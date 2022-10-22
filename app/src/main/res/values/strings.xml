@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Track.io</string>
+
+<!--    Log in Fragment-->
+    <string name="create_new_account"><u>Create new account</u></string>
+    <string name="log_in">Log in</string>
+    <string name="password">Password</string>
+    <string name="email_address">Email address</string>
+
+<!--    Sign up Fragment-->
+    <string name="sign_up">Sign up</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="weight">Weight (kg)</string>
+    <string name="height">Height (cm)</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="workout">Workout</string>
+    <string name="walking">Walking</string>
+    <string name="running">Running</string>
+    <string name="cycling">Cycling</string>
+    <string name="go">Go</string>
+    <string name="challenges">Challenges</string>
+    <string name="daily">Daily</string>
+    <string name="weekly">Weekly</string>
+    <string name="map">Map</string>
+    <string name="play_and_pause_button">Play and pause button</string>
+    <string name="heart_rate">Heart rate</string>
+    <string name="time">Time</string>
+    <string name="current">Current</string>
+    <string name="goal">Goal</string>
+    <string name="daily_steps">Daily steps</string>
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+
+</resources>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:scrollbars="vertical"
+        tools:context=".ui.DailyActivitiesFragment">
+
+
+        <ImageView
+            android:id="@+id/daily_activities_white_box1"
+            android:layout_width="330dp"
+            android:layout_height="350dp"
+            android:src="@drawable/white_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.079" />
+
+
+
+        <ImageView
+            android:id="@+id/daily_activities_blue_box1"
+            android:layout_width="260dp"
+            android:layout_height="140dp"
+            android:src="@drawable/blue_background"
+            app:layout_constraintBottom_toBottomOf="@+id/daily_activities_white_box1"
+            app:layout_constraintEnd_toEndOf="@+id/daily_activities_white_box1"
+            app:layout_constraintStart_toStartOf="@+id/daily_activities_white_box1"
+            app:layout_constraintTop_toTopOf="@+id/daily_activities_white_box1"
+            app:layout_constraintVertical_bias="0.87" />
+
+        <TextView
+            android:id="@+id/daily_activites_date_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/trebucbd"
+            android:text="DATE"
+            android:textColor="@color/primary"
+            android:textSize="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/daily_activities_white_box1"
+            app:layout_constraintEnd_toEndOf="@+id/daily_activities_white_box1"
+            app:layout_constraintStart_toStartOf="@+id/daily_activities_white_box1"
+            app:layout_constraintTop_toTopOf="@+id/daily_activities_white_box1"
+            app:layout_constraintVertical_bias="0.073" />
+
+
+
+        <TextView
+            android:id="@+id/daily_activities_running_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/trebucbd"
+            android:text="Running:"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintEnd_toEndOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintHorizontal_bias="0.07"
+            app:layout_constraintStart_toStartOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintTop_toTopOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintVertical_bias="0.131" />
+
+        <TextView
+            android:id="@+id/daily_activities_running_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/trebucbd"
+            android:text="2.25 km"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintEnd_toEndOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintHorizontal_bias="0.835"
+            app:layout_constraintStart_toStartOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintTop_toTopOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintVertical_bias="0.131" />
+
+        <TextView
+            android:id="@+id/daily_activities_walking_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/trebucbd"
+            android:text="4.21 km"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintEnd_toEndOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintHorizontal_bias="0.835"
+            app:layout_constraintStart_toStartOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintTop_toTopOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintVertical_bias="0.368" />
+
+        <TextView
+            android:id="@+id/daily_activities_cycling_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/trebucbd"
+            android:text="1.98 km"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintEnd_toEndOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintHorizontal_bias="0.835"
+            app:layout_constraintStart_toStartOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintTop_toTopOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintVertical_bias="0.614" />
+
+        <TextView
+            android:id="@+id/daily_activities_calories_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/trebucbd"
+            android:text="304 kcal"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintEnd_toEndOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintHorizontal_bias="0.835"
+            app:layout_constraintStart_toStartOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintTop_toTopOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintVertical_bias="0.86" />
+
+        <TextView
+            android:id="@+id/daily_activities_walking_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/trebucbd"
+            android:text="Walking:"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintEnd_toEndOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintHorizontal_bias="0.067"
+            app:layout_constraintStart_toStartOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintTop_toTopOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintVertical_bias="0.368" />
+
+        <TextView
+            android:id="@+id/daily_activities_cycling_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/trebucbd"
+            android:text="Cycling:"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintEnd_toEndOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintHorizontal_bias="0.061"
+            app:layout_constraintStart_toStartOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintTop_toTopOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintVertical_bias="0.614" />
+
+        <TextView
+            android:id="@+id/daily_activities_calories_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/trebucbd"
+            android:text="Calories:"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintEnd_toEndOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintHorizontal_bias="0.064"
+            app:layout_constraintStart_toStartOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintTop_toTopOf="@+id/daily_activities_blue_box1"
+            app:layout_constraintVertical_bias="0.86" />
+
+
+        <ImageView
+            android:id="@+id/daily_activities_white_box2"
+            android:layout_width="330dp"
+            android:layout_height="100dp"
+            android:src="@drawable/white_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.634" />
+
+        <TextView
+            android:id="@+id/daily_activities_previous_day"
+            android:layout_width="130dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/trebucbd"
+            android:text="DATE"
+            android:textColor="@color/primary"
+            app:layout_constraintBottom_toBottomOf="@+id/daily_activities_white_box2"
+            app:layout_constraintStart_toStartOf="@+id/daily_activities_white_box2"
+            app:layout_constraintTop_toTopOf="@+id/daily_activities_white_box2"
+            app:layout_constraintVertical_bias="0.6" />
+
+        <TextView
+            android:id="@+id/daily_activities_next_day"
+            android:layout_width="130dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="20dp"
+            android:clickable="true"
+            android:fontFamily="@font/trebucbd"
+            android:text="DATE"
+            android:textColor="@color/primary"
+            app:layout_constraintBottom_toBottomOf="@+id/daily_activities_white_box2"
+            app:layout_constraintEnd_toEndOf="@+id/daily_activities_white_box2"
+            app:layout_constraintTop_toTopOf="@+id/daily_activities_white_box2"
+            app:layout_constraintVertical_bias="0.6" />
+
+        <View
+            android:id="@+id/blue_line_between_dates"
+            android:layout_width="2dp"
+            android:layout_height="80dp"
+            android:background="@color/primary"
+            app:layout_constraintBottom_toBottomOf="@+id/daily_activities_white_box2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/daily_activities_white_box2"
+            app:layout_constraintVertical_bias="0.4" />
+
+        <ImageView
+            android:id="@+id/daily_activities_white_box"
+            android:layout_width="328dp"
+            android:layout_height="200dp"
+            android:src="@drawable/white_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.511"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/daily_activities_white_box2"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/daily_activites_my_challenges"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/trebucbd"
+            android:text="My Challenges"
+            android:textColor="@color/primary"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="@+id/daily_activities_white_box"
+            app:layout_constraintEnd_toEndOf="@+id/daily_activities_white_box"
+            app:layout_constraintHorizontal_bias="0.13"
+            app:layout_constraintStart_toStartOf="@+id/daily_activities_white_box"
+            app:layout_constraintTop_toTopOf="@+id/daily_activities_white_box"
+            app:layout_constraintVertical_bias="0.129" />
+
+        <View
+            android:id="@+id/blue_line_between_challenges"
+            android:layout_width="300dp"
+            android:layout_height="2dp"
+            android:background="@color/primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/daily_activities_white_box"
+            app:layout_constraintVertical_bias="0.555" />
+
+        <TextView
+            android:id="@+id/daily_activities_challenge_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/trebucbd"
+            android:text="CHALLENGE 1"
+            android:textColor="@color/primary"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/blue_line_between_challenges"
+            app:layout_constraintEnd_toEndOf="@+id/daily_activities_white_box"
+            app:layout_constraintHorizontal_bias="0.107"
+            app:layout_constraintStart_toStartOf="@+id/daily_activities_white_box"
+            app:layout_constraintTop_toBottomOf="@+id/daily_activites_my_challenges"
+            app:layout_constraintVertical_bias="0.693" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

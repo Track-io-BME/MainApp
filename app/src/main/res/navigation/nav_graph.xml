@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="hu.bme.aut.android.trackio.ui.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeMenuFragment"
+            app:destination="@id/homeMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="hu.bme.aut.android.trackio.ui.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_signupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_homeMenuFragment"
+            app:destination="@id/homeMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dailyActivitiesFragment"
+        android:name="hu.bme.aut.android.trackio.ui.DailyActivitiesFragment"
+        android:label="fragment_daily_activities"
+        tools:layout="@layout/fragment_daily_activities" />
+    <fragment
+        android:id="@+id/homeMenuFragment"
+        android:name="hu.bme.aut.android.trackio.ui.HomeFragment"
+        android:label="fragment_home_menu"
+        tools:layout="@layout/fragment_home_menu" >
+        <action
+            android:id="@+id/action_homeMenuFragment_to_dailyActivitiesFragment"
+            app:destination="@id/dailyActivitiesFragment" />
+        <action
+            android:id="@+id/action_homeMenuFragment_to_workoutMenuFragment"
+            app:destination="@id/workoutMenuFragment" />
+        <action
+            android:id="@+id/action_homeMenuFragment_to_profileMenuFragment"
+            app:destination="@id/profileMenuFragment" />
+        <action
+            android:id="@+id/action_homeMenuFragment_to_workoutHistoryFragment"
+            app:destination="@id/workoutHistoryFragment" />
+        <action
+            android:id="@+id/action_homeMenuFragment_to_detailedMeasurementsFragment"
+            app:destination="@id/detailedMeasurementsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutMenuFragment"
+        android:name="hu.bme.aut.android.trackio.ui.WorkoutMenuFragment"
+        android:label="fragment_workout_menu"
+        tools:layout="@layout/fragment_workout_menu" >
+        <action
+            android:id="@+id/action_workoutMenuFragment_to_homeMenuFragment"
+            app:destination="@id/homeMenuFragment" />
+        <action
+            android:id="@+id/action_workoutMenuFragment_to_duringWorkoutFragment"
+            app:destination="@id/duringWorkoutFragment" />
+        <action
+            android:id="@+id/action_workoutMenuFragment_to_profileMenuFragment"
+            app:destination="@id/profileMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileMenuFragment"
+        android:name="hu.bme.aut.android.trackio.ui.ProfileMenuFragment"
+        android:label="fragment_profile_menu"
+        tools:layout="@layout/fragment_profile_menu" >
+        <action
+            android:id="@+id/action_profileMenuFragment_to_homeMenuFragment"
+            app:destination="@id/homeMenuFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_helpFragment"
+            app:destination="@id/helpFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_measurementsDialogFragment"
+            app:destination="@id/measurementsDialogFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_personalDialogFragment"
+            app:destination="@id/personalDialogFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_workoutMenuFragment"
+            app:destination="@id/workoutMenuFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/duringWorkoutFragment"
+        android:name="hu.bme.aut.android.trackio.ui.DuringWorkoutFragment"
+        android:label="fragment_during_workout"
+        tools:layout="@layout/fragment_during_workout" >
+        <action
+            android:id="@+id/action_duringWorkoutFragment_to_workoutMenuFragment"
+            app:destination="@id/workoutMenuFragment" />
+        <action
+            android:id="@+id/action_duringWorkoutFragment_to_workoutMapFragment"
+            app:destination="@id/workoutMapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutMapFragment"
+        android:name="hu.bme.aut.android.trackio.ui.WorkoutMapFragment"
+        android:label="fragment_workout_map"
+        tools:layout="@layout/fragment_workout_map" />
+    <fragment
+        android:id="@+id/workoutHistoryFragment"
+        android:name="hu.bme.aut.android.trackio.ui.WorkoutHistoryFragment"
+        android:label="fragment_workout_history"
+        tools:layout="@layout/fragment_workout_history" >
+        <action
+            android:id="@+id/action_workoutHistoryFragment_to_pastWorkoutFragment"
+            app:destination="@id/pastWorkoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pastWorkoutFragment"
+        android:name="hu.bme.aut.android.trackio.ui.PastWorkoutFragment"
+        android:label="fragment_past_workout"
+        tools:layout="@layout/fragment_past_workout" />
+    <fragment
+        android:id="@+id/detailedMeasurementsFragment"
+        android:name="hu.bme.aut.android.trackio.ui.DetailedMeasurementsFragment"
+        android:label="fragment_detailed_measurements"
+        tools:layout="@layout/fragment_detailed_measurements" >
+        <action
+            android:id="@+id/action_detailedMeasurementsFragment_to_measurementsDialogFragment"
+            app:destination="@id/measurementsDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="hu.bme.aut.android.trackio.ui.HelpFragment"
+        android:label="fragment_help"
+        tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/measurementsDialogFragment"
+        android:name="hu.bme.aut.android.trackio.ui.MeasurementsDialogFragment"
+        android:label="fragment_measurements_dialog"
+        tools:layout="@layout/fragment_measurements_dialog" />
+    <fragment
+        android:id="@+id/personalDialogFragment"
+        android:name="hu.bme.aut.android.trackio.ui.PersonalDialogFragment"
+        android:label="fragment_personal_dialog"
+        tools:layout="@layout/fragment_personal_dialog" />
+</navigation>
