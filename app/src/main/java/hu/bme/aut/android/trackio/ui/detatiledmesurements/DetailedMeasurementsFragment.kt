@@ -1,0 +1,29 @@
+package hu.bme.aut.android.trackio.ui.detatiledmesurements
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import hu.bme.aut.android.trackio.databinding.FragmentDetailedMeasurementsBinding
+import hu.bme.aut.android.trackio.ui.profilemenu.MeasurementsDialogFragment
+
+class DetailedMeasurementsFragment : Fragment() {
+    private lateinit var binding : FragmentDetailedMeasurementsBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentDetailedMeasurementsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.newDetails.setOnClickListener {
+            MeasurementsDialogFragment().show(childFragmentManager, MeasurementsDialogFragment.TAG)
+        }
+    }
+}
