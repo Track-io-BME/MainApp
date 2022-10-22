@@ -4,7 +4,7 @@ data class UserDetails(
     val id: Int,
     val UserId: Int,
     val height: Int,
-    val gender: String,
+    var gender: String,
     val birthDate: Long,
     val goalSteps: Int,
     val goalWeight: Int

@@ -1,8 +1,8 @@
 package hu.bme.aut.android.trackio.data
 
-import androidx.room.Entity
+//import androidx.room.Entity
 
-@Entity
+//@Entity
 data class User(
     val id: Int,
     val username: String,
