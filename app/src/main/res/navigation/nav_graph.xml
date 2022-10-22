@@ -6,7 +6,7 @@
     app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/loginFragment"
-        android:name="hu.bme.aut.android.trackio.ui.LoginFragment"
+        android:name="hu.bme.aut.android.trackio.ui.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
-        android:name="hu.bme.aut.android.trackio.ui.SignupFragment"
+        android:name="hu.bme.aut.android.trackio.ui.singup.SignupFragment"
         android:label="fragment_signup"
         tools:layout="@layout/fragment_signup" >
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/dailyActivitiesFragment"
-        android:name="hu.bme.aut.android.trackio.ui.DailyActivitiesFragment"
+        android:name="hu.bme.aut.android.trackio.ui.dailyactivities.DailyActivitiesFragment"
         android:label="fragment_daily_activities"
         tools:layout="@layout/fragment_daily_activities" />
     <fragment
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/workoutMenuFragment"
-        android:name="hu.bme.aut.android.trackio.ui.WorkoutMenuFragment"
+        android:name="hu.bme.aut.android.trackio.ui.workoutsmenu.WorkoutMenuFragment"
         android:label="fragment_workout_menu"
         tools:layout="@layout/fragment_workout_menu" >
         <action
@@ -71,7 +71,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileMenuFragment"
-        android:name="hu.bme.aut.android.trackio.ui.ProfileMenuFragment"
+        android:name="hu.bme.aut.android.trackio.ui.profilemenu.ProfileMenuFragment"
         android:label="fragment_profile_menu"
         tools:layout="@layout/fragment_profile_menu" >
         <action
@@ -95,7 +95,7 @@
     </fragment>
     <fragment
         android:id="@+id/duringWorkoutFragment"
-        android:name="hu.bme.aut.android.trackio.ui.DuringWorkoutFragment"
+        android:name="hu.bme.aut.android.trackio.ui.duringworkout.DuringWorkoutFragment"
         android:label="fragment_during_workout"
         tools:layout="@layout/fragment_during_workout" >
         <action
@@ -112,7 +112,7 @@
         tools:layout="@layout/fragment_workout_map" />
     <fragment
         android:id="@+id/workoutHistoryFragment"
-        android:name="hu.bme.aut.android.trackio.ui.WorkoutHistoryFragment"
+        android:name="hu.bme.aut.android.trackio.ui.workouthistory.WorkoutHistoryFragment"
         android:label="fragment_workout_history"
         tools:layout="@layout/fragment_workout_history" >
         <action
@@ -121,12 +121,12 @@
     </fragment>
     <fragment
         android:id="@+id/pastWorkoutFragment"
-        android:name="hu.bme.aut.android.trackio.ui.PastWorkoutFragment"
+        android:name="hu.bme.aut.android.trackio.ui.pastworkout.PastWorkoutFragment"
         android:label="fragment_past_workout"
         tools:layout="@layout/fragment_past_workout" />
     <fragment
         android:id="@+id/detailedMeasurementsFragment"
-        android:name="hu.bme.aut.android.trackio.ui.DetailedMeasurementsFragment"
+        android:name="hu.bme.aut.android.trackio.ui.detatiledmesurements.DetailedMeasurementsFragment"
         android:label="fragment_detailed_measurements"
         tools:layout="@layout/fragment_detailed_measurements" >
         <action
@@ -140,12 +140,12 @@
         tools:layout="@layout/fragment_help" />
     <fragment
         android:id="@+id/measurementsDialogFragment"
-        android:name="hu.bme.aut.android.trackio.ui.MeasurementsDialogFragment"
+        android:name="hu.bme.aut.android.trackio.ui.profilemenu.MeasurementsDialogFragment"
         android:label="fragment_measurements_dialog"
         tools:layout="@layout/fragment_measurements_dialog" />
     <fragment
         android:id="@+id/personalDialogFragment"
-        android:name="hu.bme.aut.android.trackio.ui.PersonalDialogFragment"
+        android:name="hu.bme.aut.android.trackio.ui.profilemenu.PersonalDialogFragment"
         android:label="fragment_personal_dialog"
         tools:layout="@layout/fragment_personal_dialog" />
 </navigation>

@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/background"
         android:scrollbars="vertical"
-        tools:context=".ui.DailyActivitiesFragment">
+        tools:context=".ui.dailyactivities.DailyActivitiesFragment">
 
 
         <ImageView

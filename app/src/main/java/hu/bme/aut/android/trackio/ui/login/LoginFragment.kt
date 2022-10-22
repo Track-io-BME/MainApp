@@ -1,4 +1,4 @@
-package hu.bme.aut.android.trackio.ui
+package hu.bme.aut.android.trackio.ui.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,24 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.R
-import hu.bme.aut.android.trackio.databinding.FragmentDetailedMeasurementsBinding
+import hu.bme.aut.android.trackio.databinding.FragmentLoginBinding
 
-class DetailedMeasurementsFragment : Fragment() {
-    private lateinit var binding : FragmentDetailedMeasurementsBinding
+class LoginFragment : Fragment() {
+    private lateinit var binding : FragmentLoginBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDetailedMeasurementsBinding.inflate(inflater, container, false)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.newDetails.setOnClickListener {
-            MeasurementsDialogFragment().show(childFragmentManager, MeasurementsDialogFragment.TAG)
+
+        binding.btnLoginToHome.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
+        }
+        binding.tvLoginToSignup.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
     }
 }

@@ -1,4 +1,4 @@
-package hu.bme.aut.android.trackio.ui
+package hu.bme.aut.android.trackio.ui.profilemenu
 
 import android.app.Dialog
 import android.os.Bundle

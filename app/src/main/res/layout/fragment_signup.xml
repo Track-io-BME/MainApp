@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     app:layout_constraintVertical_weight="10"
-    tools:context=".ui.SignupFragment">
+    tools:context=".ui.singup.SignupFragment">
 
 <!--    <ScrollView-->
 <!--        android:layout_width="match_parent"-->
