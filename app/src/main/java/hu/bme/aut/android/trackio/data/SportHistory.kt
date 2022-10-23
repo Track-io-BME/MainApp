@@ -1,5 +1,8 @@
 package hu.bme.aut.android.trackio.data
 
+import androidx.room.Entity
+
+@Entity
 data class SportHistory(
     val id: Int,
     val UserId: Int,

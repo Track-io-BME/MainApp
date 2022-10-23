@@ -1,13 +1,11 @@
-package hu.bme.aut.android.trackio.ui.workoutsmenu
+package hu.bme.aut.android.trackio.ui.workoutmenu
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.children
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.databinding.FragmentWorkoutMenuBinding
 

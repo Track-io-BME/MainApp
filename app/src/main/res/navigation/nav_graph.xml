@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/workoutMenuFragment"
-        android:name="hu.bme.aut.android.trackio.ui.workoutsmenu.WorkoutMenuFragment"
+        android:name="hu.bme.aut.android.trackio.ui.workoutmenu.WorkoutMenuFragment"
         android:label="fragment_workout_menu"
         tools:layout="@layout/fragment_workout_menu" >
         <action

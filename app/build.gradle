@@ -72,4 +72,7 @@ dependencies {
 
 /** Google Maps **/
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
+/** Room **/
+    implementation 'androidx.room:room-common:2.4.3'
 }
