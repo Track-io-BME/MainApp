@@ -18,3 +18,9 @@
  - Musa Abdullah: LoginFragment, WorkoutMapFragment, WorkoutMenuFragment, DuringWorkoutFragment, MeasurementsDialogFragment, PersonalDialogFragment, SignupFragment 
  - Ferencz Kincső: DailyActivitiesFragment, DetailedMeasurementsFragment, HelpFragment, HomeMenuFragment
  - Fogti István: backend (retrofit, dummyserver) 
+ 
+ ### 7. hét
+ - Galuska Zoltán: Login/Signup test, NetworkManager, RetrofitApi
+ - Musa Abdullah: Login/Signup test, ProfileMenuFragment, BottomNavigationBar, Data classes
+ - Ferencz Kincső: Login/Signup test, ViewModel classes, WorkoutHistoryFragment
+ - Fogti István: Login/Signup test, Authentication
