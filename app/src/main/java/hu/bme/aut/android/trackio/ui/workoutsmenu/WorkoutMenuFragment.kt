@@ -40,8 +40,7 @@ class WorkoutMenuFragment : Fragment() {
             findNavController().navigate(R.id.action_workoutMenuFragment_to_duringWorkoutFragment)
         }
 
-        binding.tbNavigation.inflateMenu(R.menu.navigation_menu)
-        binding.tbNavigation.setupWithNavController(findNavController())
+        binding.tbNavigation.selectedItemId = R.id.workout_menu
         binding.tbNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home_menu -> {

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.R
@@ -31,12 +32,16 @@ class LoginFragment : Fragment() {
 
         binding.btnLoginToHome.setOnClickListener{
             if(!TextUtils.isEmpty(binding.etEmail.text) && !TextUtils.isEmpty(binding.etPassword.text)){
-                Log.d("baj van", "login fragment");
+                Log.d("baj van", "login fragment")
                 if(viewModel.LoginUser(binding.etEmail.text.toString(),binding.etPassword.text.toString())){
                     findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
 
                 }
 
+            }
+            else{   // todo - kiszedni, ha mar mukodik a login
+                Toast.makeText(context, "shortcut", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
             }
         }
 

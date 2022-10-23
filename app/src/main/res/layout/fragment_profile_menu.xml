@@ -16,7 +16,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/ivAccount"
@@ -25,7 +25,8 @@
                 android:src="@drawable/ic_baseline_account_circle_24"
                 app:layout_constraintTop_toTopOf="@id/topGuideline"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
+                app:layout_constraintRight_toRightOf="parent"
+                android:contentDescription="@string/profile"/>
 
             <TextView
                 android:id="@+id/tvUsername"
@@ -404,9 +405,10 @@
         android:id="@+id/tb_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:menu="@menu/navigation_menu"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:background="?android:colorPrimary" />
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

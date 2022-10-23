@@ -60,8 +60,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeMenuFragment_to_workoutHistoryFragment)
         }
 
-        binding.tbNavigation.inflateMenu(R.menu.navigation_menu)
-        binding.tbNavigation.setupWithNavController(findNavController())
+        binding.tbNavigation.selectedItemId = R.id.home_menu
         binding.tbNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.workout_menu -> {
