@@ -118,6 +118,9 @@
         <action
             android:id="@+id/action_workoutHistoryFragment_to_pastWorkoutFragment"
             app:destination="@id/pastWorkoutFragment" />
+        <action
+            android:id="@+id/action_workoutHistoryFragment_to_homeMenuFragment"
+            app:destination="@id/homeMenuFragment" />
     </fragment>
     <fragment
         android:id="@+id/pastWorkoutFragment"

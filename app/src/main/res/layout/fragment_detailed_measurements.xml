@@ -123,7 +123,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/daily_activities_white_box1"
-        app:layout_constraintVertical_bias="0.671" />
+        app:layout_constraintVertical_bias="0.793" />
 
     <TextView
         android:id="@+id/detailed_meas_date"
@@ -147,7 +147,7 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.719" />
+        app:layout_constraintVertical_bias="0.783" />
 
     <TextView
         android:id="@+id/textView20"
