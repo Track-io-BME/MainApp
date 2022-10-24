@@ -44,8 +44,7 @@ class ProfileMenuFragment : Fragment() {
             findNavController().navigate(R.id.action_profileMenuFragment_to_loginFragment)
         }
 
-        binding.tbNavigation.inflateMenu(R.menu.navigation_menu)
-        binding.tbNavigation.setupWithNavController(findNavController())
+        binding.tbNavigation.selectedItemId = R.id.profile_menu
         binding.tbNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home_menu -> {
