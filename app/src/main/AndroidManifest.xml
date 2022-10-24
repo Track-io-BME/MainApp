@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="hu.bme.aut.android.trackio">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
 
     <application
         android:allowBackup="true"
@@ -15,10 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Trackio"
         tools:targetApi="31">
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" />
 
         <activity
             android:name=".MainActivity"

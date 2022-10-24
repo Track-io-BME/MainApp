@@ -24,8 +24,8 @@ class WorkoutHistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnHistoryToPastWorkout.setOnClickListener {
-            findNavController().navigate(R.id.action_workoutHistoryFragment_to_pastWorkoutFragment)
+        binding.workoutHistoryBack.setOnClickListener {
+            findNavController().navigate(R.id.action_workoutHistoryFragment_to_homeMenuFragment)
         }
     }
 }
