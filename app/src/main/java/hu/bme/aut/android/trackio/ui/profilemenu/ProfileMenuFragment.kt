@@ -1,5 +1,6 @@
 package hu.bme.aut.android.trackio.ui.profilemenu
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import hu.bme.aut.android.trackio.MainActivity
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.databinding.FragmentProfileMenuBinding
 
@@ -41,7 +43,10 @@ class ProfileMenuFragment : Fragment() {
 //            findNavController().navigate(R.id.action_profileMenuFragment_to_homeMenuFragment)
 //        }
         binding.clSignOut.setOnClickListener {
-            findNavController().navigate(R.id.action_profileMenuFragment_to_loginFragment)
+//            findNavController().navigate(R.id.action_profileMenuFragment_to_loginFragment)
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            activity?.finish()
+            startActivity(intent)
         }
 
         binding.tbNavigation.selectedItemId = R.id.profile_menu
