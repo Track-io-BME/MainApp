@@ -1,5 +1,6 @@
 package hu.bme.aut.android.trackio.ui.duringworkout
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.databinding.FragmentDuringWorkoutBinding
+import hu.bme.aut.android.trackio.model.LocationTrackerService
 import hu.bme.aut.android.trackio.model.WorkoutViewModel
 
 class DuringWorkoutFragment : Fragment() {
@@ -32,16 +34,20 @@ class DuringWorkoutFragment : Fragment() {
         viewModel.timerRunning.observe(viewLifecycleOwner) {
             binding.btnPlayPause.isActivated = it
         }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val serviceIntent = Intent(requireContext(), LocationTrackerService::class.java)
+
         binding.btnDuringToMap.setOnClickListener {
             findNavController().navigate(R.id.action_duringWorkoutFragment_to_workoutMapFragment)
         }
         binding.btnPlayPause.setOnClickListener {
+            requireActivity().startService(serviceIntent)
             viewModel.startStop()
         }
     }
