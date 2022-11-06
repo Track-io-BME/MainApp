@@ -10,9 +10,9 @@ import kotlin.jvm.Throws
 
 class LocationLiveData(context: Context) : LiveData<Location>() {
 
-    interface OnNewLocationAvailable {
-        fun onNewLocation(location: Location)
-    }
+//    interface OnNewLocationAvailable {
+//        fun onNewLocation(location: Location)
+//    }
 
     private val fusedLocationClient: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(context)
@@ -25,15 +25,15 @@ class LocationLiveData(context: Context) : LiveData<Location>() {
         }
     }
 
-    override fun onActive() {
-        super.onActive()
-        startLocationMonitoring()
-    }
+//    override fun onActive() {
+//        super.onActive()
+////        startLocationMonitoring()
+//    }
 
-    override fun onInactive() {
-        super.onInactive()
-        stopLocationMonitoring()
-    }
+//    override fun onInactive() {
+//        super.onInactive()
+////        stopLocationMonitoring()
+//    }
 
     @Throws(SecurityException::class)
     fun startLocationMonitoring() {
@@ -44,11 +44,12 @@ class LocationLiveData(context: Context) : LiveData<Location>() {
 
         fusedLocationClient.requestLocationUpdates(locationRequest,
             locationCallback, Looper.myLooper())
-
+        Log.d("monitoring", "start")
     }
 
     @Throws(SecurityException::class)
     fun stopLocationMonitoring() {
         fusedLocationClient.removeLocationUpdates(locationCallback)
+        Log.d("monitoring", "stop")
     }
 }
