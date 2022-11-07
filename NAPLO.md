@@ -24,3 +24,9 @@
  - Musa Abdullah: Login/Signup test, ProfileMenuFragment, BottomNavigationBar, Data classes
  - Ferencz Kincső: Login/Signup test, ViewModel classes, WorkoutHistoryFragment
  - Fogti István: Login/Signup test, Authentication
+
+### 9. hét
+ - Galuska Zoltán: Admin app adatbázissal, MVVM, hálózat kommunikáció
+ - Musa Abdullah: Location, Timer, Workout ViewModel
+ - Ferencz Kincső: WorkoutHistoryFragment
+ - Fogti István: backend
