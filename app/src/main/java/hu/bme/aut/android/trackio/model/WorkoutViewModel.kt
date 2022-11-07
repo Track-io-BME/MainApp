@@ -10,11 +10,9 @@ import java.util.*
 class WorkoutViewModel(application: Application) : AndroidViewModel(application) {
     private lateinit var timer : Timer
     private val _time = MutableLiveData(0)
-    val time : LiveData<Int>
-        get() = _time
+    val time : LiveData<Int> = _time
     private var _timerRunning = MutableLiveData(false)
-    val timerRunning : LiveData<Boolean>
-        get() = _timerRunning
+    val timerRunning : LiveData<Boolean> = _timerRunning
 
     fun startStop() {
         if (_timerRunning.value == true) {
@@ -43,5 +41,9 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
         timer.cancel()
         timer.purge()
         _timerRunning.value = false
+    }
+
+    override fun onCleared() {
+        super.onCleared()
     }
 }

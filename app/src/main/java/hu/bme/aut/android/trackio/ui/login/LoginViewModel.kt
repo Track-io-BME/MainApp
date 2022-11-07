@@ -14,7 +14,7 @@ class LoginViewModel: ViewModel() {
     lateinit var response: String
 
     fun LoginUser(userEmail : String, password : String): Boolean{
-        Log.d("baj van", "viewmodel");
+        Log.d("baj van", "viewmodel")
 
         NetworkManager.loginUser(userEmail,password).enqueue(object : Callback<String>{
             override fun onResponse(call: Call<String>, response: Response<String>) {

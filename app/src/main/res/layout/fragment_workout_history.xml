@@ -1,230 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.workouthistory.WorkoutHistoryFragment"
-    android:background="@drawable/background">
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+tools:context=".ui.workouthistory.WorkoutHistoryFragment"
+android:background="@drawable/background">
+
+<ImageView
+    android:id="@+id/workoutHistoryBack"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_marginStart="4dp"
+    android:src="@drawable/ic_baseline_chevron_left_24_white"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.001" />
 
 
-    <ImageView
-        android:id="@+id/workout_history_back"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_baseline_chevron_left_24_white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.026" />
+<TextView
+    android:id="@+id/workout_history_type_of_workout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/trebucbd"
+    android:text="TYPE"
+    android:textColor="#FFFFFF"
+    android:textSize="18sp"
+    app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.498"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.028" />
 
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/trebucbd"
-        android:text="Walking"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.376"
-        app:layout_constraintStart_toEndOf="@+id/workout_history_back"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.052" />
+<TextView
+    android:id="@+id/workout_history_km"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/trebucbd"
+    android:text="0.00"
+    android:textColor="#FFFFFF"
+    android:textSize="46sp"
+    app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/workout_history_type_of_workout"
+    app:layout_constraintVertical_bias="0.0" />
 
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="km"
+    android:textColor="#FFFFFF"
+    android:textSize="20sp"
+    android:fontFamily="@font/trebucbd"
+    app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.498"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/workout_history_km"
+    app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/trebucbd"
-        android:text="0,00"
-        android:textColor="@color/white"
-        android:textSize="55sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17"
-        app:layout_constraintVertical_bias="0.035" />
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/trebucbd"
-        android:text="km"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="472dp"
-        android:layout_height="396dp"
-
-        android:src="@drawable/white_background"
-        app:layout_constraintBottom_toTopOf="@+id/workout_history_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.278"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView19"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:fontFamily="@font/trebucbd"
-        android:text="Walking 2.34 km"
-        android:textColor="@color/primary"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView12"
-        app:layout_constraintVertical_bias="0.092" />
-
-
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:fontFamily="@font/trebucbd"
-        android:text="Walking 5.88 km"
-        android:textColor="@color/primary"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView21"
-        app:layout_constraintVertical_bias="0.167" />
-
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/trebucbd"
-        android:text="00:47:25"
-        android:textColor="@color/primary"
-        android:textSize="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView21"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="@+id/textView21"
-        app:layout_constraintTop_toBottomOf="@+id/textView21" />
-
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/trebucbd"
-        android:text="01:24:16"
-        android:textColor="@color/primary"
-        android:textSize="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView27"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="@+id/textView27"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
-
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="48dp"
-        android:src="@drawable/blue_walk"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
-        app:layout_constraintEnd_toStartOf="@+id/textView21"
-        app:layout_constraintHorizontal_bias="0.913"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView12"
-        app:layout_constraintVertical_bias="0.095" />
-
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/blue_walk"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
-        app:layout_constraintEnd_toStartOf="@+id/textView27"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView12"
-        app:layout_constraintVertical_bias="0.295" />
-
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="18dp"
-        android:layout_height="16dp"
-        android:layout_marginEnd="12dp"
-        android:src="@drawable/ic_baseline_timer_24"
-        app:layout_constraintBottom_toBottomOf="@+id/textView22"
-        app:layout_constraintEnd_toStartOf="@+id/textView22"
-        app:layout_constraintTop_toBottomOf="@+id/textView21"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="18dp"
-        android:layout_height="16dp"
-        android:src="@drawable/ic_baseline_timer_24"
-        app:layout_constraintEnd_toStartOf="@+id/textView23"
-        app:layout_constraintHorizontal_bias="0.142"
-        app:layout_constraintStart_toStartOf="@+id/textView27"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        app:flow_verticalAlign="center"
-        app:layout_constraintBottom_toTopOf="@+id/textView21"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="424dp"
+        android:layout_height="446dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView12"
-        app:layout_constraintVertical_bias="0.529" />
-
-    <View
-        android:id="@+id/view4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="28dp"
-        android:background="@android:color/darker_gray"
-        app:flow_verticalAlign="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView22" />
-
-    <View
-        android:id="@+id/view3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="12dp"
-        android:background="@android:color/darker_gray"
-        app:flow_verticalAlign="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/workout_history_navigation"
-        android:layout_width="wrap_content"
+        android:id="@+id/bottomNavigationView"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="?android:colorPrimary"
-        app:menu="@menu/workout_history_menu"
-        />
+        app:menu="@menu/workout_history_menu" />
 
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/workout_history_menu"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
