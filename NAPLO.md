@@ -29,4 +29,4 @@
  - Galuska Zoltán: Admin app adatbázissal, MVVM, hálózat kommunikáció
  - Musa Abdullah: Location, Timer, Workout ViewModel
  - Ferencz Kincső: WorkoutHistoryFragment
- - Fogti István: backend
+ - Fogti István: Adatmodell sequelize ORM-mel, MSSQL-el és autentikáció JWT-vel
