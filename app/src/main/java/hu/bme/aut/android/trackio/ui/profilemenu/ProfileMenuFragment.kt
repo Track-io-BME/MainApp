@@ -6,14 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import hu.bme.aut.android.trackio.MainActivity
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.databinding.FragmentProfileMenuBinding
+import hu.bme.aut.android.trackio.model.ProfileViewModel
 
 class ProfileMenuFragment : Fragment() {
     private lateinit var binding : FragmentProfileMenuBinding
+    private val viewModel: ProfileViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,6 +23,36 @@ class ProfileMenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileMenuBinding.inflate(inflater, container, false)
+        viewModel.stepsGoal.observe(viewLifecycleOwner) {
+            if (true) {
+                binding.tvSetGoalsValues.text = getString(R.string.goals, it, viewModel.weightGoal.value)
+            }
+        }
+        viewModel.weightGoal.observe(viewLifecycleOwner) {
+            if (true) {
+                binding.tvSetGoalsValues.text = getString(R.string.goals, viewModel.stepsGoal.value, it)
+            }
+        }
+        viewModel.weight.observe(viewLifecycleOwner) {
+            if (true) {
+                binding.tvWeightValues.text = getString(R.string.cm, it)
+            }
+        }
+        viewModel.height.observe(viewLifecycleOwner) {
+            if (true) {
+                binding.tvHeightValues.text = getString(R.string.cm, it)
+            }
+        }
+        viewModel.gender.observe(viewLifecycleOwner) {
+            if (true) {
+                binding.tvGenderValues.text = it.toString()
+            }
+        }
+        viewModel.birthDate.observe(viewLifecycleOwner) {
+            if (true) {
+                binding.tvBirthDateValues.text = it.toString()   //TODO date conversion!!!
+            }
+        }
         return binding.root
     }
 
