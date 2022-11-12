@@ -7,15 +7,19 @@ import android.os.IBinder
 import android.util.Log
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 
 class LocationTrackerService : LifecycleService() {
-
+    private val binder = LocationTrackerBinder()
+    private var tracking = false
+    private var lastLocation: Location? = null
     private lateinit var _locationLiveData : LocationLiveData
     val locationLiveData : LiveData<Location>
         get() = _locationLiveData
-    private val binder = LocationTrackerBinder()
-    private var tracking = false
+    private var _distance = MutableLiveData(0.0F)
+    val distance : LiveData<Float>
+        get() = _distance
 
     inner class LocationTrackerBinder : Binder() {
         val service: LocationTrackerService
@@ -24,21 +28,17 @@ class LocationTrackerService : LifecycleService() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
-
+        Log.d("asd", "onStartCommand")
         _locationLiveData = LocationLiveData(this)
 
-        locationLiveData.observe(this) {
-            val location = _locationLiveData.value as Location
-            Log.d("location", "\tlat:${location.latitude}\tlong:${location.longitude}")
+        _locationLiveData.observe(this) {
+            if (lastLocation !== null) {
+                _distance.value = _distance.value?.plus(it.distanceTo(lastLocation) / 1000)
+            }
+            lastLocation = it
         }
-
         return START_STICKY_COMPATIBILITY
     }
-
-//    override fun onDestroy() {
-//        _locationLiveData.stopLocationMonitoring()
-//        super.onDestroy()
-//    }
 
     override fun onBind(intent: Intent): IBinder {
         super.onBind(intent)
@@ -48,6 +48,7 @@ class LocationTrackerService : LifecycleService() {
     fun startStop() {
         tracking = if (tracking) {
             _locationLiveData.stopLocationMonitoring()
+            lastLocation = null
             false
         } else {
             _locationLiveData.startLocationMonitoring()

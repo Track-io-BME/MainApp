@@ -14,6 +14,8 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
     private var _timerRunning = MutableLiveData(false)
     val timerRunning : LiveData<Boolean> = _timerRunning
 
+    var distance = 0.0F
+
     fun startStop() {
         if (_timerRunning.value == true) {
             stopTimer()
