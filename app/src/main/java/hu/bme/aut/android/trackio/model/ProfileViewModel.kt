@@ -8,6 +8,8 @@ import hu.bme.aut.android.trackio.R
 
 class ProfileViewModel(application: Application) : AndroidViewModel(application) {
     private val INVALID_VALUE = -1
+    private var _username = MutableLiveData("USERNAME")
+    var username : LiveData<String> = _username
     private var _stepsGoal = MutableLiveData(INVALID_VALUE)
     var stepsGoal : LiveData<Int> = _stepsGoal
     private var _weightGoal = MutableLiveData(INVALID_VALUE.toFloat())

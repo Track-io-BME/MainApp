@@ -23,6 +23,11 @@ class ProfileMenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileMenuBinding.inflate(inflater, container, false)
+        viewModel.username.observe(viewLifecycleOwner) {
+            if (true) {
+                binding.tvUsername.text = it
+            }
+        }
         viewModel.stepsGoal.observe(viewLifecycleOwner) {
             if (true) {
                 binding.tvSetGoalsValues.text = getString(R.string.goals, it, viewModel.weightGoal.value)
