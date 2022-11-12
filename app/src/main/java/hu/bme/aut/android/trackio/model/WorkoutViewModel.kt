@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import java.util.*
 
-
 class WorkoutViewModel(application: Application) : AndroidViewModel(application) {
     private lateinit var timer : Timer
     private val _time = MutableLiveData(0)
@@ -43,9 +42,5 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
         timer.cancel()
         timer.purge()
         _timerRunning.value = false
-    }
-
-    override fun onCleared() {
-        super.onCleared()
     }
 }

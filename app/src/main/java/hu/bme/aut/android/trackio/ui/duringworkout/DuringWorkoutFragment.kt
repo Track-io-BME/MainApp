@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -44,7 +43,6 @@ class DuringWorkoutFragment : Fragment() {
             requireActivity().startService(it)
             requireActivity().bindService(it, connection, Context.BIND_AUTO_CREATE)
         }
-        Log.d("asd", "onCreateView")
         return binding.root
     }
 
@@ -54,19 +52,16 @@ class DuringWorkoutFragment : Fragment() {
         binding.btnDuringToMap.setOnClickListener {
             findNavController().navigate(R.id.action_duringWorkoutFragment_to_workoutMapFragment)
             requireActivity().unbindService(connection)
-       }
+        }
         binding.btnPlayPause.setOnClickListener {
             mService.startStop()
             viewModel.startStop()
         }
-        Log.d("asd", "onViewCreated")
     }
 
     private lateinit var mService: LocationTrackerService
     private var mBound: Boolean = false
-
     private val connection = object : ServiceConnection {
-
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
             val binder = service as LocationTrackerService.LocationTrackerBinder
             mService = binder.service
@@ -75,22 +70,10 @@ class DuringWorkoutFragment : Fragment() {
                 binding.tvWorkoutDistance.text = String.format("%.2f", it)
             }
             mBound = true
-            Log.d("bound", "BOUND")
         }
 
         override fun onServiceDisconnected(arg0: ComponentName) {
             mBound = false
-            Log.d("unbound", "UNBOUND")
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("asd", "onResume")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("asd", "onDestroy")
     }
 }

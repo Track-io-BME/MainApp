@@ -4,11 +4,9 @@ import android.content.Intent
 import android.location.Location
 import android.os.Binder
 import android.os.IBinder
-import android.util.Log
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-
 
 class LocationTrackerService : LifecycleService() {
     private val binder = LocationTrackerBinder()
@@ -28,9 +26,8 @@ class LocationTrackerService : LifecycleService() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
-        Log.d("asd", "onStartCommand")
-        _locationLiveData = LocationLiveData(this)
 
+        _locationLiveData = LocationLiveData(this)
         _locationLiveData.observe(this) {
             if (lastLocation !== null) {
                 _distance.value = _distance.value?.plus(it.distanceTo(lastLocation) / 1000)
