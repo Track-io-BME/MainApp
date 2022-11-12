@@ -7,13 +7,27 @@ import androidx.lifecycle.MutableLiveData
 import java.util.*
 
 class WorkoutViewModel(application: Application) : AndroidViewModel(application) {
+    enum class WorkoutType{
+        WALKING, RUNNING, CYCLING
+    }
+    var distance = 0.0F
+    var currentWorkoutType = WorkoutType.WALKING
+
+
+
+
+
+
+
+
+
+
+
     private lateinit var timer : Timer
     private val _time = MutableLiveData(0)
     val time : LiveData<Int> = _time
     private var _timerRunning = MutableLiveData(false)
     val timerRunning : LiveData<Boolean> = _timerRunning
-
-    var distance = 0.0F
 
     fun startStop() {
         if (_timerRunning.value == true) {

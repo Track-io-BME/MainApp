@@ -19,7 +19,7 @@ import hu.bme.aut.android.trackio.model.WorkoutViewModel
 
 class DuringWorkoutFragment : Fragment() {
     private lateinit var binding : FragmentDuringWorkoutBinding
-    private val viewModel: WorkoutViewModel by activityViewModels()
+    private val viewModel : WorkoutViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +27,11 @@ class DuringWorkoutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDuringWorkoutBinding.inflate(inflater, container, false)
+        when (viewModel.currentWorkoutType) {
+            WorkoutViewModel.WorkoutType.WALKING -> binding.tvWorkoutType.text = getString(R.string.walking)
+            WorkoutViewModel.WorkoutType.RUNNING -> binding.tvWorkoutType.text = getString(R.string.running)
+            WorkoutViewModel.WorkoutType.CYCLING -> binding.tvWorkoutType.text = getString(R.string.cycling)
+        }
         binding.tvWorkoutDistance.text = String.format("%.2f", viewModel.distance)
 
         viewModel.time.observe(viewLifecycleOwner) {
