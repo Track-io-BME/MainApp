@@ -38,7 +38,8 @@
         android:inputType="numberDecimal"
         app:layout_constraintTop_toBottomOf="@id/etCurrentTitle"
         app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
-        app:layout_constraintRight_toLeftOf="@id/etWeightGoalValue"/>
+        app:layout_constraintRight_toLeftOf="@id/etWeightGoalValue"
+        android:importantForAutofill="no"/>
 
     <EditText
         android:id="@+id/etWeightGoalValue"
@@ -48,7 +49,8 @@
         android:inputType="numberDecimal"
         app:layout_constraintTop_toBottomOf="@id/etGoalTitle"
         app:layout_constraintLeft_toRightOf="@id/etWeightValue"
-        app:layout_constraintRight_toRightOf="@id/rightGuideline"/>
+        app:layout_constraintRight_toRightOf="@id/rightGuideline"
+        android:importantForAutofill="no"/>
 
     <EditText
         android:id="@+id/etHeightValue"
@@ -58,7 +60,8 @@
         android:inputType="numberDecimal"
         app:layout_constraintTop_toBottomOf="@id/etWeightValue"
         app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
-        app:layout_constraintRight_toLeftOf="@id/etStepsGoalValue"/>
+        app:layout_constraintRight_toLeftOf="@id/etStepsGoalValue"
+        android:importantForAutofill="no"/>
 
     <EditText
         android:id="@+id/etStepsGoalValue"
@@ -68,7 +71,8 @@
         android:inputType="number"
         app:layout_constraintTop_toBottomOf="@id/etWeightGoalValue"
         app:layout_constraintLeft_toRightOf="@id/etHeightValue"
-        app:layout_constraintRight_toRightOf="@id/rightGuideline"/>
+        app:layout_constraintRight_toRightOf="@id/rightGuideline"
+        android:importantForAutofill="no"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/leftGuideline"

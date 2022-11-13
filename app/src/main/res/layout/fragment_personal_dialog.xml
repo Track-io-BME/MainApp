@@ -15,13 +15,15 @@
         app:layout_constraintRight_toRightOf="@id/rightGuideline"/>
 
     <EditText
+        android:id="@+id/etBirthDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="05/19996"
         android:inputType="date"
         app:layout_constraintTop_toBottomOf="@id/spGender"
         app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
-        app:layout_constraintRight_toRightOf="@id/rightGuideline"/>
+        app:layout_constraintRight_toRightOf="@id/rightGuideline"
+        android:importantForAutofill="no" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/leftGuideline"

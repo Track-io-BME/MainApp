@@ -25,37 +25,37 @@ class ProfileMenuFragment : Fragment() {
         binding = FragmentProfileMenuBinding.inflate(inflater, container, false)
         viewModel.username.observe(viewLifecycleOwner) {
             if (true) {
-                binding.tvUsername.text = it
+                binding.tvUsername.text = it   //TODO
             }
         }
         viewModel.stepsGoal.observe(viewLifecycleOwner) {
             if (true) {
-                binding.tvSetGoalsValues.text = getString(R.string.goals, it, viewModel.weightGoal.value)
+                binding.tvSetGoalsValues.text = getString(R.string.goals, it, viewModel.weightGoal.value)   //TODO
             }
         }
         viewModel.weightGoal.observe(viewLifecycleOwner) {
             if (true) {
-                binding.tvSetGoalsValues.text = getString(R.string.goals, viewModel.stepsGoal.value, it)
+                binding.tvSetGoalsValues.text = getString(R.string.goals, viewModel.stepsGoal.value, it)   //TODO
             }
         }
         viewModel.weight.observe(viewLifecycleOwner) {
             if (true) {
-                binding.tvWeightValues.text = getString(R.string.cm, it)
+                binding.tvWeightValues.text = getString(R.string.cm, it)   //TODO
             }
         }
         viewModel.height.observe(viewLifecycleOwner) {
             if (true) {
-                binding.tvHeightValues.text = getString(R.string.cm, it)
+                binding.tvHeightValues.text = getString(R.string.cm, it)   //TODO
             }
         }
         viewModel.gender.observe(viewLifecycleOwner) {
             if (true) {
-                binding.tvGenderValues.text = it.toString()
+                binding.tvGenderValues.text = it.toString()   //TODO
             }
         }
         viewModel.birthDate.observe(viewLifecycleOwner) {
             if (true) {
-                binding.tvBirthDateValues.text = it.toString()   //TODO date conversion!!!
+                binding.tvBirthDateValues.text = it.toString()   //TODO date conversion
             }
         }
         return binding.root

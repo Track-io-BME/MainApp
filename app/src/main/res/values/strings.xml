@@ -36,7 +36,7 @@
         <item>@string/male</item>
         <item>@string/female</item>
     </string-array>
-    <string name="goals">%dsteps | %.1fkg</string>
+    <string name="goals">%dsteps|%.1fkg</string>
     <string name="cm">%.1fcm</string>
     <string name="set_goals">Set goals</string>
     <string name="gender">Gender</string>
