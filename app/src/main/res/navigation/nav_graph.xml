@@ -16,6 +16,7 @@
             android:id="@+id/action_loginFragment_to_homeMenuFragment"
             app:destination="@id/homeMenuFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/signupFragment"
         android:name="hu.bme.aut.android.trackio.ui.singup.SignupFragment"
@@ -121,6 +122,12 @@
         <action
             android:id="@+id/action_workoutHistoryFragment_to_homeMenuFragment"
             app:destination="@id/homeMenuFragment" />
+        <action
+            android:id="@+id/action_workoutHistoryFragment_to_workoutHistoryAllFragment2"
+            app:destination="@id/workoutHistoryAllFragment2" />
+        <action
+            android:id="@+id/action_workoutHistoryFragment_to_workoutHistoryMonthFragment"
+            app:destination="@id/workoutHistoryMonthFragment" />
     </fragment>
     <fragment
         android:id="@+id/pastWorkoutFragment"
@@ -151,4 +158,34 @@
         android:name="hu.bme.aut.android.trackio.ui.profilemenu.PersonalDialogFragment"
         android:label="fragment_personal_dialog"
         tools:layout="@layout/fragment_personal_dialog" />
+    <fragment
+        android:id="@+id/workoutHistoryAllFragment2"
+        android:name="hu.bme.aut.android.trackio.ui.workouthistory.WorkoutHistoryAllFragment"
+        android:label="fragment_workout_history_all"
+        tools:layout="@layout/fragment_workout_history_all" >
+        <action
+            android:id="@+id/action_workoutHistoryAllFragment2_to_workoutHistoryFragment"
+            app:destination="@id/workoutHistoryFragment" />
+        <action
+            android:id="@+id/action_workoutHistoryAllFragment2_to_workoutHistoryMonthFragment"
+            app:destination="@id/workoutHistoryMonthFragment" />
+        <action
+            android:id="@+id/action_workoutHistoryAllFragment2_to_homeMenuFragment"
+            app:destination="@id/homeMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutHistoryMonthFragment"
+        android:name="hu.bme.aut.android.trackio.ui.workouthistory.WorkoutHistoryMonthFragment"
+        android:label="fragment_workout_history_month"
+        tools:layout="@layout/fragment_workout_history_month" >
+        <action
+            android:id="@+id/action_workoutHistoryMonthFragment_to_workoutHistoryFragment"
+            app:destination="@id/workoutHistoryFragment" />
+        <action
+            android:id="@+id/action_workoutHistoryMonthFragment_to_workoutHistoryAllFragment2"
+            app:destination="@id/workoutHistoryAllFragment2" />
+        <action
+            android:id="@+id/action_workoutHistoryMonthFragment_to_homeMenuFragment"
+            app:destination="@id/homeMenuFragment" />
+    </fragment>
 </navigation>
