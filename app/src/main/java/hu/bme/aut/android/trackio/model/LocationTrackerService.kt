@@ -29,7 +29,7 @@ class LocationTrackerService : LifecycleService() {
 
         _locationLiveData = LocationLiveData(this)
         _locationLiveData.observe(this) {
-            if (lastLocation !== null) {
+            if (lastLocation != null && tracking) {
                 _distance.value = _distance.value?.plus(it.distanceTo(lastLocation) / 1000)
             }
             lastLocation = it
