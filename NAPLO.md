@@ -30,3 +30,9 @@
  - Musa Abdullah: Location, Timer, Workout ViewModel
  - Ferencz Kincső: WorkoutHistoryFragment
  - Fogti István: Adatmodell sequelize ORM-mel, MSSQL-el és autentikáció JWT-vel
+
+### 10. hét
+ - Galuska Zoltán: Admin app animáció, Backend/hálózat kommunikáció
+ - Musa Abdullah: Location service fix, ProfileViewModel, ProfileMenuFragment, Workout types
+ - Ferencz Kincső: WorkoutHistoryFragment, Splash screen
+ - Fogti István: nginx webszerver
