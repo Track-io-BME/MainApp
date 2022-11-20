@@ -6,13 +6,11 @@ import android.text.InputFilter
 import android.text.Spanned
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
+import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.databinding.FragmentMeasurementsDialogBinding
-import hu.bme.aut.android.trackio.model.ProfileViewModel
 
 class MeasurementsDialogFragment : DialogFragment() {
     private lateinit var binding : FragmentMeasurementsDialogBinding
-    private val viewModel: ProfileViewModel by activityViewModels()
 
     companion object {
         const val TAG = "MeasurementsDialogFragment"
@@ -33,18 +31,26 @@ class MeasurementsDialogFragment : DialogFragment() {
             .setView(binding.root)
             .setMessage("Set your measurements and goals")
             .setPositiveButton("ok") { _, _ ->
-                if(binding.etWeightValue.text.isNotEmpty() &&
-                    binding.etWeightValue.text.toString().toFloat() != viewModel.weight.value)
-                    viewModel.weight.value = binding.etWeightValue.text.toString().toFloat()
-                if(binding.etWeightGoalValue.text.isNotEmpty() &&
-                    binding.etWeightGoalValue.text.toString().toFloat() != viewModel.weightGoal.value)
-                    viewModel.weightGoal.value = binding.etWeightGoalValue.text.toString().toFloat()
-                if(binding.etHeightValue.text.isNotEmpty() &&
-                    binding.etHeightValue.text.toString().toFloat() != viewModel.height.value)
-                    viewModel.height.value = binding.etHeightValue.text.toString().toFloat()
-                if(binding.etStepsGoalValue.text.isNotEmpty() &&
-                    binding.etStepsGoalValue.text.toString().toInt() != viewModel.stepsGoal.value)
-                    viewModel.stepsGoal.value = binding.etStepsGoalValue.text.toString().toInt()
+                if(binding.etWeightValue.text.isNotEmpty())
+                    SharedPrefConfig.put(
+                        SharedPrefConfig.pref_weight,
+                        binding.etWeightValue.text.toString().toFloat()
+                    )
+                if(binding.etWeightGoalValue.text.isNotEmpty())
+                    SharedPrefConfig.put(
+                        SharedPrefConfig.pref_weight_goal,
+                        binding.etWeightGoalValue.text.toString().toFloat()
+                    )
+                if(binding.etHeightValue.text.isNotEmpty())
+                    SharedPrefConfig.put(
+                        SharedPrefConfig.pref_height,
+                        binding.etHeightValue.text.toString().toFloat()
+                    )
+                if(binding.etStepsGoalValue.text.isNotEmpty())
+                    SharedPrefConfig.put(
+                        SharedPrefConfig.pref_steps_goal,
+                        binding.etStepsGoalValue.text.toString().toInt()
+                    )
             }
             .setNegativeButton("back", null)
             .create()

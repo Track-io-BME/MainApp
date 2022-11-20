@@ -6,14 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.core.view.get
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.R
+import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.databinding.FragmentSignupBinding
 
 class SignupFragment : Fragment() {
     private lateinit var binding: FragmentSignupBinding
+    private val viewModel: SignupViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +27,6 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var viewModel = ViewModelProvider(this)[SignupViewModel::class.java]
 
         binding.spGender.adapter = ArrayAdapter(requireContext(), R.layout.spinner_content_template, resources.getStringArray(R.array.genders))
 
@@ -41,8 +41,8 @@ class SignupFragment : Fragment() {
                     binding.etHeight.text.toString().toFloat(),
                     binding.etPassword.text.toString()
                 )){
+                SharedPrefConfig.put(SharedPrefConfig.pref_signed_in, true)
                 findNavController().navigate(R.id.action_signupFragment_to_homeMenuFragment)
-
             }
         }
 //        binding.btnSignupToLogin.setOnClickListener {

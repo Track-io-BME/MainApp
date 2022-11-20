@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.MainActivity
 import hu.bme.aut.android.trackio.R
+import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.databinding.FragmentProfileMenuBinding
 import hu.bme.aut.android.trackio.model.ProfileViewModel
 
@@ -80,7 +81,7 @@ class ProfileMenuFragment : Fragment() {
 //            findNavController().navigate(R.id.action_profileMenuFragment_to_homeMenuFragment)
 //        }
         binding.clSignOut.setOnClickListener {
-//            findNavController().navigate(R.id.action_profileMenuFragment_to_loginFragment)
+            SharedPrefConfig.put(SharedPrefConfig.pref_signed_in, false)
             val intent = Intent(requireContext(), MainActivity::class.java)
             activity?.finish()
             startActivity(intent)
@@ -117,5 +118,15 @@ class ProfileMenuFragment : Fragment() {
         binding.clHeight.setOnClickListener {
             MeasurementsDialogFragment().show(childFragmentManager, MeasurementsDialogFragment.TAG)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        SharedPrefConfig.registerListener(viewModel)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        SharedPrefConfig.unregisterListener(viewModel)
     }
 }

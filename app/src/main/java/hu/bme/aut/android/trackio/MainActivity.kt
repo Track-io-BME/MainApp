@@ -7,8 +7,13 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
+import hu.bme.aut.android.trackio.data.SharedPrefConfig
+import hu.bme.aut.android.trackio.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     companion object {
         private const val REQUEST_CODE_PERMISSIONS = 1001
         private val REQUIRED_PERMISSIONS = arrayOf(
@@ -21,13 +26,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
             )
         }
+        SharedPrefConfig.init(applicationContext)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (SharedPrefConfig.getBoolean(SharedPrefConfig.pref_signed_in))
+            binding.navHostFragment. findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {

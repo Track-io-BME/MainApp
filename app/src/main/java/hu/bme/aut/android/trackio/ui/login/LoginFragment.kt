@@ -8,13 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.R
+import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
     private lateinit var binding : FragmentLoginBinding
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,13 +24,12 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+        binding.etEmail.setText(SharedPrefConfig.getString(SharedPrefConfig.pref_username, ""))
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        var viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         binding.btnLoginToHome.setOnClickListener{
             if(!TextUtils.isEmpty(binding.etEmail.text) && !TextUtils.isEmpty(binding.etPassword.text)){
@@ -41,6 +42,10 @@ class LoginFragment : Fragment() {
             }
             else{   // todo - kiszedni, ha mar mukodik a login
                 Toast.makeText(context, "shortcut", Toast.LENGTH_SHORT).show()
+                if (binding.etEmail.text.toString() != SharedPrefConfig.getString(SharedPrefConfig.pref_username, ""))
+                    SharedPrefConfig.clear()
+                SharedPrefConfig.put(SharedPrefConfig.pref_signed_in, true)
+                SharedPrefConfig.put(SharedPrefConfig.pref_username, binding.etEmail.text.toString())
                 findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
             }
         }
