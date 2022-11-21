@@ -36,3 +36,10 @@
  - Musa Abdullah: Location service fix, ProfileViewModel, ProfileMenuFragment, Workout types
  - Ferencz Kincső: WorkoutHistoryFragment, Splash screen
  - Fogti István: nginx webszerver
+
+### 11. hét 
+ - Galuska Zoltán: Autentikáció 
+ - Musa Abdullah: Shared Preferences
+ - Ferencz Kincső: Williamchart gráf
+ - Fogti István: Autentikáció, refaktorálás
+
