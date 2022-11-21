@@ -95,4 +95,10 @@ dependencies {
 
 /** Recycle View **/
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
+
+    // Charts
+    implementation 'com.diogobernardino:williamchart:3.10.1'
+
+
+
 }

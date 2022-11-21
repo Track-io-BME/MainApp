@@ -137,29 +137,24 @@
         app:layout_constraintTop_toTopOf="@+id/daily_activities_white_box1"
         app:layout_constraintVertical_bias="0.129" />
 
-    <ImageView
-        android:id="@+id/daily_activities_white_box4"
+    <com.db.williamchart.view.LineChartView
+        android:id="@+id/lineChart"
         android:layout_width="318dp"
         android:layout_height="115dp"
-        android:src="@drawable/white_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.783" />
-
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GRAPH OF WEIGHT"
-        app:layout_constraintBottom_toBottomOf="@+id/daily_activities_white_box4"
-        app:layout_constraintEnd_toEndOf="@+id/daily_activities_white_box4"
-        app:layout_constraintStart_toStartOf="@+id/daily_activities_white_box4"
-        app:layout_constraintTop_toTopOf="@+id/daily_activities_white_box4" />
-
-
-
+        app:layout_constraintVertical_bias="0.783"
+        app:chart_lineColor="@color/white"
+        app:chart_lineThickness="5dp"
+        app:chart_smoothLine="false"
+        app:chart_gridEffect="dotted"
+        app:chart_labelsColor="#FFFFFF"
+        app:chart_labelsFont="@font/trebucbd"
+        app:chart_labelsSize="15sp"
+        />
+    <!--app:chart_axis="none" - ha nem akarjuk az oldalsó feliratokat -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

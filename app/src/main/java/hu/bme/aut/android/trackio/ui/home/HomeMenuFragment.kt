@@ -1,5 +1,6 @@
 package hu.bme.aut.android.trackio.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,10 @@ import androidx.navigation.ui.setupWithNavController
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.databinding.FragmentHomeMenuBinding
 import hu.bme.aut.android.trackio.databinding.FragmentLoginBinding
+import hu.bme.aut.android.trackio.ui.detatiledmesurements.DetailedMeasurementsFragment
+import hu.bme.aut.android.trackio.ui.profilemenu.MeasurementsDialogFragment
+import kotlinx.android.synthetic.main.fragment_detailed_measurements.*
+import kotlinx.android.synthetic.main.fragment_home_menu.*
 
 class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeMenuBinding
@@ -40,6 +45,18 @@ class HomeFragment : Fragment() {
         binding.btnHomeToWorkoutHistory.setOnClickListener {
             findNavController().navigate()
         }*/
+
+
+
+        lineChart2.gradientFillColors =
+            intArrayOf(
+                Color.parseColor("#81FFFF"),
+                Color.TRANSPARENT
+            )
+        lineChart2.animation.duration = animationDuration
+
+        lineChart2.animate(lineSet2)
+
         binding.imageView4.setOnClickListener {
             findNavController().navigate(R.id.action_homeMenuFragment_to_detailedMeasurementsFragment)
         }
@@ -75,4 +92,15 @@ class HomeFragment : Fragment() {
             }
         }
     }
+    companion object{
+        private val lineSet2 = listOf(
+            "05/01" to 68.5f,
+            "06/14" to 67.9f,
+            "08/03" to 68.1f,
+            "08/28" to 67.5f,
+            "10/01" to 65.4f
+        )
+    }
+    private val animationDuration = 1000L
+
 }
