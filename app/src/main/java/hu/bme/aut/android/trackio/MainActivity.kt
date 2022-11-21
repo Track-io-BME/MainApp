@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.navigation.findNavController
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.databinding.ActivityMainBinding
 
@@ -35,12 +34,10 @@ class MainActivity : AppCompatActivity() {
             )
         }
         SharedPrefConfig.init(applicationContext)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        if (SharedPrefConfig.getBoolean(SharedPrefConfig.pref_signed_in))
-            binding.navHostFragment. findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
+//        if (SharedPrefConfig.getBoolean(SharedPrefConfig.pref_signed_in))
+//            binding.navHostFragment
+//                .findNavController()
+//                .navigate(R.id.action_loginFragment_to_homeMenuFragment)
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
