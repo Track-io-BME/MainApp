@@ -1,17 +1,12 @@
-package hu.bme.aut.android.trackio.ui
+package hu.bme.aut.android.trackio.ui.home
 
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.databinding.FragmentHomeMenuBinding
-import hu.bme.aut.android.trackio.databinding.FragmentLoginBinding
-import hu.bme.aut.android.trackio.ui.detatiledmesurements.DetailedMeasurementsFragment
-import hu.bme.aut.android.trackio.ui.profilemenu.MeasurementsDialogFragment
 import kotlinx.android.synthetic.main.fragment_detailed_measurements.*
 import kotlinx.android.synthetic.main.fragment_home_menu.*
 

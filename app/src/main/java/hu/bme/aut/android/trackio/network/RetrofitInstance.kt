@@ -1,52 +1,27 @@
 package hu.bme.aut.android.trackio.network
 
-import android.util.Log
+import hu.bme.aut.android.trackio.network.Constant.Companion.SERVICE_URL
 import okhttp3.OkHttpClient
-import retrofit2.Call
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.security.cert.X509Certificate
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
-object NetworkManager {
-    private val retrofit: Retrofit
-    private val serverApi : RetrofitApi
-    private const val SERVICE_URL = "https://23.97.188.188:443/"
-
-    init {
-        retrofit = Retrofit.Builder()
+object RetrofitInstance {
+    private val retrofit by lazy {
+        Retrofit.Builder()
             .baseUrl(SERVICE_URL)
             .client(getUnsafeOkHttpClient())
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create())
             .build()
-        serverApi = retrofit.create(RetrofitApi::class.java)
     }
 
-    fun loginUser(mail : String, password : String): Call<String>{
-        Log.d("baj van", serverApi.login(mail,password).toString())
-        return serverApi.login(mail,password)
+    val api: TrackAPI by lazy{
+        retrofit.create(TrackAPI::class.java)
     }
 
-    fun signUp( firstName: String,
-                lastName: String,
-                emailAddress: String,
-                gender: Int,
-                birthDate: Long,
-                weight: Float,
-                height: Float,
-                password: String): Call<String>{
-        return serverApi.signUp(firstName,
-            lastName,
-            emailAddress,
-            gender,
-            weight,
-            height,
-            birthDate,
-            password)
-
-    }
 
     private fun getUnsafeOkHttpClient(): OkHttpClient {
         // Create a trust manager that does not validate certificate chains
@@ -70,8 +45,4 @@ object NetworkManager {
             .sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
             .hostnameVerifier { _, _ -> true }.build()
     }
-
-
-
-
 }

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.databinding.FragmentSignupBinding
+import hu.bme.aut.android.trackio.viewmodel.SignupViewModel
 
 class SignupFragment : Fragment() {
     private lateinit var binding: FragmentSignupBinding

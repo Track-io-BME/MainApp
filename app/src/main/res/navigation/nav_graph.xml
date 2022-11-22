@@ -36,7 +36,7 @@
         tools:layout="@layout/fragment_daily_activities" />
     <fragment
         android:id="@+id/homeMenuFragment"
-        android:name="hu.bme.aut.android.trackio.ui.HomeFragment"
+        android:name="hu.bme.aut.android.trackio.ui.home.HomeFragment"
         android:label="fragment_home_menu"
         tools:layout="@layout/fragment_home_menu" >
         <action

@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.databinding.FragmentLoginBinding
+import hu.bme.aut.android.trackio.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
     private lateinit var binding : FragmentLoginBinding
