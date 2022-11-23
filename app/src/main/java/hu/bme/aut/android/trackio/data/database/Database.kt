@@ -8,7 +8,7 @@ import hu.bme.aut.android.trackio.data.roomentities.*
 
 @Database(
     entities = [
-        ActiveChallanges::class,
+        ActiveChallenge::class,
         DailyHistory::class,
         FinishedChallenges::class,
         SportHistory::class,
@@ -16,7 +16,7 @@ import hu.bme.aut.android.trackio.data.roomentities.*
     ], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
 
-    abstract fun challengeDao(): DatabaseDAO
+    abstract fun databaseDAO(): DatabaseDAO
 
     companion object{
         @Volatile

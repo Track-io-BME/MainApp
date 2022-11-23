@@ -6,9 +6,9 @@ import androidx.room.TypeConverter
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-@Entity(tableName = "activeChallanges_table")
-data class ActiveChallanges(
-    @PrimaryKey(autoGenerate = true)
+@Entity(tableName = "activeChallenges_table")
+data class ActiveChallenge(
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
     val distance: Float,
     val sportType : SportType,

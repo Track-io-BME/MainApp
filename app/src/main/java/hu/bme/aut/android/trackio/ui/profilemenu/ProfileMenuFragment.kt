@@ -12,7 +12,7 @@ import hu.bme.aut.android.trackio.MainActivity
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.databinding.FragmentProfileMenuBinding
-import hu.bme.aut.android.trackio.model.ProfileViewModel
+import hu.bme.aut.android.trackio.viewmodel.ProfileViewModel
 
 class ProfileMenuFragment : Fragment() {
     private lateinit var binding : FragmentProfileMenuBinding
@@ -82,6 +82,7 @@ class ProfileMenuFragment : Fragment() {
 //        }
         binding.clSignOut.setOnClickListener {
             SharedPrefConfig.put(SharedPrefConfig.pref_signed_in, false)
+            SharedPrefConfig.put("pref_loggedin",false)
             val intent = Intent(requireContext(), MainActivity::class.java)
             activity?.finish()
             startActivity(intent)

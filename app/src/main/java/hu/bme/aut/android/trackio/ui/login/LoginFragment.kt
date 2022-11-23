@@ -1,23 +1,22 @@
 package hu.bme.aut.android.trackio.ui.login
 
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.R
+import hu.bme.aut.android.trackio.data.Login
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.databinding.FragmentLoginBinding
+import hu.bme.aut.android.trackio.network.InternetConnectivityChecker
 import hu.bme.aut.android.trackio.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
-    private lateinit var binding : FragmentLoginBinding
-    private val viewModel: LoginViewModel by viewModels()
+    private lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,28 +30,65 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
-        binding.btnLoginToHome.setOnClickListener{
-            if(!TextUtils.isEmpty(binding.etEmail.text) && !TextUtils.isEmpty(binding.etPassword.text)){
-                Log.d("baj van", "login fragment")
-                if(viewModel.LoginUser(binding.etEmail.text.toString(),binding.etPassword.text.toString())){
-                    findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
+        var login = SharedPrefConfig.getBoolean(SharedPrefConfig.pref_logged_in, false)
+        if (login) {
+            if (InternetConnectivityChecker.isOnline()) {
+                viewModel.login(
+                    Login(
+                        SharedPrefConfig.getString(SharedPrefConfig.pref_email),
+                        SharedPrefConfig.getString(SharedPrefConfig.pref_password)
+                    )
+                ).observe(viewLifecycleOwner) { succesfulLogin ->
+                    if (succesfulLogin) {
+                        SharedPrefConfig.put(SharedPrefConfig.pref_logged_in,true)
+                        findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
+                    } else {
+                        Toast.makeText(context, "Wrong password or email", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            } else {
+                Toast.makeText(
+                    context,
+                    "No internet",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        } else {
+            binding.btnLoginToHome.setOnClickListener {
+                if (InternetConnectivityChecker.isOnline()) {
+                    viewModel.login(
+                        Login(
+                            binding.etEmail.text.toString(),
+                            binding.etPassword.text.toString()
+                        )
+                    ).observe(viewLifecycleOwner) { succesfulLogin ->
+                        if (succesfulLogin) {
+                            findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
+                        } else {
+                            Toast.makeText(context, "Wrong password or email", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+                } else {
+                    Toast.makeText(
+                        context,
+                        "No internet, please restart the app with internet connection",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
                 }
-
-            }
-            else{   // todo - kiszedni, ha mar mukodik a login
-                Toast.makeText(context, "shortcut", Toast.LENGTH_SHORT).show()
-                if (binding.etEmail.text.toString() != SharedPrefConfig.getString(SharedPrefConfig.pref_username, ""))
-                    SharedPrefConfig.clear()
-                SharedPrefConfig.put(SharedPrefConfig.pref_signed_in, true)
-                SharedPrefConfig.put(SharedPrefConfig.pref_username, binding.etEmail.text.toString())
-                findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
             }
         }
 
-        binding.tvLoginToSignup.setOnClickListener {
+        binding.tvLoginToSignup.setOnClickListener{
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
+        }
+
+        binding.tvLogIn.setOnClickListener{
+            findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
         }
     }
 }

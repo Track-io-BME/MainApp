@@ -1,4 +1,21 @@
 package hu.bme.aut.android.trackio.repository
 
-class DbRepository {
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import hu.bme.aut.android.trackio.data.database.DatabaseDAO
+import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
+
+class DbRepository(private val databaseDAO : DatabaseDAO) {
+
+    fun getActiveChallengeOfSportType(sportType: ActiveChallenge.SportType) : LiveData<List<ActiveChallenge>> {
+        return databaseDAO.getActiveChallenges(sportType)
+    }
+
+    suspend fun addActiveChallenge(activeChallenges: ActiveChallenge){
+        databaseDAO.addActiveChallenge(activeChallenges)
+    }
+
+    suspend fun deleteActiveChallenge(activeChallenges: ActiveChallenge){
+        databaseDAO.deleteActiveChallenge(activeChallenges)
+    }
 }

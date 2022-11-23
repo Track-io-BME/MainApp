@@ -62,7 +62,7 @@
                     android:background="@drawable/bottom_border">
 
                     <TextView
-                        android:id="@+id/tvSetGoalsTitle"
+                        android:id="@+id/tvChallengeDuration"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/trebucbd"

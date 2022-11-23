@@ -1,4 +1,4 @@
-package hu.bme.aut.android.trackio.model
+package hu.bme.aut.android.trackio.viewmodel
 
 import android.app.Application
 import android.content.SharedPreferences

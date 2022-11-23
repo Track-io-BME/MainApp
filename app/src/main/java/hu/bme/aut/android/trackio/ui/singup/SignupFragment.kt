@@ -31,21 +31,7 @@ class SignupFragment : Fragment() {
 
         binding.spGender.adapter = ArrayAdapter(requireContext(), R.layout.spinner_content_template, resources.getStringArray(R.array.genders))
 
-        binding.btnSignupToHome.setOnClickListener {
-            if(viewModel.signUp(
-                    binding.etFirstName.text.toString(),
-                    binding.etLastName.text.toString(),
-                    binding.etEmail.text.toString(),
-                    0,
-                    binding.etBirthDate.drawingTime,
-                    binding.etWeight.text.toString().toFloat(),
-                    binding.etHeight.text.toString().toFloat(),
-                    binding.etPassword.text.toString()
-                )){
-                SharedPrefConfig.put(SharedPrefConfig.pref_signed_in, true)
-                findNavController().navigate(R.id.action_signupFragment_to_homeMenuFragment)
-            }
-        }
+
 //        binding.btnSignupToLogin.setOnClickListener {
 //            findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
 //        }

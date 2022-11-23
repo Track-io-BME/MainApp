@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.databinding.FragmentDuringWorkoutBinding
 import hu.bme.aut.android.trackio.model.LocationTrackerService
-import hu.bme.aut.android.trackio.model.WorkoutViewModel
+import hu.bme.aut.android.trackio.viewmodel.WorkoutViewModel
 
 class DuringWorkoutFragment : Fragment() {
     private lateinit var binding : FragmentDuringWorkoutBinding

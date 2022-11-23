@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.databinding.ActivityMainBinding
+import hu.bme.aut.android.trackio.network.InternetConnectivityChecker
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
             )
         }
+        InternetConnectivityChecker.init(applicationContext)
         SharedPrefConfig.init(applicationContext)
 //        if (SharedPrefConfig.getBoolean(SharedPrefConfig.pref_signed_in))
 //            binding.navHostFragment

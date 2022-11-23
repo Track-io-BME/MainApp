@@ -9,13 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import hu.bme.aut.android.trackio.R
+import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
 import hu.bme.aut.android.trackio.databinding.FragmentWorkoutMenuBinding
-import hu.bme.aut.android.trackio.model.WorkoutViewModel
+import hu.bme.aut.android.trackio.viewmodel.WorkoutViewModel
 
 class WorkoutMenuFragment : Fragment() {
     private lateinit var binding : FragmentWorkoutMenuBinding
     private val viewModel : WorkoutViewModel by activityViewModels()
+    private lateinit var  adapter: ActiveChallengesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,6 +26,11 @@ class WorkoutMenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentWorkoutMenuBinding.inflate(inflater, container, false)
+        initRecycleView()
+
+        viewModel.activeWalkingChallengesFromDB.observe(viewLifecycleOwner){
+            adapter.setData(it)
+        }
         when (viewModel.currentWorkoutType) {
             WorkoutViewModel.WorkoutType.WALKING ->
                 binding.tvWalkingMode.text = underlineText(binding.tvWalkingMode.text.toString())
@@ -31,6 +39,8 @@ class WorkoutMenuFragment : Fragment() {
             WorkoutViewModel.WorkoutType.CYCLING ->
                 binding.tvCyclingMode.text = underlineText(binding.tvCyclingMode.text.toString())
         }
+
+
         return binding.root
     }
 
@@ -42,18 +52,27 @@ class WorkoutMenuFragment : Fragment() {
             binding.tvRunningMode.text = binding.tvRunningMode.text.toString()
             binding.tvCyclingMode.text = binding.tvCyclingMode.text.toString()
             viewModel.currentWorkoutType = WorkoutViewModel.WorkoutType.WALKING
+            viewModel.activeWalkingChallengesFromDB.observe(viewLifecycleOwner){
+                adapter.setData(it)
+            }
         }
         binding.tvRunningMode.setOnClickListener {
             binding.tvWalkingMode.text = binding.tvWalkingMode.text.toString()
             binding.tvRunningMode.text = underlineText(binding.tvRunningMode.text.toString())
             binding.tvCyclingMode.text = binding.tvCyclingMode.text.toString()
             viewModel.currentWorkoutType = WorkoutViewModel.WorkoutType.RUNNING
+            viewModel.activeRunningChallengesFromDB.observe(viewLifecycleOwner){
+                adapter.setData(it)
+            }
         }
         binding.tvCyclingMode.setOnClickListener {
             binding.tvWalkingMode.text = binding.tvWalkingMode.text.toString()
             binding.tvRunningMode.text = binding.tvRunningMode.text.toString()
             binding.tvCyclingMode.text = underlineText(binding.tvCyclingMode.text.toString())
             viewModel.currentWorkoutType = WorkoutViewModel.WorkoutType.CYCLING
+            viewModel.activeCyclingChallengesFromDB.observe(viewLifecycleOwner){
+                adapter.setData(it)
+            }
         }
 
         binding.btnStartWorkout.setOnClickListener {
@@ -80,5 +99,11 @@ class WorkoutMenuFragment : Fragment() {
         val text = SpannableString(string)
         text.setSpan(UnderlineSpan(), 0, text.length, 0)
         return text
+    }
+
+    private fun initRecycleView(){
+        adapter = ActiveChallengesAdapter()
+        binding.challengeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.challengeRecyclerView.adapter=adapter
     }
 }
