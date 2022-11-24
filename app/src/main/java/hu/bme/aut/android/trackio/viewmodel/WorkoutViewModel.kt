@@ -16,6 +16,23 @@ import retrofit2.Response
 import java.util.*
 
 class WorkoutViewModel(application: Application) : AndroidViewModel(application) {
+    var time = 0
+    var distance = 0.0F
+    var clearNeeded = false
+
+    enum class WorkoutType {
+        WALKING, RUNNING, CYCLING
+    }
+    var currentWorkoutType = WorkoutType.WALKING
+        set(value) {
+            if (value != field) {
+                save()
+                time = 0
+                distance = 0.0F
+                clearNeeded = true
+                field = value
+            }
+        }
 
     //Challengekmegjelenítése
     private val dbRepository: DbRepository
@@ -77,44 +94,8 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
             })
     }
 
-    //Workouthoz
-    enum class WorkoutType {
-        WALKING, RUNNING, CYCLING
-    }
-
-    var distance = 0.0F
-    var currentWorkoutType = WorkoutType.WALKING
-    private lateinit var timer: Timer
-    private val _time = MutableLiveData(0)
-    val time: LiveData<Int> = _time
-    private var _timerRunning = MutableLiveData(false)
-    val timerRunning: LiveData<Boolean> = _timerRunning
-
-    fun startStop() {
-        if (_timerRunning.value == true) {
-            stopTimer()
-        } else {
-            startTimer()
-        }
-    }
-
-    private fun startTimer() {
-        timer = Timer()
-        timer.scheduleAtFixedRate(
-            object : TimerTask() {
-                override fun run() {
-                    _time.postValue(_time.value?.plus(1))
-                }
-            },
-            0,
-            1000
-        )
-        _timerRunning.value = true
-    }
-
-    private fun stopTimer() {
-        timer.cancel()
-        timer.purge()
-        _timerRunning.value = false
+    fun save() {
+        Log.d("WorkoutViewModel", "SAVE")
+        //TODO
     }
 }
