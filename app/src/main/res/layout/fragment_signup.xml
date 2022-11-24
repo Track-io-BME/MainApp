@@ -91,7 +91,7 @@
         android:layout_height="48dp"
         android:layout_marginVertical="8dp"
         android:layout_marginStart="8dp"
-        android:hint="09/05/1996"
+        android:hint="1996-05-09"
         android:inputType="date"
         app:layout_constraintLeft_toRightOf="@id/spGender"
         app:layout_constraintRight_toRightOf="@id/rightGuideline"
@@ -105,7 +105,7 @@
         android:layout_marginVertical="8dp"
         android:layout_marginEnd="8dp"
         android:hint="@string/weight"
-        android:inputType="numberDecimal"
+        android:inputType="numberDecimal|numberSigned"
         app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
         app:layout_constraintRight_toLeftOf="@id/etHeight"
         app:layout_constraintTop_toBottomOf="@id/spGender" />
@@ -118,7 +118,7 @@
         android:layout_marginVertical="8dp"
         android:layout_marginStart="8dp"
         android:hint="@string/height"
-        android:inputType="numberDecimal"
+        android:inputType="numberDecimal|numberSigned"
         app:layout_constraintLeft_toRightOf="@id/etWeight"
         app:layout_constraintRight_toRightOf="@id/rightGuideline"
         app:layout_constraintTop_toBottomOf="@id/etBirthDate" />

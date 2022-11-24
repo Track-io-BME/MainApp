@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_signupFragment_to_homeMenuFragment"
             app:destination="@id/homeMenuFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_datePickerDialogFragment"
+            app:destination="@id/datePickerDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/dailyActivitiesFragment"
@@ -188,4 +191,8 @@
             android:id="@+id/action_workoutHistoryMonthFragment_to_homeMenuFragment"
             app:destination="@id/homeMenuFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/datePickerDialogFragment"
+        android:name="hu.bme.aut.android.trackio.ui.singup.DatePickerDialogFragment"
+        android:label="DatePickerDialogFragment" />
 </navigation>

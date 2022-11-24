@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
+import hu.bme.aut.android.trackio.data.roomentities.Workout
 
 
 @Dao
@@ -20,6 +21,12 @@ interface DatabaseDAO {
 
     @Delete
     suspend fun deleteActiveChallenge(activeChallenges: ActiveChallenge)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addWorkout(workout: Workout)
+
+    @Query("SELECT * FROM workout_table WHERE  sportType= :sportType ORDER BY id ASC")
+    fun getWorkoutData(sportType: ActiveChallenge.SportType) : LiveData<List<Workout>>
 
 
 }

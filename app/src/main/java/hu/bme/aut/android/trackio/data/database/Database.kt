@@ -11,7 +11,7 @@ import hu.bme.aut.android.trackio.data.roomentities.*
         ActiveChallenge::class,
         DailyHistory::class,
         FinishedChallenges::class,
-        SportHistory::class,
+        Workout::class,
         UserWeight::class
     ], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {

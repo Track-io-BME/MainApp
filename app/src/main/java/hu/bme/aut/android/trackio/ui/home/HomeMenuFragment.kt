@@ -2,16 +2,20 @@ package hu.bme.aut.android.trackio.ui.home
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.databinding.FragmentHomeMenuBinding
+import hu.bme.aut.android.trackio.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_detailed_measurements.*
 import kotlinx.android.synthetic.main.fragment_home_menu.*
 
 class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeMenuBinding
+    private val viewModel : HomeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,6 +27,14 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.getTop3Workout().observe(viewLifecycleOwner){
+            workoutlist ->
+            if (workoutlist != null) {
+                for(item in workoutlist){
+                        Log.d("talan",item.toString())
+                }
+            }
+        }
         /*super.onViewCreated(view, savedInstanceState)
 
         binding.btnHomeToDaily.setOnClickListener {
