@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -44,9 +45,17 @@ class DuringWorkoutFragment : Fragment() {
         viewModel.timerRunning.observe(viewLifecycleOwner) {
             binding.btnPlayPause.isActivated = it
         }
-        Intent(requireContext(), LocationTrackerService::class.java).also {
-            requireActivity().startService(it)
-            requireActivity().bindService(it, connection, Context.BIND_AUTO_CREATE)
+        if (!mBound) {
+            Intent(requireContext(), LocationTrackerService::class.java).also {
+                requireActivity().bindService(it, connection, Context.BIND_AUTO_CREATE)
+            }
+        }
+        else {
+            mService.distance.observe(viewLifecycleOwner) {
+                Log.d("fragment", "OBSERVE")
+                viewModel.distance = it
+                binding.tvWorkoutDistance.text = String.format("%.2f", it)
+            }
         }
         return binding.root
     }
@@ -56,7 +65,6 @@ class DuringWorkoutFragment : Fragment() {
 
         binding.btnDuringToMap.setOnClickListener {
             findNavController().navigate(R.id.action_duringWorkoutFragment_to_workoutMapFragment)
-            requireActivity().unbindService(connection)
         }
         binding.btnPlayPause.setOnClickListener {
             mService.startStop()
@@ -71,6 +79,7 @@ class DuringWorkoutFragment : Fragment() {
             val binder = service as LocationTrackerService.LocationTrackerBinder
             mService = binder.service
             mService.distance.observe(viewLifecycleOwner) {
+                Log.d("fragment", "OBSERVE")
                 viewModel.distance = it
                 binding.tvWorkoutDistance.text = String.format("%.2f", it)
             }
