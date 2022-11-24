@@ -1,5 +1,6 @@
 package hu.bme.aut.android.trackio.ui.duringworkout
 
+import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -71,6 +72,25 @@ class DuringWorkoutFragment : Fragment() {
         binding.btnPlayPause.setOnClickListener {
             mService.startStop()
         }
+        binding.btnFinishWorkout.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Do you want to end the current workout?")
+                .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                    viewModel.save()
+                    mService.clear()
+                }
+                .setNegativeButton(getString(R.string.no), null)
+                .show()
+        }
+        binding.btnRestartWorkout.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Do you want to start a new workout and lose the current process?")
+                .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                    mService.clear()
+                }
+                .setNegativeButton(getString(R.string.no), null)
+                .show()
+        }
     }
 
     private fun observeService() {
@@ -86,6 +106,8 @@ class DuringWorkoutFragment : Fragment() {
             val hours = minutes / 60
             minutes %= 60
             viewModel.time = it
+            binding.btnFinishWorkout.isEnabled = it > 0
+            binding.btnRestartWorkout.isEnabled = it > 0
             binding.tvTimeValue.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
         }
 
