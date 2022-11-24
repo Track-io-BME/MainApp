@@ -13,7 +13,6 @@ object SharedPrefConfig {
     const val pref_weight_goal = "weightGoal"
     const val pref_steps_goal  = "stepsGoal"
     const val pref_birth_date  = "birthDate"
-    const val pref_logged_in  = "loggedIn"
     const val pref_token  = "token"
     const val pref_email  = "email"
     const val pref_expiry_date= "expiryDate"

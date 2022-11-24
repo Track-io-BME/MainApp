@@ -26,7 +26,11 @@ class ActiveChallengesAdapter :
         val currentItem = activeChallengeList[position]
         holder.binding.tvChallengeDuration.text= currentItem.duration.toString()
         holder.binding.tvDistance.text=getSportType(currentItem.sportType,currentItem.distance.toString())
-        holder.binding.tvStartDate.text = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(currentItem.startDate)
+        if (currentItem.duration == ActiveChallenge.SportDuration.DAILY)
+            holder.binding.tvStartDate.text = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(currentItem.startDate)
+        else
+            holder.binding.tvStartDate.text = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(currentItem.startDate + 6 * 86_400_000)
+
     }
 
     override fun getItemCount(): Int {

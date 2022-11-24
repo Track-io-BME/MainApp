@@ -29,7 +29,7 @@ class LoginViewModel: ViewModel() {
                         SharedPrefConfig.put(SharedPrefConfig.pref_token,"Bearer "+autToken.token)
                         SharedPrefConfig.put(SharedPrefConfig.pref_password,login.password)
                         SharedPrefConfig.put(SharedPrefConfig.pref_email,autToken.email)
-                        SharedPrefConfig.put(SharedPrefConfig.pref_logged_in,true)
+                        SharedPrefConfig.put(SharedPrefConfig.pref_signed_in,true)
                         val expiry_date = Calendar.getInstance().getTime().time+3600000
                         SharedPrefConfig.put(SharedPrefConfig.pref_expiry_date,expiry_date)
                         succefulLogin.value=true

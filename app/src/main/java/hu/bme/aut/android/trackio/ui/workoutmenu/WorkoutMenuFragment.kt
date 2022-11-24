@@ -28,16 +28,25 @@ class WorkoutMenuFragment : Fragment() {
         binding = FragmentWorkoutMenuBinding.inflate(inflater, container, false)
         initRecycleView()
 
-        viewModel.activeWalkingChallengesFromDB.observe(viewLifecycleOwner){
-            adapter.setData(it)
-        }
         when (viewModel.currentWorkoutType) {
-            WorkoutViewModel.WorkoutType.WALKING ->
+            WorkoutViewModel.WorkoutType.WALKING -> {
                 binding.tvWalkingMode.text = underlineText(binding.tvWalkingMode.text.toString())
-            WorkoutViewModel.WorkoutType.RUNNING ->
+                viewModel.activeWalkingChallengesFromDB.observe(viewLifecycleOwner){
+                    adapter.setData(it)
+                }
+            }
+            WorkoutViewModel.WorkoutType.RUNNING -> {
                 binding.tvRunningMode.text = underlineText(binding.tvRunningMode.text.toString())
-            WorkoutViewModel.WorkoutType.CYCLING ->
+                viewModel.activeRunningChallengesFromDB.observe(viewLifecycleOwner){
+                    adapter.setData(it)
+                }
+            }
+            WorkoutViewModel.WorkoutType.CYCLING -> {
                 binding.tvCyclingMode.text = underlineText(binding.tvCyclingMode.text.toString())
+                viewModel.activeCyclingChallengesFromDB.observe(viewLifecycleOwner){
+                    adapter.setData(it)
+                }
+            }
         }
 
 

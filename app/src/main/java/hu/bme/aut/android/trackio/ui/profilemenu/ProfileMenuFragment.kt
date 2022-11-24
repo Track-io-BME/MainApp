@@ -82,7 +82,6 @@ class ProfileMenuFragment : Fragment() {
 //        }
         binding.clSignOut.setOnClickListener {
             SharedPrefConfig.put(SharedPrefConfig.pref_signed_in, false)
-            SharedPrefConfig.put("pref_loggedin",false)
             val intent = Intent(requireContext(), MainActivity::class.java)
             activity?.finish()
             startActivity(intent)

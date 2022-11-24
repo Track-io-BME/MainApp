@@ -32,7 +32,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
-        var login = SharedPrefConfig.getBoolean(SharedPrefConfig.pref_logged_in, false)
+        val login = SharedPrefConfig.getBoolean(SharedPrefConfig.pref_signed_in, false)
         if (login) {
             if (InternetConnectivityChecker.isOnline()) {
                 viewModel.login(
@@ -42,7 +42,7 @@ class LoginFragment : Fragment() {
                     )
                 ).observe(viewLifecycleOwner) { succesfulLogin ->
                     if (succesfulLogin) {
-                        SharedPrefConfig.put(SharedPrefConfig.pref_logged_in,true)
+                        SharedPrefConfig.put(SharedPrefConfig.pref_signed_in, true)
                         findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
                     } else {
                         Toast.makeText(context, "Wrong password or email", Toast.LENGTH_SHORT)
@@ -56,38 +56,37 @@ class LoginFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-        } else {
-            binding.btnLoginToHome.setOnClickListener {
-                if (InternetConnectivityChecker.isOnline()) {
-                    viewModel.login(
-                        Login(
-                            binding.etEmail.text.toString(),
-                            binding.etPassword.text.toString()
-                        )
-                    ).observe(viewLifecycleOwner) { succesfulLogin ->
-                        if (succesfulLogin) {
-                            findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
-                        } else {
-                            Toast.makeText(context, "Wrong password or email", Toast.LENGTH_SHORT)
-                                .show()
-                        }
+        }
+        binding.btnLoginToHome.setOnClickListener {
+            if (InternetConnectivityChecker.isOnline()) {
+                viewModel.login(
+                    Login(
+                        binding.etEmail.text.toString(),
+                        binding.etPassword.text.toString()
+                    )
+                ).observe(viewLifecycleOwner) { succesfulLogin ->
+                    if (succesfulLogin) {
+                        findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
+                    } else {
+                        Toast.makeText(context, "Wrong password or email", Toast.LENGTH_SHORT)
+                            .show()
                     }
-                } else {
-                    Toast.makeText(
-                        context,
-                        "No internet, please restart the app with internet connection",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
                 }
+            } else {
+                Toast.makeText(
+                    context,
+                    "No internet",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
-        binding.tvLoginToSignup.setOnClickListener{
+
+        binding.tvLoginToSignup.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
 
-        binding.tvLogIn.setOnClickListener{
+        binding.tvLogIn.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
         }
     }
