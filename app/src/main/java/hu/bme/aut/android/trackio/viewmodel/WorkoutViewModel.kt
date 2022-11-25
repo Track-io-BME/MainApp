@@ -23,10 +23,12 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
     var currentWorkoutType = ActiveChallenge.SportType.WALKING
         set(value) {
             if (value != field) {
-                saveCurrentWorkout()
-                time = 0
-                distance = 0.0F
-                clearNeeded = true
+                if (time > 0) {
+                    saveCurrentWorkout()
+                    time = 0
+                    distance = 0.0F
+                    clearNeeded = true
+                }
                 field = value
             }
         }
@@ -99,7 +101,8 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
 
         networkRepository.finishTraining(
             SharedPrefConfig.getString(SharedPrefConfig.pref_token),
-            Workout(0, Calendar.getInstance().timeInMillis, time, distance, distance/time, calories, currentWorkoutType)
+            Workout(0, Calendar.getInstance().timeInMillis, time, distance,
+                distance/time, calories, currentWorkoutType)
             )?.enqueue(object : Callback<Workout?> {
                 override fun onResponse(
                     call: Call<Workout?>,
