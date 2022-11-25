@@ -10,7 +10,7 @@ data class Workout(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     val date: Long,
-    val totalDuration : Long,
+    val totalduration : Long,
     val distance: Float,
     val averageSpeed: Float,
     val calories: Float,

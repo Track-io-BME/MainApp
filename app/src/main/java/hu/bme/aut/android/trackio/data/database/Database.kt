@@ -10,7 +10,6 @@ import hu.bme.aut.android.trackio.data.roomentities.*
     entities = [
         ActiveChallenge::class,
         DailyHistory::class,
-        FinishedChallenges::class,
         Workout::class,
         UserWeight::class
     ], version = 1, exportSchema = false)

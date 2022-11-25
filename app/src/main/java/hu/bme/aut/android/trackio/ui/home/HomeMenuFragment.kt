@@ -32,7 +32,6 @@ class HomeFragment : Fragment() {
         initRecyclerView()
         viewModel.getTop3Workout().observe(viewLifecycleOwner){
             workoutlist ->
-
            adapter.setData(workoutlist as List<Workout>)
         }
         /*super.onViewCreated(view, savedInstanceState)

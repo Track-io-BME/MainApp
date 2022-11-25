@@ -1,10 +1,8 @@
 package hu.bme.aut.android.trackio.network
 
-import hu.bme.aut.android.trackio.data.ServerResponse
-import hu.bme.aut.android.trackio.data.Login
-import hu.bme.aut.android.trackio.data.UserCreationResponse
-import hu.bme.aut.android.trackio.data.UserSignUP
+import hu.bme.aut.android.trackio.data.*
 import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
+import hu.bme.aut.android.trackio.data.roomentities.UserWeight
 import hu.bme.aut.android.trackio.data.roomentities.Workout
 import retrofit2.Call
 import retrofit2.http.*
@@ -31,4 +29,19 @@ interface TrackAPI {
 
     @GET("/userWorkout/top3")
     fun getTop3Workout(@Header("Authorization") token: String) : Call<List<Workout?>?>?
+
+
+    //USERDETAILS dolgok
+    @GET("/userDetails/all")
+    fun getUserDetails(@Header("Authorization") token: String) : Call<UserDetails?>?
+
+    @POST("/userDetails/weight")
+    fun postUserWeight(@Header("Authorization") token: String,@Body userWeight: UserWeight)  : Call<UserWeight?>?
+
+    @GET("userDetails/weight")
+    fun getUserWeight(@Header("Authorization") token: String): Call<List<UserWeight?>?>?
+
+    @PUT("userDetails/goals")
+    fun putGoals(@Header("Authorization") token: String,@Body userWeight: UserWeight) : Call<UserGoals?>?
+
 }

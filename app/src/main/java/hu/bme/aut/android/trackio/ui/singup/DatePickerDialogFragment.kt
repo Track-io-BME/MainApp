@@ -2,13 +2,11 @@ package hu.bme.aut.android.trackio.ui.singup
 
 import android.app.DatePickerDialog
 import android.app.Dialog
-import android.app.TimePickerDialog
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import java.io.Serializable
-import java.sql.Time
 import java.util.*
 
 class DatePickerDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {

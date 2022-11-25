@@ -37,6 +37,10 @@ object SharedPrefConfig {
             mEditor = null
         }
     }
+
+    fun deleteAll(){
+        mPreferences.edit().clear().commit()
+    }
 //
 //    fun saveProfile(profile: UserProfile) {
 //        doEdit()

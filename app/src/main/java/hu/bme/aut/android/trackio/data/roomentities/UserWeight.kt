@@ -7,9 +7,8 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 @Entity(tableName = "userweight_table")
 data class UserWeight(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
-    val userId: Int,
     val date: Long,
     val weight: Float
 )

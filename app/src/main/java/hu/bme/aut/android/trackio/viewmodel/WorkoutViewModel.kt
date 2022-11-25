@@ -7,6 +7,7 @@ import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.data.database.AppDatabase
 import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
 import hu.bme.aut.android.trackio.data.roomentities.Workout
+import hu.bme.aut.android.trackio.network.InternetConnectivityChecker
 import hu.bme.aut.android.trackio.repository.DbRepository
 import hu.bme.aut.android.trackio.repository.NetworkRepository
 import kotlinx.coroutines.Dispatchers
@@ -44,6 +45,9 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
         val databaseDAO = AppDatabase.getDatabase(application).databaseDAO()
         dbRepository = DbRepository(databaseDAO)
         networkRepository = NetworkRepository()
+        if(InternetConnectivityChecker.isOnline()){
+            deleteAllActiveChallenge()
+        }
         getActiveChallengesFromNetwork()
         activeWalkingChallengesFromDB = dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.WALKING)
         activeRunningChallengesFromDB = dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.RUNNING)
@@ -59,6 +63,12 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
     fun deleteActiveChallenge(activeChallenges: ActiveChallenge) {
         viewModelScope.launch(Dispatchers.IO) {
             dbRepository.deleteActiveChallenge(activeChallenges)
+        }
+    }
+
+    fun deleteAllActiveChallenge(){
+        viewModelScope.launch(Dispatchers.IO) {
+            dbRepository.deleteAllActiveChallenge()
         }
     }
 

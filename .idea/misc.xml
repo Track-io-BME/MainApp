@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/activechallengerowitem.xml" value="0.28177083333333336" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.26268115942028986" />
         <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_daily_activities.xml" value="0.25" />
         <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_detailed_measurements.xml" value="0.26268115942028986" />
         <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_help.xml" value="0.26268115942028986" />
@@ -17,7 +18,10 @@
         <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_workout_history.xml" value="0.26268115942028986" />
         <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_workout_history_all.xml" value="0.26268115942028986" />
         <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_workout_history_month.xml" value="0.26268115942028986" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_workout_map.xml" value="0.26268115942028986" />
         <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_workout_menu.xml" value="0.28177083333333336" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/recycler_data_view.xml" value="0.26268115942028986" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/spinner_content_template.xml" value="0.26268115942028986" />
         <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/workouthistoryitem.xml" value="0.33" />
         <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/menu/workout_history_menu.xml" value="0.23148148148148148" />
       </map>

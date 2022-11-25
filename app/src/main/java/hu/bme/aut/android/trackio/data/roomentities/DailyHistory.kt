@@ -7,7 +7,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 @Entity(tableName = "dailyhistory_table")
 data class DailyHistory(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
     val UserId: Int,
     val date: Long,

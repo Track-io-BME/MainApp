@@ -19,6 +19,13 @@ class DbRepository(private val databaseDAO : DatabaseDAO) {
         databaseDAO.deleteAllActiveChallenges()
     }
 
+    fun deleteAllData(){
+        databaseDAO.deleteAllActiveChallenges()
+        databaseDAO.deleteAllDailyHistory()
+        databaseDAO.deleteWorkout()
+        databaseDAO.deleteAllUserWeight()
+    }
+
     suspend fun addActiveChallenge(activeChallenges: ActiveChallenge){
         databaseDAO.addActiveChallenge(activeChallenges)
     }

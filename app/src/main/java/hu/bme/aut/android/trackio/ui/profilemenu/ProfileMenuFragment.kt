@@ -81,6 +81,8 @@ class ProfileMenuFragment : Fragment() {
 //            findNavController().navigate(R.id.action_profileMenuFragment_to_homeMenuFragment)
 //        }
         binding.clSignOut.setOnClickListener {
+            viewModel.deleteAllUserDB()
+           // SharedPrefConfig.deleteAll()
             SharedPrefConfig.put(SharedPrefConfig.pref_signed_in, false)
             val intent = Intent(requireContext(), MainActivity::class.java)
             activity?.finish()

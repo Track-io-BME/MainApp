@@ -33,10 +33,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                     response: Response<List<Workout?>?>
                 ) {
                     if (response.isSuccessful) {
+                        if (response.body() != null) {
+                            top3Workout.value = response.body()
+                        }
                     }
-                    if (response.body() != null) {
-                        top3Workout.value = response.body()
-                    }
+
                 }
 
                 override fun onFailure(call: Call<List<Workout?>?>, t: Throwable) {

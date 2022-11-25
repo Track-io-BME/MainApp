@@ -21,6 +21,15 @@ interface DatabaseDAO {
     @Query("DELETE FROM activeChallenges_table")
     fun deleteAllActiveChallenges()
 
+    @Query("DELETE FROM dailyhistory_table")
+    fun deleteAllDailyHistory()
+
+    @Query("DELETE FROM userweight_table")
+    fun deleteAllUserWeight()
+
+    @Query("DELETE FROM workout_table")
+    fun deleteWorkout()
+
     @Delete
     suspend fun deleteActiveChallenge(activeChallenges: ActiveChallenge)
 
@@ -29,5 +38,7 @@ interface DatabaseDAO {
 
     @Query("SELECT * FROM workout_table WHERE  sportType= :sportType ORDER BY id ASC")
     fun getWorkoutData(sportType: ActiveChallenge.SportType) : LiveData<List<Workout>>
+
+
 
 }
