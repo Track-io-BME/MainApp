@@ -26,6 +26,9 @@ interface TrackAPI {
     @GET("/challenges/getCompletedChallenges")
     fun getCompletedChallenges(@Header("Authorization") token: String) : Call<List<ActiveChallenge?>?>?
 
+    @GET("all")
+    fun getAllWorkoutHistory(@Header("Authorization") token: String) : Call<List<Workout?>?>?
+
     @GET("/userWorkout/top3")
     fun getTop3Workout(@Header("Authorization") token: String) : Call<List<Workout?>?>?
 }
