@@ -30,6 +30,10 @@ class NetworkRepository {
         return RetrofitInstance.api.getActiveChallenges(autToken)
     }
 
+    fun getCompletedChallenges(autToken: String)  : Call<List<ActiveChallenge?>?>?{
+        return RetrofitInstance.api.getCompletedChallenges(autToken)
+    }
+
     fun getTop3Workout(token: String) : Call<List<Workout?>?>?{
         return RetrofitInstance.api.getTop3Workout(token)
     }

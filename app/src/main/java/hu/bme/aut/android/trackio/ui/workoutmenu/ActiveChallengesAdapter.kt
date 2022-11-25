@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
+import hu.bme.aut.android.trackio.data.roomentities.Workout
 import hu.bme.aut.android.trackio.databinding.ActivechallengerowitemBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -13,6 +14,7 @@ class ActiveChallengesAdapter :
 
 
     private var activeChallengeList = mutableListOf<ActiveChallenge>()
+
 
 
     inner class ActiveChallengeViewHolder(val binding: ActivechallengerowitemBinding) :

@@ -1,7 +1,9 @@
 package hu.bme.aut.android.trackio.ui.home
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.trackio.R
@@ -11,12 +13,11 @@ import hu.bme.aut.android.trackio.databinding.WorkouthistoryitemBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class WorkoutAdapter : RecyclerView.Adapter<WorkoutAdapter.WorkoutHistoryViewHolder>() {
+class WorkoutAdapter(private val listener: HomeFragment) : RecyclerView.Adapter<WorkoutAdapter.WorkoutHistoryViewHolder>() {
 
     private var workouthistoryList = mutableListOf<Workout>()
 
-    inner class WorkoutHistoryViewHolder(val binding: WorkouthistoryitemBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class WorkoutHistoryViewHolder(val binding: WorkouthistoryitemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutHistoryViewHolder {
         return WorkoutHistoryViewHolder(
@@ -37,7 +38,12 @@ class WorkoutAdapter : RecyclerView.Adapter<WorkoutAdapter.WorkoutHistoryViewHol
         holder.binding.tvDate.text =
             SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault()).format(currentItem.date)
         holder.binding.tvDuration.text=SimpleDateFormat("HH:mm", Locale.getDefault()).format(currentItem.totalduration)
+        holder.binding.root.setOnClickListener{
+            listener.onItemClick(currentItem)
+        }
     }
+
+
 
     override fun getItemCount(): Int {
         return workouthistoryList.size

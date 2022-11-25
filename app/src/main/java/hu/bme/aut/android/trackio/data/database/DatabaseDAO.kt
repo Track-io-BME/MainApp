@@ -30,5 +30,4 @@ interface DatabaseDAO {
     @Query("SELECT * FROM workout_table WHERE  sportType= :sportType ORDER BY id ASC")
     fun getWorkoutData(sportType: ActiveChallenge.SportType) : LiveData<List<Workout>>
 
-
 }

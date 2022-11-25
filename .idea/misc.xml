@@ -3,7 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/activechallengerowitem.xml" value="0.28177083333333336" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_daily_activities.xml" value="0.25" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_detailed_measurements.xml" value="0.26268115942028986" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_help.xml" value="0.26268115942028986" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_home_menu.xml" value="0.25" />
         <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_measurements_dialog.xml" value="0.26268115942028986" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_past_workout.xml" value="0.26268115942028986" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_personal_dialog.xml" value="0.26268115942028986" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_profile_menu.xml" value="0.26268115942028986" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_signup.xml" value="0.24139492753623187" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_workout_history.xml" value="0.26268115942028986" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_workout_history_all.xml" value="0.26268115942028986" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_workout_history_month.xml" value="0.26268115942028986" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/fragment_workout_menu.xml" value="0.28177083333333336" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/layout/workouthistoryitem.xml" value="0.33" />
+        <entry key="..\:/Programozas/Temalabor/MainApp/app/src/main/res/menu/workout_history_menu.xml" value="0.23148148148148148" />
       </map>
     </option>
   </component>

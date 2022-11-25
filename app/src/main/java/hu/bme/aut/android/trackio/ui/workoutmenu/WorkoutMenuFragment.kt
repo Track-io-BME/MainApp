@@ -1,19 +1,22 @@
 package hu.bme.aut.android.trackio.ui.workoutmenu
 
+import android.content.Context
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.trackio.R
-import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
 import hu.bme.aut.android.trackio.databinding.FragmentWorkoutMenuBinding
 import hu.bme.aut.android.trackio.viewmodel.WorkoutViewModel
+
 
 class WorkoutMenuFragment : Fragment() {
     private lateinit var binding : FragmentWorkoutMenuBinding
@@ -27,6 +30,7 @@ class WorkoutMenuFragment : Fragment() {
     ): View {
         binding = FragmentWorkoutMenuBinding.inflate(inflater, container, false)
         initRecycleView()
+
 
         when (viewModel.currentWorkoutType) {
             WorkoutViewModel.WorkoutType.WALKING -> {
@@ -114,5 +118,7 @@ class WorkoutMenuFragment : Fragment() {
         adapter = ActiveChallengesAdapter()
         binding.challengeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.challengeRecyclerView.adapter=adapter
+
     }
 }
+
