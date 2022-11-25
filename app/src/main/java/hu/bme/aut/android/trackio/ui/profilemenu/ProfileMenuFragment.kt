@@ -31,17 +31,17 @@ class ProfileMenuFragment : Fragment() {
         }
         viewModel.stepsGoal.observe(viewLifecycleOwner) {
             if (true) {
-                binding.tvSetGoalsValues.text = getString(R.string.goals, it, viewModel.weightGoal.value)   //TODO
+                binding.tvSetGoalsValues.text = getString(R.string.goals_unit, it, viewModel.weightGoal.value)   //TODO
             }
         }
         viewModel.weightGoal.observe(viewLifecycleOwner) {
             if (true) {
-                binding.tvSetGoalsValues.text = getString(R.string.goals, viewModel.stepsGoal.value, it)   //TODO
+                binding.tvSetGoalsValues.text = getString(R.string.goals_unit, viewModel.stepsGoal.value, it)   //TODO
             }
         }
         viewModel.weight.observe(viewLifecycleOwner) {
             if (true) {
-                binding.tvWeightValues.text = getString(R.string.cm, it)   //TODO
+                binding.tvWeightValues.text = getString(R.string.kg, it)   //TODO
             }
         }
         viewModel.height.observe(viewLifecycleOwner) {
@@ -103,20 +103,30 @@ class ProfileMenuFragment : Fragment() {
         }
 
         binding.clGender.setOnClickListener {
-            PersonalDialogFragment().show(childFragmentManager, PersonalDialogFragment.TAG)
+            PersonalDialogFragment(
+                isGenderVisible = true
+            ).show(childFragmentManager, PersonalDialogFragment.TAG)
         }
-
         binding.clBirthDate.setOnClickListener {
-            PersonalDialogFragment().show(childFragmentManager, PersonalDialogFragment.TAG)
+            PersonalDialogFragment(
+                isBirthDateVisible = true
+            ).show(childFragmentManager, PersonalDialogFragment.TAG)
         }
         binding.clSetGoals.setOnClickListener {
-            MeasurementsDialogFragment().show(childFragmentManager, MeasurementsDialogFragment.TAG)
+            MeasurementsDialogFragment(
+                isWeightGoalValueVisible = true,
+                isStepsGoalValueVisible = true
+            ).show(childFragmentManager, MeasurementsDialogFragment.TAG)
         }
         binding.clWeight.setOnClickListener {
-            MeasurementsDialogFragment().show(childFragmentManager, MeasurementsDialogFragment.TAG)
+            MeasurementsDialogFragment(
+                isWeightValueVisible = true
+            ).show(childFragmentManager, MeasurementsDialogFragment.TAG)
         }
         binding.clHeight.setOnClickListener {
-            MeasurementsDialogFragment().show(childFragmentManager, MeasurementsDialogFragment.TAG)
+            MeasurementsDialogFragment(
+                isHeightValueVisible = true
+            ).show(childFragmentManager, MeasurementsDialogFragment.TAG)
         }
     }
 
