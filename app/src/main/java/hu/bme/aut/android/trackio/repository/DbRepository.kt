@@ -1,9 +1,9 @@
 package hu.bme.aut.android.trackio.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import hu.bme.aut.android.trackio.data.database.DatabaseDAO
 import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
+import hu.bme.aut.android.trackio.data.roomentities.Workout
 
 class DbRepository(private val databaseDAO : DatabaseDAO) {
 
@@ -25,5 +25,9 @@ class DbRepository(private val databaseDAO : DatabaseDAO) {
 
     suspend fun deleteActiveChallenge(activeChallenges: ActiveChallenge){
         databaseDAO.deleteActiveChallenge(activeChallenges)
+    }
+
+    suspend fun addWorkout(workout: Workout) {
+        databaseDAO.addWorkout(workout)
     }
 }

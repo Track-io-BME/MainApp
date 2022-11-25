@@ -1,19 +1,14 @@
 package hu.bme.aut.android.trackio.model
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
 import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.google.android.gms.location.*
-import kotlin.jvm.Throws
 
 class LocationLiveData(context: Context) : LiveData<Location>() {
-
-//    interface OnNewLocationAvailable {
-//        fun onNewLocation(location: Location)
-//    }
-
     private val fusedLocationClient: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(context)
 
@@ -25,29 +20,20 @@ class LocationLiveData(context: Context) : LiveData<Location>() {
         }
     }
 
-//    override fun onActive() {
-//        super.onActive()
-////        startLocationMonitoring()
-//    }
-
-//    override fun onInactive() {
-//        super.onInactive()
-////        stopLocationMonitoring()
-//    }
-
-    @Throws(SecurityException::class)
+    @SuppressLint("MissingPermission")
     fun startLocationMonitoring() {
-        val locationRequest = LocationRequest.create()
-        locationRequest.interval = 1000
-        locationRequest.fastestInterval = 500
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        //TODO
+        val locationRequest = LocationRequest
+            .Builder(
+                Priority.PRIORITY_HIGH_ACCURACY,
+                5000
+            )
+            .setMinUpdateIntervalMillis(1000)
+            .build()
         fusedLocationClient.requestLocationUpdates(locationRequest,
             locationCallback, Looper.myLooper())
         Log.d("monitoring", "start")
     }
 
-    @Throws(SecurityException::class)
     fun stopLocationMonitoring() {
         fusedLocationClient.removeLocationUpdates(locationCallback)
         Log.d("monitoring", "stop")

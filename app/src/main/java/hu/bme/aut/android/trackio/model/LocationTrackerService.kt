@@ -20,8 +20,8 @@ class LocationTrackerService : LifecycleService() {
     val distance : LiveData<Float>
         get() = _distance
     private lateinit var timer: Timer
-    private val _time = MutableLiveData(0)
-    val time: LiveData<Int> = _time
+    private val _time = MutableLiveData(0L)
+    val time: LiveData<Long> = _time
     private var _tracking = MutableLiveData(false)
     val tracking: LiveData<Boolean> = _tracking
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.*
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.data.database.AppDatabase
 import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
+import hu.bme.aut.android.trackio.data.roomentities.Workout
 import hu.bme.aut.android.trackio.repository.DbRepository
 import hu.bme.aut.android.trackio.repository.NetworkRepository
 import kotlinx.coroutines.Dispatchers
@@ -13,20 +14,16 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
+import java.util.Calendar
 
 class WorkoutViewModel(application: Application) : AndroidViewModel(application) {
-    var time = 0
+    var time = 0L
     var distance = 0.0F
     var clearNeeded = false
-
-    enum class WorkoutType {
-        WALKING, RUNNING, CYCLING
-    }
-    var currentWorkoutType = WorkoutType.WALKING
+    var currentWorkoutType = ActiveChallenge.SportType.WALKING
         set(value) {
             if (value != field) {
-                save()
+                saveCurrentWorkout()
                 time = 0
                 distance = 0.0F
                 clearNeeded = true
@@ -75,10 +72,8 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
                         val data = response.body()
                         if (data != null) {
                             for (item in data) {
-                                if (data != null) {
-                                    if (item != null) {
-                                        addActiveChallenge(item)
-                                    }
+                                if (item != null) {
+                                    addActiveChallenge(item)
                                 }
                             }
                         }
@@ -94,8 +89,39 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
             })
     }
 
-    fun save() {
+    fun saveCurrentWorkout() {
         Log.d("WorkoutViewModel", "SAVE")
-        //TODO
+        val calories = when(currentWorkoutType) {
+            ActiveChallenge.SportType.WALKING -> 40.25F * distance
+            ActiveChallenge.SportType.RUNNING -> 62.5F * distance
+            ActiveChallenge.SportType.CYCLING -> 32F * distance
+        }
+
+        networkRepository.finishTraining(
+            SharedPrefConfig.getString(SharedPrefConfig.pref_token),
+            Workout(0, Calendar.getInstance().timeInMillis, time, distance, distance/time, calories, currentWorkoutType)
+            )?.enqueue(object : Callback<Workout?> {
+                override fun onResponse(
+                    call: Call<Workout?>,
+                    response: Response<Workout?>
+                ) {
+                    if (response.isSuccessful) {
+                        val data = response.body()
+                        if (data != null) {
+                            addWorkout(data)
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<Workout?>, t: Throwable) {
+                    t.printStackTrace()
+                }
+            }
+            )
+    }
+
+    private fun addWorkout(workout: Workout) {
+        viewModelScope.launch(Dispatchers.IO) {
+            dbRepository.addWorkout(workout)
+        }
     }
 }

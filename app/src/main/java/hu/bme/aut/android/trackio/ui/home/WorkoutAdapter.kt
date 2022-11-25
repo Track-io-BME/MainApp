@@ -1,9 +1,7 @@
 package hu.bme.aut.android.trackio.ui.home
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.trackio.R
@@ -15,7 +13,7 @@ import java.util.*
 
 class WorkoutAdapter(private val listener: HomeFragment) : RecyclerView.Adapter<WorkoutAdapter.WorkoutHistoryViewHolder>() {
 
-    private var workouthistoryList = mutableListOf<Workout>()
+    private var workoutHistoryList = mutableListOf<Workout>()
 
     inner class WorkoutHistoryViewHolder(val binding: WorkouthistoryitemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -30,14 +28,14 @@ class WorkoutAdapter(private val listener: HomeFragment) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: WorkoutHistoryViewHolder, position: Int) {
-        val currentItem = workouthistoryList[position]
+        val currentItem = workoutHistoryList[position]
         holder.binding.ivSportType.setImageResource(getImageResource(currentItem.sportType))
         holder.binding.tvSportType.text =
             getSportType(currentItem.sportType, currentItem.distance.toString())
         holder.binding.tvPace.text = currentItem.averageSpeed.toString()
         holder.binding.tvDate.text =
             SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault()).format(currentItem.date)
-        holder.binding.tvDuration.text=SimpleDateFormat("HH:mm", Locale.getDefault()).format(currentItem.totalduration)
+        holder.binding.tvDuration.text=SimpleDateFormat("HH:mm", Locale.getDefault()).format(currentItem.totalDuration)
         holder.binding.root.setOnClickListener{
             listener.onItemClick(currentItem)
         }
@@ -46,11 +44,11 @@ class WorkoutAdapter(private val listener: HomeFragment) : RecyclerView.Adapter<
 
 
     override fun getItemCount(): Int {
-        return workouthistoryList.size
+        return workoutHistoryList.size
     }
 
     fun setData(workouts: List<Workout>){
-        this.workouthistoryList=workouts.toMutableList()
+        this.workoutHistoryList=workouts.toMutableList()
         notifyDataSetChanged()
     }
 

@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.R
+import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
 import hu.bme.aut.android.trackio.databinding.FragmentDuringWorkoutBinding
 import hu.bme.aut.android.trackio.model.LocationTrackerService
 import hu.bme.aut.android.trackio.viewmodel.WorkoutViewModel
@@ -49,9 +50,9 @@ class DuringWorkoutFragment : Fragment() {
     ): View {
         binding = FragmentDuringWorkoutBinding.inflate(inflater, container, false)
         when (viewModel.currentWorkoutType) {
-            WorkoutViewModel.WorkoutType.WALKING -> binding.tvWorkoutType.text = getString(R.string.walking)
-            WorkoutViewModel.WorkoutType.RUNNING -> binding.tvWorkoutType.text = getString(R.string.running)
-            WorkoutViewModel.WorkoutType.CYCLING -> binding.tvWorkoutType.text = getString(R.string.cycling)
+            ActiveChallenge.SportType.WALKING -> binding.tvWorkoutType.text = getString(R.string.walking)
+            ActiveChallenge.SportType.RUNNING -> binding.tvWorkoutType.text = getString(R.string.running)
+            ActiveChallenge.SportType.CYCLING -> binding.tvWorkoutType.text = getString(R.string.cycling)
         }
         if (!mBound) {
             Intent(requireContext(), LocationTrackerService::class.java).also {
@@ -76,7 +77,7 @@ class DuringWorkoutFragment : Fragment() {
             AlertDialog.Builder(requireContext())
                 .setTitle("Do you want to end the current workout?")
                 .setPositiveButton(getString(R.string.yes)) { _, _ ->
-                    viewModel.save()
+                    viewModel.saveCurrentWorkout()
                     mService.clear()
                 }
                 .setNegativeButton(getString(R.string.no), null)

@@ -1,19 +1,17 @@
 package hu.bme.aut.android.trackio.ui.workoutmenu
 
-import android.content.Context
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.trackio.R
+import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
 import hu.bme.aut.android.trackio.databinding.FragmentWorkoutMenuBinding
 import hu.bme.aut.android.trackio.viewmodel.WorkoutViewModel
 
@@ -33,19 +31,19 @@ class WorkoutMenuFragment : Fragment() {
 
 
         when (viewModel.currentWorkoutType) {
-            WorkoutViewModel.WorkoutType.WALKING -> {
+            ActiveChallenge.SportType.WALKING -> {
                 binding.tvWalkingMode.text = underlineText(binding.tvWalkingMode.text.toString())
                 viewModel.activeWalkingChallengesFromDB.observe(viewLifecycleOwner){
                     adapter.setData(it)
                 }
             }
-            WorkoutViewModel.WorkoutType.RUNNING -> {
+            ActiveChallenge.SportType.RUNNING -> {
                 binding.tvRunningMode.text = underlineText(binding.tvRunningMode.text.toString())
                 viewModel.activeRunningChallengesFromDB.observe(viewLifecycleOwner){
                     adapter.setData(it)
                 }
             }
-            WorkoutViewModel.WorkoutType.CYCLING -> {
+            ActiveChallenge.SportType.CYCLING -> {
                 binding.tvCyclingMode.text = underlineText(binding.tvCyclingMode.text.toString())
                 viewModel.activeCyclingChallengesFromDB.observe(viewLifecycleOwner){
                     adapter.setData(it)
@@ -64,7 +62,7 @@ class WorkoutMenuFragment : Fragment() {
             binding.tvWalkingMode.text = underlineText(binding.tvWalkingMode.text.toString())
             binding.tvRunningMode.text = binding.tvRunningMode.text.toString()
             binding.tvCyclingMode.text = binding.tvCyclingMode.text.toString()
-            viewModel.currentWorkoutType = WorkoutViewModel.WorkoutType.WALKING
+            viewModel.currentWorkoutType = ActiveChallenge.SportType.WALKING
             viewModel.activeWalkingChallengesFromDB.observe(viewLifecycleOwner){
                 adapter.setData(it)
             }
@@ -73,7 +71,7 @@ class WorkoutMenuFragment : Fragment() {
             binding.tvWalkingMode.text = binding.tvWalkingMode.text.toString()
             binding.tvRunningMode.text = underlineText(binding.tvRunningMode.text.toString())
             binding.tvCyclingMode.text = binding.tvCyclingMode.text.toString()
-            viewModel.currentWorkoutType = WorkoutViewModel.WorkoutType.RUNNING
+            viewModel.currentWorkoutType = ActiveChallenge.SportType.RUNNING
             viewModel.activeRunningChallengesFromDB.observe(viewLifecycleOwner){
                 adapter.setData(it)
             }
@@ -82,7 +80,7 @@ class WorkoutMenuFragment : Fragment() {
             binding.tvWalkingMode.text = binding.tvWalkingMode.text.toString()
             binding.tvRunningMode.text = binding.tvRunningMode.text.toString()
             binding.tvCyclingMode.text = underlineText(binding.tvCyclingMode.text.toString())
-            viewModel.currentWorkoutType = WorkoutViewModel.WorkoutType.CYCLING
+            viewModel.currentWorkoutType = ActiveChallenge.SportType.CYCLING
             viewModel.activeCyclingChallengesFromDB.observe(viewLifecycleOwner){
                 adapter.setData(it)
             }
