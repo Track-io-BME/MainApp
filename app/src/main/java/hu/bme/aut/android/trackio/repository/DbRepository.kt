@@ -11,6 +11,14 @@ class DbRepository(private val databaseDAO : DatabaseDAO) {
         return databaseDAO.getActiveChallenges(sportType)
     }
 
+    fun getAllActiveChallenge() : LiveData<List<ActiveChallenge>>{
+        return databaseDAO.readAllData()
+    }
+
+    fun deleteAllActiveChallenge(){
+        databaseDAO.deleteAllActiveChallenges()
+    }
+
     suspend fun addActiveChallenge(activeChallenges: ActiveChallenge){
         databaseDAO.addActiveChallenge(activeChallenges)
     }

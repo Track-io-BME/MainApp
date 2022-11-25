@@ -6,6 +6,7 @@ import androidx.lifecycle.*
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.data.database.AppDatabase
 import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
+import hu.bme.aut.android.trackio.network.InternetConnectivityChecker
 import hu.bme.aut.android.trackio.repository.DbRepository
 import hu.bme.aut.android.trackio.repository.NetworkRepository
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +29,10 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
         val databaseDAO = AppDatabase.getDatabase(application).databaseDAO()
         dbRepository = DbRepository(databaseDAO)
         networkRepository = NetworkRepository()
-        getActiveChallengesFromNetwork()
+        if(InternetConnectivityChecker.isOnline()){
+          //  deleteAllActiveChallenges()
+            getActiveChallengesFromNetwork()
+        }
         activeWalkingChallengesFromDB = dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.WALKING)
         activeRunningChallengesFromDB = dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.RUNNING)
         activeCyclingChallengesFromDB = dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.CYCLING)
@@ -40,9 +44,15 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun deleteActiveChallenge(activeChallenges: ActiveChallenge) {
+    fun deleteInactiveChallengeDB(activeChallenges: ActiveChallenge){
         viewModelScope.launch(Dispatchers.IO) {
             dbRepository.deleteActiveChallenge(activeChallenges)
+        }
+    }
+
+    fun deleteAllActiveChallenges(){
+        viewModelScope.launch(Dispatchers.IO) {
+            dbRepository.deleteAllActiveChallenge()
         }
     }
 
@@ -56,14 +66,17 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
                 ) {
                     if (response.isSuccessful) {
                         val data = response.body()
+                        Log.d("talan",data.toString())
                         if (data != null) {
                             for (item in data) {
                                 if (data != null) {
                                     if (item != null) {
+
                                         addActiveChallenge(item)
                                     }
                                 }
                             }
+
                         }
 
                     }
@@ -76,6 +89,8 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
 
             })
     }
+
+
 
     //Workouthoz
     enum class WorkoutType {

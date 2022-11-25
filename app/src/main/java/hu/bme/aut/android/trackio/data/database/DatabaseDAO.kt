@@ -1,7 +1,6 @@
 package hu.bme.aut.android.trackio.data.database
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
 import hu.bme.aut.android.trackio.data.roomentities.Workout
@@ -18,6 +17,9 @@ interface DatabaseDAO {
 
     @Query("SELECT * FROM activeChallenges_table WHERE sportType= :sportType ORDER BY id ASC")
     fun getActiveChallenges(sportType: ActiveChallenge.SportType) : LiveData<List<ActiveChallenge>>
+
+    @Query("DELETE FROM activeChallenges_table")
+    fun deleteAllActiveChallenges()
 
     @Delete
     suspend fun deleteActiveChallenge(activeChallenges: ActiveChallenge)

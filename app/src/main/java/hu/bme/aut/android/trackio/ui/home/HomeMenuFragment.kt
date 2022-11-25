@@ -7,7 +7,10 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
 import hu.bme.aut.android.trackio.R
+import hu.bme.aut.android.trackio.data.roomentities.Workout
 import hu.bme.aut.android.trackio.databinding.FragmentHomeMenuBinding
 import hu.bme.aut.android.trackio.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_detailed_measurements.*
@@ -16,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_home_menu.*
 class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeMenuBinding
     private val viewModel : HomeViewModel by activityViewModels()
+    private lateinit var adapter: WorkoutAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,13 +31,11 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initRecyclerView()
         viewModel.getTop3Workout().observe(viewLifecycleOwner){
             workoutlist ->
-            if (workoutlist != null) {
-                for(item in workoutlist){
-                        Log.d("talan",item.toString())
-                }
-            }
+
+           adapter.setData(workoutlist as List<Workout>)
         }
         /*super.onViewCreated(view, savedInstanceState)
 
@@ -72,6 +74,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeMenuFragment_to_dailyActivitiesFragment)
         }
 
+        /*
         binding.imageView7.setOnClickListener{
             findNavController().navigate(R.id.action_homeMenuFragment_to_workoutHistoryFragment)
         }
@@ -83,7 +86,7 @@ class HomeFragment : Fragment() {
         binding.imageView5.setOnClickListener{
             findNavController().navigate(R.id.action_homeMenuFragment_to_workoutHistoryFragment)
         }
-
+*/
         binding.tbNavigation.selectedItemId = R.id.home_menu
         binding.tbNavigation.setOnItemSelectedListener {
             when (it.itemId) {
@@ -99,6 +102,12 @@ class HomeFragment : Fragment() {
             }
         }
     }
+    private fun initRecyclerView() {
+        adapter = WorkoutAdapter()
+        binding.top3recycleview.layoutManager = LinearLayoutManager(requireContext())
+        binding.top3recycleview.adapter = adapter
+    }
+
     companion object{
         private val lineSet2 = listOf(
             "05/01" to 68.5f,
@@ -109,5 +118,6 @@ class HomeFragment : Fragment() {
         )
     }
     private val animationDuration = 1000L
+
 
 }

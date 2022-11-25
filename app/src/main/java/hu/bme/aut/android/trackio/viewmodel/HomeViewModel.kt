@@ -1,16 +1,22 @@
 package hu.bme.aut.android.trackio.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.LinearLayoutManager
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
+import hu.bme.aut.android.trackio.data.database.AppDatabase
 import hu.bme.aut.android.trackio.data.roomentities.Workout
+import hu.bme.aut.android.trackio.repository.DbRepository
 import hu.bme.aut.android.trackio.repository.NetworkRepository
+import hu.bme.aut.android.trackio.ui.home.WorkoutAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val networkRepository: NetworkRepository = NetworkRepository()
 
     init {
@@ -40,4 +46,6 @@ class HomeViewModel : ViewModel() {
             })
         return top3Workout
     }
+
+
 }
