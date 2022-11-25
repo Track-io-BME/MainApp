@@ -6,7 +6,6 @@ import androidx.lifecycle.*
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.data.database.AppDatabase
 import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
-import hu.bme.aut.android.trackio.network.InternetConnectivityChecker
 import hu.bme.aut.android.trackio.repository.DbRepository
 import hu.bme.aut.android.trackio.repository.NetworkRepository
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +16,23 @@ import retrofit2.Response
 import java.util.*
 
 class WorkoutViewModel(application: Application) : AndroidViewModel(application) {
+    var time = 0
+    var distance = 0.0F
+    var clearNeeded = false
+
+    enum class WorkoutType {
+        WALKING, RUNNING, CYCLING
+    }
+    var currentWorkoutType = WorkoutType.WALKING
+        set(value) {
+            if (value != field) {
+                save()
+                time = 0
+                distance = 0.0F
+                clearNeeded = true
+                field = value
+            }
+        }
 
     //Challengekmegjelenítése
     private val dbRepository: DbRepository
@@ -29,10 +45,7 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
         val databaseDAO = AppDatabase.getDatabase(application).databaseDAO()
         dbRepository = DbRepository(databaseDAO)
         networkRepository = NetworkRepository()
-        if(InternetConnectivityChecker.isOnline()){
-          //  deleteAllActiveChallenges()
-            getActiveChallengesFromNetwork()
-        }
+        getActiveChallengesFromNetwork()
         activeWalkingChallengesFromDB = dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.WALKING)
         activeRunningChallengesFromDB = dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.RUNNING)
         activeCyclingChallengesFromDB = dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.CYCLING)
@@ -44,15 +57,9 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun deleteInactiveChallengeDB(activeChallenges: ActiveChallenge){
+    fun deleteActiveChallenge(activeChallenges: ActiveChallenge) {
         viewModelScope.launch(Dispatchers.IO) {
             dbRepository.deleteActiveChallenge(activeChallenges)
-        }
-    }
-
-    fun deleteAllActiveChallenges(){
-        viewModelScope.launch(Dispatchers.IO) {
-            dbRepository.deleteAllActiveChallenge()
         }
     }
 
@@ -66,17 +73,14 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
                 ) {
                     if (response.isSuccessful) {
                         val data = response.body()
-                        Log.d("talan",data.toString())
                         if (data != null) {
                             for (item in data) {
                                 if (data != null) {
                                     if (item != null) {
-
                                         addActiveChallenge(item)
                                     }
                                 }
                             }
-
                         }
 
                     }
@@ -90,46 +94,8 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
             })
     }
 
-
-
-    //Workouthoz
-    enum class WorkoutType {
-        WALKING, RUNNING, CYCLING
-    }
-
-    var distance = 0.0F
-    var currentWorkoutType = WorkoutType.WALKING
-    private lateinit var timer: Timer
-    private val _time = MutableLiveData(0)
-    val time: LiveData<Int> = _time
-    private var _timerRunning = MutableLiveData(false)
-    val timerRunning: LiveData<Boolean> = _timerRunning
-
-    fun startStop() {
-        if (_timerRunning.value == true) {
-            stopTimer()
-        } else {
-            startTimer()
-        }
-    }
-
-    private fun startTimer() {
-        timer = Timer()
-        timer.scheduleAtFixedRate(
-            object : TimerTask() {
-                override fun run() {
-                    _time.postValue(_time.value?.plus(1))
-                }
-            },
-            0,
-            1000
-        )
-        _timerRunning.value = true
-    }
-
-    private fun stopTimer() {
-        timer.cancel()
-        timer.purge()
-        _timerRunning.value = false
+    fun save() {
+        Log.d("WorkoutViewModel", "SAVE")
+        //TODO
     }
 }

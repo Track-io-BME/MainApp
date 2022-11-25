@@ -6,49 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.profilemenu.MeasurementsDialogFragment">
 
-    <TextView
-        android:id="@+id/etCurrentTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/current"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
-        app:layout_constraintRight_toLeftOf="@id/etGoalTitle"/>
-
-    <TextView
-        android:id="@+id/etGoalTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/goal"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/etCurrentTitle"
-        app:layout_constraintRight_toRightOf="@id/rightGuideline"/>
-
     <EditText
         android:id="@+id/etWeightValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/weight"
         android:inputType="numberDecimal"
-        app:layout_constraintTop_toBottomOf="@id/etCurrentTitle"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
-        app:layout_constraintRight_toLeftOf="@id/etWeightGoalValue"
-        android:importantForAutofill="no"/>
-
-    <EditText
-        android:id="@+id/etWeightGoalValue"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/weight"
-        android:inputType="numberDecimal"
-        app:layout_constraintTop_toBottomOf="@id/etGoalTitle"
-        app:layout_constraintLeft_toRightOf="@id/etWeightValue"
         app:layout_constraintRight_toRightOf="@id/rightGuideline"
         android:importantForAutofill="no"/>
 
@@ -60,7 +25,18 @@
         android:inputType="numberDecimal"
         app:layout_constraintTop_toBottomOf="@id/etWeightValue"
         app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
-        app:layout_constraintRight_toLeftOf="@id/etStepsGoalValue"
+        app:layout_constraintRight_toRightOf="@id/rightGuideline"
+        android:importantForAutofill="no"/>
+
+    <EditText
+        android:id="@+id/etWeightGoalValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/weight_goal"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/etHeightValue"
+        app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
+        app:layout_constraintRight_toRightOf="@id/rightGuideline"
         android:importantForAutofill="no"/>
 
     <EditText
@@ -70,7 +46,7 @@
         android:hint="@string/daily_steps"
         android:inputType="number"
         app:layout_constraintTop_toBottomOf="@id/etWeightGoalValue"
-        app:layout_constraintLeft_toRightOf="@id/etHeightValue"
+        app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
         app:layout_constraintRight_toRightOf="@id/rightGuideline"
         android:importantForAutofill="no"/>
 

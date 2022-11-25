@@ -1,5 +1,6 @@
 package hu.bme.aut.android.trackio.ui.duringworkout
 
+import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -22,6 +23,25 @@ class DuringWorkoutFragment : Fragment() {
     private lateinit var binding : FragmentDuringWorkoutBinding
     private val viewModel : WorkoutViewModel by activityViewModels()
 
+    private var mBound: Boolean = false
+    private lateinit var mService: LocationTrackerService
+    private val connection = object : ServiceConnection {
+        override fun onServiceConnected(className: ComponentName, service: IBinder) {
+            val binder = service as LocationTrackerService.LocationTrackerBinder
+            mService = binder.service
+            if (viewModel.clearNeeded) {
+                mService.clear()
+                viewModel.clearNeeded = false
+            }
+            observeService()
+            mBound = true
+        }
+
+        override fun onServiceDisconnected(arg0: ComponentName) {
+            mBound = false
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,61 +53,66 @@ class DuringWorkoutFragment : Fragment() {
             WorkoutViewModel.WorkoutType.RUNNING -> binding.tvWorkoutType.text = getString(R.string.running)
             WorkoutViewModel.WorkoutType.CYCLING -> binding.tvWorkoutType.text = getString(R.string.cycling)
         }
-        binding.tvWorkoutDistance.text = String.format("%.2f", viewModel.distance)
-
-        viewModel.time.observe(viewLifecycleOwner) {
-            val seconds = it % 60
-            var minutes = it / 60
-            val hours = minutes / 60
-            minutes %= 60
-            binding.tvTimeValue.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
-        }
-        viewModel.timerRunning.observe(viewLifecycleOwner) {
-            binding.btnPlayPause.isActivated = it
-        }
         if (!mBound) {
             Intent(requireContext(), LocationTrackerService::class.java).also {
                 requireActivity().bindService(it, connection, Context.BIND_AUTO_CREATE)
             }
         }
         else {
-            mService.distance.observe(viewLifecycleOwner) {
-                Log.d("fragment", "OBSERVE")
-                viewModel.distance = it
-                binding.tvWorkoutDistance.text = String.format("%.2f", it)
-            }
+            observeService()
         }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.btnDuringToMap.setOnClickListener {
             findNavController().navigate(R.id.action_duringWorkoutFragment_to_workoutMapFragment)
         }
         binding.btnPlayPause.setOnClickListener {
             mService.startStop()
-            viewModel.startStop()
+        }
+        binding.btnFinishWorkout.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Do you want to end the current workout?")
+                .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                    viewModel.save()
+                    mService.clear()
+                }
+                .setNegativeButton(getString(R.string.no), null)
+                .show()
+        }
+        binding.btnRestartWorkout.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Do you want to start a new workout and lose the current process?")
+                .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                    mService.clear()
+                }
+                .setNegativeButton(getString(R.string.no), null)
+                .show()
         }
     }
 
-    private lateinit var mService: LocationTrackerService
-    private var mBound: Boolean = false
-    private val connection = object : ServiceConnection {
-        override fun onServiceConnected(className: ComponentName, service: IBinder) {
-            val binder = service as LocationTrackerService.LocationTrackerBinder
-            mService = binder.service
-            mService.distance.observe(viewLifecycleOwner) {
-                Log.d("fragment", "OBSERVE")
-                viewModel.distance = it
-                binding.tvWorkoutDistance.text = String.format("%.2f", it)
-            }
-            mBound = true
+    private fun observeService() {
+        mService.distance.observe(viewLifecycleOwner) {
+            Log.d("fragment", "OBSERVE")
+            viewModel.distance = it
+            binding.tvWorkoutDistance.text = String.format("%.2f", it)
         }
 
-        override fun onServiceDisconnected(arg0: ComponentName) {
-            mBound = false
+        mService.time.observe(viewLifecycleOwner) {
+            val seconds = it % 60
+            var minutes = it / 60
+            val hours = minutes / 60
+            minutes %= 60
+            viewModel.time = it
+            binding.btnFinishWorkout.isEnabled = it > 0
+            binding.btnRestartWorkout.isEnabled = it > 0
+            binding.tvTimeValue.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+        }
+
+        mService.tracking.observe(viewLifecycleOwner) {
+            binding.btnPlayPause.isActivated = it
         }
     }
 }

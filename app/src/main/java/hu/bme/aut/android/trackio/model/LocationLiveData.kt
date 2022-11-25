@@ -20,7 +20,7 @@ class LocationLiveData(context: Context) : LiveData<Location>() {
     private var locationCallback: LocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             super.onLocationResult(locationResult)
-
+            Log.d("liveData", "OBSERVE")
             value = locationResult.lastLocation
         }
     }
@@ -41,7 +41,7 @@ class LocationLiveData(context: Context) : LiveData<Location>() {
         locationRequest.interval = 1000
         locationRequest.fastestInterval = 500
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-
+        //TODO
         fusedLocationClient.requestLocationUpdates(locationRequest,
             locationCallback, Looper.myLooper())
         Log.d("monitoring", "start")

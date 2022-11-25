@@ -35,7 +35,10 @@ class DetailedMeasurementsFragment : Fragment() {
         lineChart.animate(lineSet)
 
         binding.newDetails.setOnClickListener {
-            MeasurementsDialogFragment().show(childFragmentManager, MeasurementsDialogFragment.TAG)
+            MeasurementsDialogFragment(
+                isWeightValueVisible = true,
+                isHeightValueVisible = true
+            ).show(childFragmentManager, MeasurementsDialogFragment.TAG)
         }
     }
 
