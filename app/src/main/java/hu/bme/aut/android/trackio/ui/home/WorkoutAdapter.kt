@@ -1,5 +1,6 @@
 package hu.bme.aut.android.trackio.ui.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
@@ -35,7 +36,7 @@ class WorkoutAdapter(private val listener: HomeFragment) : RecyclerView.Adapter<
         holder.binding.tvPace.text = currentItem.averageSpeed.toString()
         holder.binding.tvDate.text =
             SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault()).format(currentItem.date)
-        holder.binding.tvDuration.text=SimpleDateFormat("HH:mm", Locale.getDefault()).format(currentItem.totalduration)
+        holder.binding.tvDuration.text=SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(currentItem.totalduration)
         holder.binding.root.setOnClickListener{
             listener.onItemClick(currentItem)
         }
@@ -47,6 +48,7 @@ class WorkoutAdapter(private val listener: HomeFragment) : RecyclerView.Adapter<
         return workoutHistoryList.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(workouts: List<Workout>){
         this.workoutHistoryList=workouts.toMutableList()
         notifyDataSetChanged()

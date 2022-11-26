@@ -6,7 +6,8 @@ import android.content.SharedPreferences
 object SharedPrefConfig {
     private const val PREFERENCE_NAME  = "hu.bme.aut.android.trackio"
     const val pref_signed_in   = "signedIn"
-    const val pref_username    = "username"
+    const val pref_first_name    = "firstName"
+    const val pref_last_name    = "lastName"
     const val pref_gender      = "gender"
     const val pref_height      = "height"
     const val pref_weight      = "weight"
@@ -15,7 +16,6 @@ object SharedPrefConfig {
     const val pref_birth_date  = "birthDate"
     const val pref_token  = "token"
     const val pref_email  = "email"
-    const val pref_expiry_date= "expiryDate"
     const val pref_password= "password"
 
 
@@ -36,10 +36,6 @@ object SharedPrefConfig {
             mEditor?.commit()
             mEditor = null
         }
-    }
-
-    fun deleteAll(){
-        mPreferences.edit().clear().commit()
     }
 //
 //    fun saveProfile(profile: UserProfile) {
@@ -83,10 +79,6 @@ object SharedPrefConfig {
         return mPreferences.getFloat(prefKey, defaultValue)
     }
 
-    fun getLong(prefKey: String, defaultValue: Long = 0) : Long {
-        return mPreferences.getLong(prefKey, defaultValue)
-    }
-
     fun getBoolean(prefKey: String, defaultValue: Boolean = false) : Boolean {
         return mPreferences.getBoolean(prefKey, defaultValue)
     }
@@ -121,7 +113,7 @@ object SharedPrefConfig {
         doCommit()
     }
 
-    fun clear() {
+    fun deleteAll() {
         doEdit()
         mEditor?.clear()
         doCommit()

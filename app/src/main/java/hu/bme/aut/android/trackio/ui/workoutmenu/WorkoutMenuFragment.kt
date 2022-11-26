@@ -106,6 +106,11 @@ class WorkoutMenuFragment : Fragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.getActiveChallengesFromNetwork()
+    }
+
     private fun underlineText(string: String) : SpannableString {
         val text = SpannableString(string)
         text.setSpan(UnderlineSpan(), 0, text.length, 0)

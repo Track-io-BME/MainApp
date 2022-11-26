@@ -5,19 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
 import hu.bme.aut.android.trackio.databinding.FragmentDailyActivitiesBinding
 import hu.bme.aut.android.trackio.ui.workoutmenu.ActiveChallengesAdapter
 import hu.bme.aut.android.trackio.viewmodel.DailyActivitesViewModel
-import hu.bme.aut.android.trackio.viewmodel.WorkoutViewModel
 
 class DailyActivitiesFragment : Fragment() {
     private lateinit var binding : FragmentDailyActivitiesBinding
-    private val viewModel : DailyActivitesViewModel by activityViewModels()
+    private val viewModel : DailyActivitesViewModel by viewModels()
     private lateinit var adapter : ActiveChallengesAdapter
     override fun onCreateView(
         inflater: LayoutInflater,

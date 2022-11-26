@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import hu.bme.aut.android.trackio.data.ServerResponse
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.data.UserCreationResponse
 import hu.bme.aut.android.trackio.data.UserSignUP
@@ -18,7 +17,7 @@ class SignupViewModel : ViewModel() {
 
     fun signUp(userSignUP: UserSignUP): LiveData<String> {
         var serverResponse: UserCreationResponse
-        var succesfullSignUP = MutableLiveData<String>()
+        val succesfullSignUP = MutableLiveData<String>()
         networkRepository.signUp(userSignUP)?.enqueue(object : Callback<UserCreationResponse?> {
             override fun onResponse(
                 call: Call<UserCreationResponse?>,
@@ -29,6 +28,8 @@ class SignupViewModel : ViewModel() {
                     if (response.body() != null) {
                         serverResponse = response.body()!!
                         SharedPrefConfig.put(SharedPrefConfig.pref_email, serverResponse.email)
+                        SharedPrefConfig.put(SharedPrefConfig.pref_first_name, userSignUP.firstname)
+                        SharedPrefConfig.put(SharedPrefConfig.pref_last_name, userSignUP.lastname)
                         succesfullSignUP.value = serverResponse.message
                     }
                 }

@@ -46,13 +46,18 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
         dbRepository = DbRepository(databaseDAO)
         networkRepository = NetworkRepository()
         if(InternetConnectivityChecker.isOnline()){
-            deleteAllActiveChallenge()
+            getActiveChallengesFromNetwork()
         }
-        getActiveChallengesFromNetwork()
+
+
+
+
         activeWalkingChallengesFromDB = dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.WALKING)
         activeRunningChallengesFromDB = dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.RUNNING)
         activeCyclingChallengesFromDB = dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.CYCLING)
     }
+
+
 
     fun addActiveChallenge(activeChallenges: ActiveChallenge) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -83,6 +88,7 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
                     if (response.isSuccessful) {
                         val data = response.body()
                         if (data != null) {
+                            deleteAllActiveChallenge()
                             for (item in data) {
                                 if (item != null) {
                                     addActiveChallenge(item)

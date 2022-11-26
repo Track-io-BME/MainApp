@@ -3,19 +3,13 @@ package hu.bme.aut.android.trackio.viewmodel
 import android.app.Application
 import android.content.SharedPreferences
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.data.UserDetails
 import hu.bme.aut.android.trackio.data.database.AppDatabase
-import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
-import hu.bme.aut.android.trackio.data.roomentities.Workout
 import hu.bme.aut.android.trackio.repository.DbRepository
 import hu.bme.aut.android.trackio.repository.NetworkRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,7 +30,10 @@ class ProfileViewModel(application: Application) :
     }
 
     var username =
-        MutableLiveData(SharedPrefConfig.getString(SharedPrefConfig.pref_username, "USERNAME"))
+        MutableLiveData(
+            "${SharedPrefConfig.getString(SharedPrefConfig.pref_first_name)} " +
+                    SharedPrefConfig.getString(SharedPrefConfig.pref_last_name)
+        )
     var gender = MutableLiveData(
         SharedPrefConfig.getString(
             SharedPrefConfig.pref_gender,
@@ -51,8 +48,12 @@ class ProfileViewModel(application: Application) :
 
     override fun onSharedPreferenceChanged(p0: SharedPreferences?, p1: String?) {
         when (p1) {
-            SharedPrefConfig.pref_username ->
-                username.value = SharedPrefConfig.getString(SharedPrefConfig.pref_username)
+            SharedPrefConfig.pref_first_name ->
+                username.value = "${SharedPrefConfig.getString(SharedPrefConfig.pref_first_name)} " +
+                                    SharedPrefConfig.getString(SharedPrefConfig.pref_last_name)
+            SharedPrefConfig.pref_last_name ->
+                username.value = "${SharedPrefConfig.getString(SharedPrefConfig.pref_first_name)} " +
+                                    SharedPrefConfig.getString(SharedPrefConfig.pref_last_name)
             SharedPrefConfig.pref_gender ->
                 gender.value = SharedPrefConfig.getString(SharedPrefConfig.pref_gender)
             SharedPrefConfig.pref_height ->
@@ -70,12 +71,6 @@ class ProfileViewModel(application: Application) :
         }
     }
 
-    fun deleteAllUserDB(){
-        viewModelScope.launch(Dispatchers.IO) {
-            dbRepository.deleteAllData()
-        }
-    }
-
     fun getUserDetails() {
         networkRepository.getUserDetails(SharedPrefConfig.getString(SharedPrefConfig.pref_token))
             ?.enqueue(object : Callback<UserDetails?> {
@@ -88,21 +83,25 @@ class ProfileViewModel(application: Application) :
                         if(data != null){
                             SharedPrefConfig.put(SharedPrefConfig.pref_birth_date,SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(data.birthDate))
                             SharedPrefConfig.put(SharedPrefConfig.pref_height,data.height)
-                            if(data.sex.equals("male")){
-                                SharedPrefConfig.put(SharedPrefConfig.pref_gender,"Male")
-                            }else{
-                                SharedPrefConfig.put(SharedPrefConfig.pref_gender,"Female")
+                            if(data.sex == "male"){
+                                SharedPrefConfig.put(
+                                    SharedPrefConfig.pref_gender,
+                                    getApplication<Application>().getString(R.string.male)
+                                )
+                            }
+                            else{
+                                SharedPrefConfig.put(
+                                    SharedPrefConfig.pref_gender,
+                                    getApplication<Application>().getString(R.string.female)
+                                )
                             }
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<UserDetails?>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    t.printStackTrace()
                 }
-
             })
     }
-
-
 }

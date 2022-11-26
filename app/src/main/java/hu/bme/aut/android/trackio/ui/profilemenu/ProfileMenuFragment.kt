@@ -25,39 +25,25 @@ class ProfileMenuFragment : Fragment() {
     ): View {
         binding = FragmentProfileMenuBinding.inflate(inflater, container, false)
         viewModel.username.observe(viewLifecycleOwner) {
-            if (true) {
-                binding.tvUsername.text = it   //TODO
-            }
+            binding.tvUsername.text = it
         }
         viewModel.stepsGoal.observe(viewLifecycleOwner) {
-            if (true) {
-                binding.tvSetGoalsValues.text = getString(R.string.goals_unit, it, viewModel.weightGoal.value)   //TODO
-            }
+            binding.tvSetGoalsValues.text = getString(R.string.goals_unit, it, viewModel.weightGoal.value)
         }
         viewModel.weightGoal.observe(viewLifecycleOwner) {
-            if (true) {
-                binding.tvSetGoalsValues.text = getString(R.string.goals_unit, viewModel.stepsGoal.value, it)   //TODO
-            }
+            binding.tvSetGoalsValues.text = getString(R.string.goals_unit, viewModel.stepsGoal.value, it)
         }
         viewModel.weight.observe(viewLifecycleOwner) {
-            if (true) {
-                binding.tvWeightValues.text = getString(R.string.kg, it)   //TODO
-            }
+            binding.tvWeightValues.text = getString(R.string.kg, it)
         }
         viewModel.height.observe(viewLifecycleOwner) {
-            if (true) {
-                binding.tvHeightValues.text = getString(R.string.cm, it)   //TODO
-            }
+            binding.tvHeightValues.text = getString(R.string.cm, it)
         }
         viewModel.gender.observe(viewLifecycleOwner) {
-            if (true) {
-                binding.tvGenderValues.text = it.toString()   //TODO
-            }
+            binding.tvGenderValues.text = it.toString()
         }
         viewModel.birthDate.observe(viewLifecycleOwner) {
-            if (true) {
-                binding.tvBirthDateValues.text = it.toString()   //TODO date conversion
-            }
+            binding.tvBirthDateValues.text = it.toString()
         }
         return binding.root
     }
@@ -81,8 +67,6 @@ class ProfileMenuFragment : Fragment() {
 //            findNavController().navigate(R.id.action_profileMenuFragment_to_homeMenuFragment)
 //        }
         binding.clSignOut.setOnClickListener {
-            viewModel.deleteAllUserDB()
-           // SharedPrefConfig.deleteAll()
             SharedPrefConfig.put(SharedPrefConfig.pref_signed_in, false)
             val intent = Intent(requireContext(), MainActivity::class.java)
             activity?.finish()

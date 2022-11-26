@@ -6,7 +6,6 @@ import hu.bme.aut.android.trackio.data.roomentities.UserWeight
 import hu.bme.aut.android.trackio.data.roomentities.Workout
 import hu.bme.aut.android.trackio.network.RetrofitInstance
 import retrofit2.Call
-import retrofit2.http.*
 
 class NetworkRepository {
 
@@ -50,8 +49,7 @@ class NetworkRepository {
         return RetrofitInstance.api.getUserWeight(token)
     }
 
-    fun putGoals(token: String, userWeight: UserWeight): Call<UserGoals?>? {
-        return RetrofitInstance.api.putGoals(token, userWeight)
+    fun putGoals(token: String, userGoals: UserGoals): Call<UserGoals?>? {
+        return RetrofitInstance.api.putGoals(token, userGoals)
     }
-
 }

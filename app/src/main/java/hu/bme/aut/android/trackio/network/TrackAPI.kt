@@ -42,6 +42,15 @@ interface TrackAPI {
     fun getUserWeight(@Header("Authorization") token: String): Call<List<UserWeight?>?>?
 
     @PUT("userDetails/goals")
-    fun putGoals(@Header("Authorization") token: String,@Body userWeight: UserWeight) : Call<UserGoals?>?
+    fun putGoals(@Header("Authorization") token: String,@Body userGoals: UserGoals) : Call<UserGoals?>?
+
+
+
+
+
+
+
+
+
 
 }

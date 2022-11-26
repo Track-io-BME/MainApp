@@ -1,8 +1,8 @@
 package hu.bme.aut.android.trackio.network
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.ConnectivityManager.TYPE_WIFI
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Log
@@ -15,6 +15,7 @@ object InternetConnectivityChecker {
         connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 
+    @SuppressLint("MissingPermission")
     fun isOnline(): Boolean {
         val capabilities =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

@@ -24,7 +24,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
-        binding.etEmail.setText(SharedPrefConfig.getString(SharedPrefConfig.pref_username, ""))
+        binding.etEmail.setText(SharedPrefConfig.getString(SharedPrefConfig.pref_email, ""))
         return binding.root
     }
 
