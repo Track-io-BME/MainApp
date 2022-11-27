@@ -36,7 +36,12 @@ class WorkoutAdapter(private val listener: HomeFragment) : RecyclerView.Adapter<
         holder.binding.tvPace.text = currentItem.averageSpeed.toString()
         holder.binding.tvDate.text =
             SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault()).format(currentItem.date)
-        holder.binding.tvDuration.text=SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(currentItem.totalduration)
+
+        val seconds = currentItem.totalduration % 60
+        var minutes = currentItem.totalduration / 60
+        val hours = minutes / 60
+        minutes %= 60
+        holder.binding.tvDuration.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
         holder.binding.root.setOnClickListener{
             listener.onItemClick(currentItem)
         }
