@@ -33,7 +33,7 @@ class WorkoutAdapter(private val listener: HomeFragment) : RecyclerView.Adapter<
         holder.binding.ivSportType.setImageResource(getImageResource(currentItem.sportType))
         holder.binding.tvSportType.text =
             getSportType(currentItem.sportType, currentItem.distance.toString())
-        holder.binding.tvPace.text = currentItem.averageSpeed.toString()
+        holder.binding.tvPace.text = String.format("%.2f m/s",currentItem.averageSpeed)
         holder.binding.tvDate.text =
             SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault()).format(currentItem.date)
 

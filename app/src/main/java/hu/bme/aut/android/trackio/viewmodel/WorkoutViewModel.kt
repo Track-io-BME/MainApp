@@ -118,7 +118,7 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
         networkRepository.finishTraining(
             SharedPrefConfig.getString(SharedPrefConfig.pref_token),
             Workout(0, Calendar.getInstance().timeInMillis, time, distance,
-                distance/time, calories, currentWorkoutType)
+                distance/time * 1000.0F, calories, currentWorkoutType)
             )?.enqueue(object : Callback<Workout?> {
                 override fun onResponse(
                     call: Call<Workout?>,
