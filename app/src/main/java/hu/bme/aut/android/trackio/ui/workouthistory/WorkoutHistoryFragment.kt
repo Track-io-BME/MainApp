@@ -11,13 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.data.roomentities.Workout
 import hu.bme.aut.android.trackio.databinding.FragmentWorkoutHistoryBinding
+import hu.bme.aut.android.trackio.ui.home.RowItemClick
+import hu.bme.aut.android.trackio.ui.home.WorkoutAdapter
 import hu.bme.aut.android.trackio.viewmodel.WorkoutHistoryViewModel
 
 
-class WorkoutHistoryFragment : Fragment() {
+class WorkoutHistoryFragment : Fragment(), RowItemClick {
     private lateinit var binding : FragmentWorkoutHistoryBinding
     private val viewModel : WorkoutHistoryViewModel by activityViewModels()
-    private lateinit var adapter: MyRecyclerViewAdapter
+    private lateinit var adapter: WorkoutAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,9 +31,20 @@ class WorkoutHistoryFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initRecyclerView()
+        viewModel.getWeekWorkoutHistory().observe(viewLifecycleOwner) {
+                workoutlist ->
+            adapter.setData(workoutlist as List<Workout>)
+        }
         binding.bottomNavigationView.selectedItemId = R.id.workout_history_week_menu_item
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
+                R.id.workout_history_week_menu_item -> {
+                    viewModel.getWeekWorkoutHistory().observe(viewLifecycleOwner) {
+                            workoutlist ->
+                        adapter.setData(workoutlist as List<Workout>)
+                    }
+                    true
+                }
                 R.id.workout_history_month_menu_item -> {
                     viewModel.getMonthWorkoutHistory().observe(viewLifecycleOwner) {
                             workoutlist ->
@@ -41,13 +54,6 @@ class WorkoutHistoryFragment : Fragment() {
                 }
                 R.id.workout_history_all_menu_item -> {
                     viewModel.getAllWorkoutHistory().observe(viewLifecycleOwner) {
-                            workoutlist ->
-                        adapter.setData(workoutlist as List<Workout>)
-                    }
-                    true
-                }
-                R.id.workout_history_week_menu_item -> {
-                    viewModel.getWeekWorkoutHistory().observe(viewLifecycleOwner) {
                             workoutlist ->
                         adapter.setData(workoutlist as List<Workout>)
                     }
@@ -63,12 +69,12 @@ class WorkoutHistoryFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = MyRecyclerViewAdapter(this)
+        adapter = WorkoutAdapter(this)
         binding.WorkoutHistoryrecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.WorkoutHistoryrecyclerView.adapter = adapter
     }
 
-    fun onItemClick(currentItem: Workout) {
+    override fun onItemClick(currentItem: Workout) {
         //ha rákattint az egyik régi workoutjára kiírja a további adatokat...
     }
 

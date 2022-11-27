@@ -1,6 +1,7 @@
 package hu.bme.aut.android.trackio.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,8 +18,6 @@ class WorkoutHistoryViewModel(application: Application) :AndroidViewModel(applic
     private val networkRepository: NetworkRepository = NetworkRepository()
 
     init {
-        getAllWorkoutHistory()
-        getMonthWorkoutHistory()
         getWeekWorkoutHistory()
     }
 
@@ -33,6 +32,7 @@ class WorkoutHistoryViewModel(application: Application) :AndroidViewModel(applic
                 ) {
                     if (response.isSuccessful) {
                         if (response.body() != null) {
+                            Log.d("talanweek",response.body().toString())
                             weekWorkout.value = response.body()
                         }
                     }
@@ -55,6 +55,7 @@ class WorkoutHistoryViewModel(application: Application) :AndroidViewModel(applic
                 ) {
                     if (response.isSuccessful) {
                         if (response.body() != null) {
+                            Log.d("talanmoth",response.body().toString())
                             monthWorkout.value = response.body()
                         }
                     }
@@ -77,6 +78,7 @@ class WorkoutHistoryViewModel(application: Application) :AndroidViewModel(applic
                 ) {
                     if (response.isSuccessful) {
                         if (response.body() != null) {
+                            Log.d("talanall",response.body().toString())
                             allWorkout.value = response.body()
                         }
                     }

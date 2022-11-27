@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/blue_background"
     android:padding="8sp"
-    android:layout_margin="8sp">
+    android:layout_margin="2sp">
 
 
     <ImageView
@@ -25,7 +25,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="12dp"
         android:fontFamily="@font/trebucbd"
-        android:hint="Walking for 10km"
+        android:hint="Walking for 10km and burned xx calories"
         android:text=""
         android:textColor="@color/white"
 

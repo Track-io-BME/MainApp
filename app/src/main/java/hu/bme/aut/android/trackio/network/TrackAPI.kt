@@ -24,13 +24,13 @@ interface TrackAPI {
     @GET("/challenges/getCompletedChallenges")
     fun getCompletedChallenges(@Header("Authorization") token: String) : Call<List<ActiveChallenge?>?>?
 
-    @GET("all")
+    @GET("/userWorkout/all")
     fun getAllWorkoutHistory(@Header("Authorization") token: String) : Call<List<Workout?>?>?
 
-    @GET("month")
+    @GET("/userWorkout/lastmonth")
     fun getMonthWorkoutHistory(@Header("Authorization") token: String) : Call<List<Workout?>?>?
 
-    @GET("week")
+    @GET("/userWorkout/lastweek")
     fun getWeekWorkoutHistory(@Header("Authorization") token: String) : Call<List<Workout?>?>?
 
     @GET("/userWorkout/top3")

@@ -7,14 +7,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.data.roomentities.Workout
 import hu.bme.aut.android.trackio.databinding.FragmentHomeMenuBinding
 import hu.bme.aut.android.trackio.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home_menu.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), RowItemClick {
     private lateinit var binding : FragmentHomeMenuBinding
     private val viewModel : HomeViewModel by activityViewModels()
     private lateinit var adapter: WorkoutAdapter
@@ -105,7 +104,7 @@ class HomeFragment : Fragment() {
         binding.top3recycleview.adapter = adapter
     }
 
-    fun onItemClick(currentItem: Workout) {
+    override fun onItemClick(currentItem: Workout) {
         findNavController().navigate(R.id.action_homeMenuFragment_to_workoutHistoryFragment)
     }
 
