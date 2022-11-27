@@ -14,7 +14,7 @@ import androidx.lifecycle.MutableLiveData
 import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
 import java.util.*
 
-class LocationTrackerService : LifecycleService() {
+class LocationTrackerService : LifecycleService(), java.io.Serializable {
     private val binder = LocationTrackerBinder()
     private var lastLocation: Location? = null
     private lateinit var _locationLiveData: LocationLiveData

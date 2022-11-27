@@ -43,6 +43,7 @@
         <item>@string/female</item>
     </string-array>
     <string name="goals_unit">%dsteps|%.1fkg</string>
+    <string name="km">km</string>
     <string name="cm">%.1fcm</string>
     <string name="kg">%.1fkg</string>
     <string name="set_goals">Set goals</string>
@@ -59,4 +60,6 @@
     <string name="most_recent_workouts">Most recent workouts</string>
     <string name="completed_challenges">Completed challenges</string>
     <string name="weight2">Weight</string>
+    <string name="notification_message">Your workout is being tracked</string>
+
 </resources>
