@@ -53,12 +53,10 @@
     <string name="no_value">--</string>
     <string name="finish_workout">Finish workout</string>
     <string name="restart_workout">Restart workout</string>
-
     <string name="set_your_something">Set your %s</string>
     <string name="measurements">measurements</string>
     <string name="goals">goals</string>
     <string name="most_recent_workouts">Most recent workouts</string>
     <string name="completed_challenges">Completed challenges</string>
-    <string name="notification_message">Your workout is being tracked</string>
-
+    <string name="weight2">Weight</string>
 </resources>

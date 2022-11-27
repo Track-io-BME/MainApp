@@ -48,7 +48,7 @@ class DetailedMeasurementsFragment : Fragment() {
             "06/14" to 67.9f,
             "08/03" to 68.1f,
             "08/28" to 67.5f,
-            "10/01" to 65.4f
+            "10/01" to 68.4f
         )
     }
 

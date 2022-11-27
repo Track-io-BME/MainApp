@@ -20,6 +20,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="datePickerDialogFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="detailedMeasurementsFragment">
                     <value>
                       <LayoutPositions>
@@ -239,6 +251,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_signupFragment_to_datePickerDialogFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_signupFragment_to_homeMenuFragment">
                               <value>
                                 <LayoutPositions />
@@ -265,7 +282,17 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_workoutHistoryAllFragment2_to_homeMenuFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_workoutHistoryAllFragment2_to_workoutHistoryFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_workoutHistoryAllFragment2_to_workoutHistoryMonthFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -301,6 +328,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_workoutHistoryFragment_to_workoutHistoryMonthFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -314,6 +346,25 @@
                             <option name="x" value="1673" />
                             <option name="y" value="556" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_workoutHistoryMonthFragment_to_homeMenuFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_workoutHistoryMonthFragment_to_workoutHistoryAllFragment2">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_workoutHistoryMonthFragment_to_workoutHistoryFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

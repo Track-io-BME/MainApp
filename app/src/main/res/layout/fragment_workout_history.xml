@@ -29,7 +29,7 @@
             android:text="TYPE"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+            app:layout_constraintBottom_toBottomOf="@+id/WorkoutHistoryrecyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
             android:text="0.00"
             android:textColor="#FFFFFF"
             android:textSize="46sp"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintBottom_toTopOf="@+id/WorkoutHistoryrecyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/workout_history_type_of_workout"
@@ -57,15 +57,16 @@
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:fontFamily="@font/trebucbd"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintBottom_toTopOf="@+id/WorkoutHistoryrecyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/workout_history_km"
             app:layout_constraintVertical_bias="0.0" />
 
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/WorkoutHistoryrecyclerView"
             android:layout_width="424dp"
             android:layout_height="446dp"
             android:background="#FFFFFF"

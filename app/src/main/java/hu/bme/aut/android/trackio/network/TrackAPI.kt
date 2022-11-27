@@ -27,6 +27,12 @@ interface TrackAPI {
     @GET("all")
     fun getAllWorkoutHistory(@Header("Authorization") token: String) : Call<List<Workout?>?>?
 
+    @GET("month")
+    fun getMonthWorkoutHistory(@Header("Authorization") token: String) : Call<List<Workout?>?>?
+
+    @GET("week")
+    fun getWeekWorkoutHistory(@Header("Authorization") token: String) : Call<List<Workout?>?>?
+
     @GET("/userWorkout/top3")
     fun getTop3Workout(@Header("Authorization") token: String) : Call<List<Workout?>?>?
 

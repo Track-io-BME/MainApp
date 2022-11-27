@@ -33,6 +33,14 @@ class NetworkRepository {
         return RetrofitInstance.api.getAllWorkoutHistory(token)
     }
 
+    fun getWeekWorkoutHistory(token: String): Call<List<Workout?>?>? {
+        return RetrofitInstance.api.getWeekWorkoutHistory(token)
+    }
+
+    fun getMonthWorkoutHistory(token: String): Call<List<Workout?>?>? {
+        return RetrofitInstance.api.getMonthWorkoutHistory(token)
+    }
+
     fun getTop3Workout(token: String): Call<List<Workout?>?>? {
         return RetrofitInstance.api.getTop3Workout(token)
     }
