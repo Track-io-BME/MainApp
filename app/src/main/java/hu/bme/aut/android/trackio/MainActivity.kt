@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.databinding.ActivityMainBinding
+import hu.bme.aut.android.trackio.model.WorkoutNotificationHelper
 import hu.bme.aut.android.trackio.network.InternetConnectivityChecker
 
 class MainActivity : AppCompatActivity() {
@@ -35,11 +36,8 @@ class MainActivity : AppCompatActivity() {
             )
         }
         InternetConnectivityChecker.init(applicationContext)
+        WorkoutNotificationHelper.init(application)
         SharedPrefConfig.init(applicationContext)
-//        if (SharedPrefConfig.getBoolean(SharedPrefConfig.pref_signed_in))
-//            binding.navHostFragment
-//                .findNavController()
-//                .navigate(R.id.action_loginFragment_to_homeMenuFragment)
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {

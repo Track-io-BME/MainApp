@@ -1,23 +1,27 @@
 package hu.bme.aut.android.trackio.model
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.location.Location
 import android.os.Binder
+import android.os.Build
 import android.os.IBinder
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
 import java.util.*
 
 class LocationTrackerService : LifecycleService() {
     private val binder = LocationTrackerBinder()
     private var lastLocation: Location? = null
-    private lateinit var _locationLiveData : LocationLiveData
-    val locationLiveData : LiveData<Location>
+    private lateinit var _locationLiveData: LocationLiveData
+    val locationLiveData: LiveData<Location>
         get() = _locationLiveData
     private var _distance = MutableLiveData(0.0F)
-    val distance : LiveData<Float>
+    val distance: LiveData<Float>
         get() = _distance
     private lateinit var timer: Timer
     private val _time = MutableLiveData(0L)
@@ -25,9 +29,26 @@ class LocationTrackerService : LifecycleService() {
     private var _tracking = MutableLiveData(false)
     val tracking: LiveData<Boolean> = _tracking
 
+    var workoutType = ActiveChallenge.SportType.WALKING
+
     inner class LocationTrackerBinder : Binder() {
         val service: LocationTrackerService
             get() = this@LocationTrackerService
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+
+//        NotificationManagerCompat.from(this).apply {
+//            notify(notificationPair.first, /*updated notification*/ notificationPair.second)
+//        }
+
+//        Delete notification
+//        val notificationManager: NotificationManager =
+//            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+//        notificationManager.cancel(notificationPair.first)
+
+        return super.onStartCommand(intent, flags, startId)
     }
 
     override fun onBind(intent: Intent): IBinder {
@@ -45,46 +66,42 @@ class LocationTrackerService : LifecycleService() {
         return binder
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onUnbind(intent: Intent?): Boolean {
         Log.d("service", "UNBIND")
-        if (_tracking.value == true) {
-            _locationLiveData.stopLocationMonitoring()
-            _tracking.value = false
-        }
+        if (_tracking.value == true) stop()
         return super.onUnbind(intent)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onDestroy() {
         Log.d("service", tracking.toString())
-        if (_tracking.value == true) {
-            _locationLiveData.stopLocationMonitoring()
-            _tracking.value = false
-        }
+        if (_tracking.value == true) stop()
         Log.d("service", "DESTROY")
         super.onDestroy()
     }
 
-    override fun onRebind(intent: Intent?) {
-        Log.d("service", "REBIND")
-        super.onRebind(intent)
-    }
-
-    fun startStop() {
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun startStop(workoutType: ActiveChallenge.SportType) {
+        this.workoutType = workoutType
         _tracking.value = if (_tracking.value == true) {
-            _locationLiveData.stopLocationMonitoring()
-            lastLocation = null
-            stopTimer()
+            stop()
             Log.d("service", "STOP")
             false
         } else {
-            _locationLiveData.startLocationMonitoring()
-            startTimer()
+            start()
             Log.d("service", "START")
             true
         }
     }
 
-    private fun startTimer() {
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun start() {
+        startForeground(
+            WorkoutNotificationHelper.WORKOUT_NOTIFICATION_ID,
+            WorkoutNotificationHelper.getWorkoutNotification(workoutType)
+        )
+        _locationLiveData.startLocationMonitoring()
         timer = Timer()
         timer.scheduleAtFixedRate(
             object : TimerTask() {
@@ -98,17 +115,20 @@ class LocationTrackerService : LifecycleService() {
         _tracking.value = true
     }
 
-    private fun stopTimer() {
+    @SuppressLint("WrongConstant")
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun stop() {
+        stopForeground(WorkoutNotificationHelper.WORKOUT_NOTIFICATION_ID)
+        _locationLiveData.stopLocationMonitoring()
         timer.cancel()
         timer.purge()
+        lastLocation = null
         _tracking.value = false
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     fun clear() {
-        if (_tracking.value == true) {
-            stopTimer()
-            _locationLiveData.stopLocationMonitoring()
-        }
+        if (_tracking.value == true) stop()
         _time.value = 0
         _distance.value = 0.0F
         _tracking.value = false

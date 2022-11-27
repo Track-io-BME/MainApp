@@ -59,5 +59,6 @@
     <string name="goals">goals</string>
     <string name="most_recent_workouts">Most recent workouts</string>
     <string name="completed_challenges">Completed challenges</string>
+    <string name="notification_message">Your workout is being tracked</string>
 
 </resources>

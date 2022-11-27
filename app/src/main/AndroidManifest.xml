@@ -45,6 +45,7 @@
 
         <service
             android:name=".model.LocationTrackerService"
+            android:foregroundServiceType="location"
             android:exported="false" />
     </application>
 
