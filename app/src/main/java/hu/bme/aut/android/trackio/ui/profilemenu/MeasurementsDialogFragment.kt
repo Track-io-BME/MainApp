@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.Spanned
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
@@ -13,6 +14,9 @@ import hu.bme.aut.android.trackio.data.UserGoals
 import hu.bme.aut.android.trackio.data.roomentities.UserWeight
 import hu.bme.aut.android.trackio.databinding.FragmentMeasurementsDialogBinding
 import hu.bme.aut.android.trackio.repository.NetworkRepository
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.Calendar
 
 class MeasurementsDialogFragment(
@@ -65,14 +69,26 @@ class MeasurementsDialogFragment(
             .setPositiveButton(getString(R.string.ok)) { _, _ ->
                 if (binding.etWeightValue.text.isNotEmpty()) {
                     val newWeightValue = binding.etWeightValue.text.toString().toFloat()
-                    SharedPrefConfig.put(
-                        SharedPrefConfig.pref_weight,
-                        newWeightValue
-                    )
                     networkRepository.postUserWeight(
                         SharedPrefConfig.pref_token,
                         UserWeight(0, Calendar.getInstance().timeInMillis, newWeightValue)
-                    )
+                    )?.enqueue(object : Callback<UserWeight?> {
+                        override fun onResponse(
+                            call: Call<UserWeight?>,
+                            response: Response<UserWeight?>
+                        ) {
+                            Log.d("talan",response.body().toString())
+                            if (response.isSuccessful && response.body() != null) {
+                                SharedPrefConfig.put(
+                                    SharedPrefConfig.pref_weight,
+                                    response.body()!!.weight
+                                )
+                            }
+                        }
+                        override fun onFailure(call: Call<UserWeight?>, t: Throwable) {
+                            t.printStackTrace()
+                        }
+                    })
                 }
                 if (binding.etHeightValue.text.isNotEmpty()) {
                     val newHeightValue = binding.etHeightValue.text.toString().toFloat()
