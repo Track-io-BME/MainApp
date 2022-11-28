@@ -88,9 +88,6 @@
             android:id="@+id/action_profileMenuFragment_to_measurementsDialogFragment"
             app:destination="@id/measurementsDialogFragment" />
         <action
-            android:id="@+id/action_profileMenuFragment_to_personalDialogFragment"
-            app:destination="@id/personalDialogFragment" />
-        <action
             android:id="@+id/action_profileMenuFragment_to_workoutMenuFragment"
             app:destination="@id/workoutMenuFragment" />
         <action
@@ -162,11 +159,6 @@
         android:name="hu.bme.aut.android.trackio.ui.profilemenu.MeasurementsDialogFragment"
         android:label="fragment_measurements_dialog"
         tools:layout="@layout/fragment_measurements_dialog" />
-    <fragment
-        android:id="@+id/personalDialogFragment"
-        android:name="hu.bme.aut.android.trackio.ui.profilemenu.PersonalDialogFragment"
-        android:label="fragment_personal_dialog"
-        tools:layout="@layout/fragment_personal_dialog" />
     <dialog
         android:id="@+id/datePickerDialogFragment"
         android:name="hu.bme.aut.android.trackio.ui.singup.DatePickerDialogFragment"

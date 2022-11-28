@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.MainActivity
 import hu.bme.aut.android.trackio.R
@@ -16,7 +16,7 @@ import hu.bme.aut.android.trackio.viewmodel.ProfileViewModel
 
 class ProfileMenuFragment : Fragment() {
     private lateinit var binding : FragmentProfileMenuBinding
-    private val viewModel: ProfileViewModel by activityViewModels()
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -88,16 +88,6 @@ class ProfileMenuFragment : Fragment() {
             }
         }
 
-        binding.clGender.setOnClickListener {
-            PersonalDialogFragment(
-                isGenderVisible = true
-            ).show(childFragmentManager, PersonalDialogFragment.TAG)
-        }
-        binding.clBirthDate.setOnClickListener {
-            PersonalDialogFragment(
-                isBirthDateVisible = true
-            ).show(childFragmentManager, PersonalDialogFragment.TAG)
-        }
         binding.clSetGoals.setOnClickListener {
             MeasurementsDialogFragment(
                 isWeightGoalValueVisible = true,
