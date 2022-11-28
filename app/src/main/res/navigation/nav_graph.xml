@@ -107,14 +107,24 @@
             app:destination="@id/workoutMenuFragment" />
         <action
             android:id="@+id/action_duringWorkoutFragment_to_workoutMapFragment"
-            app:destination="@id/workoutMapFragment"
-            />
+            app:destination="@id/workoutMapFragment">
+            <argument
+                android:name="locationTrackerService"
+                app:argType="hu.bme.aut.android.trackio.model.LocationTrackerService"
+                app:nullable="true"
+                android:defaultValue="@null" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/workoutMapFragment"
         android:name="hu.bme.aut.android.trackio.ui.WorkoutMapFragment"
         android:label="fragment_workout_map"
         tools:layout="@layout/fragment_workout_map" >
+        <argument
+            android:name="locationTrackerService"
+            app:argType="hu.bme.aut.android.trackio.model.LocationTrackerService"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/workoutHistoryFragment"

@@ -14,19 +14,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
 import hu.bme.aut.android.trackio.databinding.FragmentDuringWorkoutBinding
 import hu.bme.aut.android.trackio.model.LocationTrackerService
-import hu.bme.aut.android.trackio.ui.WorkoutMapFragment
 import hu.bme.aut.android.trackio.viewmodel.WorkoutViewModel
 
 class DuringWorkoutFragment : Fragment() {
-    private lateinit var binding : FragmentDuringWorkoutBinding
-    private val viewModel : WorkoutViewModel by activityViewModels()
+    private lateinit var binding: FragmentDuringWorkoutBinding
+    private val viewModel: WorkoutViewModel by activityViewModels()
 
     private var mBound: Boolean = false
     private lateinit var mService: LocationTrackerService
@@ -56,16 +54,18 @@ class DuringWorkoutFragment : Fragment() {
     ): View {
         binding = FragmentDuringWorkoutBinding.inflate(inflater, container, false)
         when (viewModel.currentWorkoutType) {
-            ActiveChallenge.SportType.WALKING -> binding.tvWorkoutType.text = getString(R.string.walking)
-            ActiveChallenge.SportType.RUNNING -> binding.tvWorkoutType.text = getString(R.string.running)
-            ActiveChallenge.SportType.CYCLING -> binding.tvWorkoutType.text = getString(R.string.cycling)
+            ActiveChallenge.SportType.WALKING -> binding.tvWorkoutType.text =
+                getString(R.string.walking)
+            ActiveChallenge.SportType.RUNNING -> binding.tvWorkoutType.text =
+                getString(R.string.running)
+            ActiveChallenge.SportType.CYCLING -> binding.tvWorkoutType.text =
+                getString(R.string.cycling)
         }
         if (!mBound) {
             Intent(requireContext(), LocationTrackerService::class.java).also {
                 requireActivity().bindService(it, connection, Context.BIND_AUTO_CREATE)
             }
-        }
-        else {
+        } else {
             observeService()
         }
         return binding.root
@@ -76,8 +76,9 @@ class DuringWorkoutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnDuringToMap.setOnClickListener {
             findNavController().navigate(
-                R.id.action_duringWorkoutFragment_to_workoutMapFragment,
-                bundleOf(WorkoutMapFragment.ARG_LOCATION_TRACKER_SERVICE to mService)
+                DuringWorkoutFragmentDirections.actionDuringWorkoutFragmentToWorkoutMapFragment(
+                    locationTrackerService = mService
+                )
             )
         }
         binding.btnPlayPause.setOnClickListener {
