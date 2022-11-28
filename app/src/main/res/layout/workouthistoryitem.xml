@@ -8,7 +8,6 @@
     android:padding="8sp"
     android:layout_margin="2sp">
 
-
     <ImageView
         android:id="@+id/ivSportType"
         android:layout_width="wrap_content"
@@ -16,19 +15,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/white_run" />
+        app:srcCompat="@drawable/white_run"
+        tools:ignore="contentDescription"/>
 
     <TextView
         android:id="@+id/tvSportType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="12dp"
         android:fontFamily="@font/trebucbd"
-        android:hint="Walking for 10km and burned xx calories"
-        android:text=""
         android:textColor="@color/white"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivSportType"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,34 +34,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/trebucbd"
-        android:hint="01:10:14"
-        android:text=""
         android:textSize="11sp"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/tvSportType"
-        app:layout_constraintTop_toBottomOf="@+id/tvSportType" />
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toStartOf="@id/tvPace"
+        app:layout_constraintTop_toBottomOf="@+id/tvDate"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/tvPace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:fontFamily="@font/trebucbd"
-        android:hint="10,9"
         android:textColor="@color/white"
-        android:text=""
         android:textSize="11sp"
-        app:layout_constraintStart_toEndOf="@+id/tvDuration"
-        app:layout_constraintTop_toBottomOf="@+id/tvSportType" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDate"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="2004.04.12"
-        android:text=""
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvSportType" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

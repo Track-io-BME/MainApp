@@ -9,7 +9,6 @@ import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
 import hu.bme.aut.android.trackio.data.roomentities.Workout
 import hu.bme.aut.android.trackio.databinding.WorkouthistoryitemBinding
-import hu.bme.aut.android.trackio.ui.workouthistory.WorkoutHistoryFragment
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,7 +32,7 @@ class WorkoutAdapter(private val listener: RowItemClick) : RecyclerView.Adapter<
         val currentItem = workoutHistoryList[position]
         holder.binding.ivSportType.setImageResource(getImageResource(currentItem.sportType))
         holder.binding.tvSportType.text =
-            getSportTypeAndCalories(currentItem.sportType, currentItem.distance.toString(), currentItem.calories.toInt())
+            getSportTypeAndCalories(currentItem.sportType, String.format("%.2f", currentItem.distance), currentItem.calories.toInt())
         holder.binding.tvPace.text = String.format("%.2f m/s",currentItem.averageSpeed)
         holder.binding.tvDate.text =
             SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault()).format(currentItem.date)
@@ -60,7 +59,7 @@ class WorkoutAdapter(private val listener: RowItemClick) : RecyclerView.Adapter<
         notifyDataSetChanged()
     }
 
-    @DrawableRes()
+    @DrawableRes
     private fun getImageResource(sportType: ActiveChallenge.SportType): Int {
         return when (sportType) {
             ActiveChallenge.SportType.WALKING -> R.drawable.white_walk
