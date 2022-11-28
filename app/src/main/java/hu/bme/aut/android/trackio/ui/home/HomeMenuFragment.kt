@@ -1,8 +1,10 @@
 package hu.bme.aut.android.trackio.ui.home
 
+import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -24,6 +26,18 @@ class HomeFragment : Fragment(), RowItemClick {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeMenuBinding.inflate(inflater, container, false)
+
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.exit_the_app))
+                    .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                        activity?.finish()
+                    }
+                    .setNegativeButton(getString(R.string.no), null)
+                    .show()
+            }
+        })
         return binding.root
     }
 

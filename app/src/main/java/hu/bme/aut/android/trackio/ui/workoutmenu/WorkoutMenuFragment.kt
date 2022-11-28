@@ -1,11 +1,13 @@
 package hu.bme.aut.android.trackio.ui.workoutmenu
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -15,11 +17,10 @@ import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
 import hu.bme.aut.android.trackio.databinding.FragmentWorkoutMenuBinding
 import hu.bme.aut.android.trackio.viewmodel.WorkoutViewModel
 
-
 class WorkoutMenuFragment : Fragment() {
-    private lateinit var binding : FragmentWorkoutMenuBinding
-    private val viewModel : WorkoutViewModel by activityViewModels()
-    private lateinit var  adapter: ActiveChallengesAdapter
+    private lateinit var binding: FragmentWorkoutMenuBinding
+    private val viewModel: WorkoutViewModel by activityViewModels()
+    private lateinit var adapter: ActiveChallengesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,29 +30,40 @@ class WorkoutMenuFragment : Fragment() {
         binding = FragmentWorkoutMenuBinding.inflate(inflater, container, false)
         initRecycleView()
 
-
         when (viewModel.currentWorkoutType) {
             ActiveChallenge.SportType.WALKING -> {
                 binding.tvWalkingMode.text = underlineText(binding.tvWalkingMode.text.toString())
-                viewModel.activeWalkingChallengesFromDB.observe(viewLifecycleOwner){
+                viewModel.activeWalkingChallengesFromDB.observe(viewLifecycleOwner) {
                     adapter.setData(it)
                 }
             }
             ActiveChallenge.SportType.RUNNING -> {
                 binding.tvRunningMode.text = underlineText(binding.tvRunningMode.text.toString())
-                viewModel.activeRunningChallengesFromDB.observe(viewLifecycleOwner){
+                viewModel.activeRunningChallengesFromDB.observe(viewLifecycleOwner) {
                     adapter.setData(it)
                 }
             }
             ActiveChallenge.SportType.CYCLING -> {
                 binding.tvCyclingMode.text = underlineText(binding.tvCyclingMode.text.toString())
-                viewModel.activeCyclingChallengesFromDB.observe(viewLifecycleOwner){
+                viewModel.activeCyclingChallengesFromDB.observe(viewLifecycleOwner) {
                     adapter.setData(it)
                 }
             }
         }
 
-
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    AlertDialog.Builder(requireContext())
+                        .setTitle(getString(R.string.exit_the_app))
+                        .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                            activity?.finish()
+                        }
+                        .setNegativeButton(getString(R.string.no), null)
+                        .show()
+                }
+            })
         return binding.root
     }
 
@@ -63,7 +75,7 @@ class WorkoutMenuFragment : Fragment() {
             binding.tvRunningMode.text = binding.tvRunningMode.text.toString()
             binding.tvCyclingMode.text = binding.tvCyclingMode.text.toString()
             viewModel.currentWorkoutType = ActiveChallenge.SportType.WALKING
-            viewModel.activeWalkingChallengesFromDB.observe(viewLifecycleOwner){
+            viewModel.activeWalkingChallengesFromDB.observe(viewLifecycleOwner) {
                 adapter.setData(it)
             }
         }
@@ -72,7 +84,7 @@ class WorkoutMenuFragment : Fragment() {
             binding.tvRunningMode.text = underlineText(binding.tvRunningMode.text.toString())
             binding.tvCyclingMode.text = binding.tvCyclingMode.text.toString()
             viewModel.currentWorkoutType = ActiveChallenge.SportType.RUNNING
-            viewModel.activeRunningChallengesFromDB.observe(viewLifecycleOwner){
+            viewModel.activeRunningChallengesFromDB.observe(viewLifecycleOwner) {
                 adapter.setData(it)
             }
         }
@@ -81,7 +93,7 @@ class WorkoutMenuFragment : Fragment() {
             binding.tvRunningMode.text = binding.tvRunningMode.text.toString()
             binding.tvCyclingMode.text = underlineText(binding.tvCyclingMode.text.toString())
             viewModel.currentWorkoutType = ActiveChallenge.SportType.CYCLING
-            viewModel.activeCyclingChallengesFromDB.observe(viewLifecycleOwner){
+            viewModel.activeCyclingChallengesFromDB.observe(viewLifecycleOwner) {
                 adapter.setData(it)
             }
         }
@@ -111,16 +123,16 @@ class WorkoutMenuFragment : Fragment() {
         viewModel.getActiveChallengesFromNetwork()
     }
 
-    private fun underlineText(string: String) : SpannableString {
+    private fun underlineText(string: String): SpannableString {
         val text = SpannableString(string)
         text.setSpan(UnderlineSpan(), 0, text.length, 0)
         return text
     }
 
-    private fun initRecycleView(){
+    private fun initRecycleView() {
         adapter = ActiveChallengesAdapter()
         binding.challengeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.challengeRecyclerView.adapter=adapter
+        binding.challengeRecyclerView.adapter = adapter
 
     }
 }

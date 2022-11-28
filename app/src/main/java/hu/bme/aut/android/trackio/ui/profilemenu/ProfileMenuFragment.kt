@@ -1,11 +1,13 @@
 package hu.bme.aut.android.trackio.ui.profilemenu
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.MainActivity
@@ -15,7 +17,7 @@ import hu.bme.aut.android.trackio.databinding.FragmentProfileMenuBinding
 import hu.bme.aut.android.trackio.viewmodel.ProfileViewModel
 
 class ProfileMenuFragment : Fragment() {
-    private lateinit var binding : FragmentProfileMenuBinding
+    private lateinit var binding: FragmentProfileMenuBinding
     private val viewModel: ProfileViewModel by viewModels()
 
     override fun onCreateView(
@@ -28,10 +30,12 @@ class ProfileMenuFragment : Fragment() {
             binding.tvUsername.text = it
         }
         viewModel.stepsGoal.observe(viewLifecycleOwner) {
-            binding.tvSetGoalsValues.text = getString(R.string.goals_unit, it, viewModel.weightGoal.value)
+            binding.tvSetGoalsValues.text =
+                getString(R.string.goals_unit, it, viewModel.weightGoal.value)
         }
         viewModel.weightGoal.observe(viewLifecycleOwner) {
-            binding.tvSetGoalsValues.text = getString(R.string.goals_unit, viewModel.stepsGoal.value, it)
+            binding.tvSetGoalsValues.text =
+                getString(R.string.goals_unit, viewModel.stepsGoal.value, it)
         }
         viewModel.weight.observe(viewLifecycleOwner) {
             binding.tvWeightValues.text = getString(R.string.kg, it)
@@ -45,6 +49,20 @@ class ProfileMenuFragment : Fragment() {
         viewModel.birthDate.observe(viewLifecycleOwner) {
             binding.tvBirthDateValues.text = it.toString()
         }
+
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    AlertDialog.Builder(requireContext())
+                        .setTitle(getString(R.string.exit_the_app))
+                        .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                            activity?.finish()
+                        }
+                        .setNegativeButton(getString(R.string.no), null)
+                        .show()
+                }
+            })
         return binding.root
     }
 
@@ -54,18 +72,6 @@ class ProfileMenuFragment : Fragment() {
         binding.clHelp.setOnClickListener {
             findNavController().navigate(R.id.action_profileMenuFragment_to_helpFragment)
         }
-//        binding.btnProfileToPersonal.setOnClickListener {
-//            findNavController().navigate(R.id.action_profileMenuFragment_to_personalDialogFragment)
-//        }
-//        binding.btnProfileToMeasurementsDialog.setOnClickListener {
-//            findNavController().navigate(R.id.action_profileMenuFragment_to_measurementsDialogFragment)
-//        }
-//        binding.btnProfileToWorkout.setOnClickListener {
-//            findNavController().navigate(R.id.action_profileMenuFragment_to_workoutMenuFragment)
-//        }
-//        binding.btnProfileToHome.setOnClickListener {
-//            findNavController().navigate(R.id.action_profileMenuFragment_to_homeMenuFragment)
-//        }
         binding.clSignOut.setOnClickListener {
             SharedPrefConfig.put(SharedPrefConfig.pref_signed_in, false)
             val intent = Intent(requireContext(), MainActivity::class.java)

@@ -61,4 +61,5 @@
     <string name="completed_challenges">Completed challenges</string>
     <string name="weight2">Weight</string>
     <string name="notification_message">Your workout is being tracked</string>
+    <string name="exit_the_app">Exit the app?</string>
 </resources>
