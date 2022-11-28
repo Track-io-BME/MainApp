@@ -9,7 +9,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import hu.bme.aut.android.trackio.R
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
+import hu.bme.aut.android.trackio.data.UserGoals
+import hu.bme.aut.android.trackio.data.roomentities.UserWeight
 import hu.bme.aut.android.trackio.databinding.FragmentMeasurementsDialogBinding
+import hu.bme.aut.android.trackio.repository.NetworkRepository
+import java.util.Calendar
 
 class MeasurementsDialogFragment(
     private var isWeightValueVisible: Boolean = false,
@@ -17,7 +21,8 @@ class MeasurementsDialogFragment(
     private var isHeightValueVisible: Boolean = false,
     private var isStepsGoalValueVisible: Boolean = false
 ) : DialogFragment() {
-    private lateinit var binding : FragmentMeasurementsDialogBinding
+    private lateinit var binding: FragmentMeasurementsDialogBinding
+    private val networkRepository: NetworkRepository = NetworkRepository()
 
     companion object {
         const val TAG = "MeasurementsDialogFragment"
@@ -30,7 +35,8 @@ class MeasurementsDialogFragment(
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = FragmentMeasurementsDialogBinding.inflate(layoutInflater)
         binding.etWeightValue.filters = arrayOf<InputFilter>(MinMaxFilter(MIN_VALUE, MAX_WEIGHT))
-        binding.etWeightGoalValue.filters = arrayOf<InputFilter>(MinMaxFilter(MIN_VALUE, MAX_WEIGHT))
+        binding.etWeightGoalValue.filters =
+            arrayOf<InputFilter>(MinMaxFilter(MIN_VALUE, MAX_WEIGHT))
         binding.etHeightValue.filters = arrayOf<InputFilter>(MinMaxFilter(MIN_VALUE, MAX_HEIGHT))
         binding.etStepsGoalValue.filters = arrayOf<InputFilter>(MinMaxFilter(MIN_VALUE, MAX_STEPS))
 
@@ -57,26 +63,52 @@ class MeasurementsDialogFragment(
             .setView(binding.root)
             .setMessage(getString(R.string.set_your_something, setterTitle))
             .setPositiveButton(getString(R.string.ok)) { _, _ ->
-                if(binding.etWeightValue.text.isNotEmpty())
+                if (binding.etWeightValue.text.isNotEmpty()) {
+                    val newWeightValue = binding.etWeightValue.text.toString().toFloat()
                     SharedPrefConfig.put(
                         SharedPrefConfig.pref_weight,
-                        binding.etWeightValue.text.toString().toFloat()
+                        newWeightValue
                     )
-                if(binding.etWeightGoalValue.text.isNotEmpty())
-                    SharedPrefConfig.put(
-                        SharedPrefConfig.pref_weight_goal,
-                        binding.etWeightGoalValue.text.toString().toFloat()
+                    networkRepository.postUserWeight(
+                        SharedPrefConfig.pref_token,
+                        UserWeight(0, Calendar.getInstance().timeInMillis, newWeightValue)
                     )
-                if(binding.etHeightValue.text.isNotEmpty())
+                }
+                if (binding.etHeightValue.text.isNotEmpty()) {
+                    val newHeightValue = binding.etHeightValue.text.toString().toFloat()
                     SharedPrefConfig.put(
                         SharedPrefConfig.pref_height,
-                        binding.etHeightValue.text.toString().toFloat()
+                        newHeightValue
                     )
-                if(binding.etStepsGoalValue.text.isNotEmpty())
+                    networkRepository.postUserHeight(SharedPrefConfig.pref_token, newHeightValue)
+                }
+                var newWeightGoalValue: Float? = null
+                var newStepsGoalValue: Int? = null
+                if (binding.etWeightGoalValue.text.isNotEmpty()) {
+                    newWeightGoalValue = binding.etWeightGoalValue.text.toString().toFloat()
+                    SharedPrefConfig.put(
+                        SharedPrefConfig.pref_weight_goal,
+                        newWeightGoalValue
+                    )
+                }
+                if (binding.etStepsGoalValue.text.isNotEmpty()) {
+                    newStepsGoalValue = binding.etStepsGoalValue.text.toString().toInt()
                     SharedPrefConfig.put(
                         SharedPrefConfig.pref_steps_goal,
-                        binding.etStepsGoalValue.text.toString().toInt()
+                        newStepsGoalValue
                     )
+                }
+                if (newStepsGoalValue != null || newWeightGoalValue != null) {
+                    networkRepository.putGoals(
+                        SharedPrefConfig.getString(SharedPrefConfig.pref_token),
+                        UserGoals(
+                            newStepsGoalValue
+                                ?: SharedPrefConfig.getInt(SharedPrefConfig.pref_steps_goal),
+                            newWeightGoalValue
+                                ?: SharedPrefConfig.getFloat(SharedPrefConfig.pref_weight_goal)
+                        )
+                    )
+                }
             }
             .setNegativeButton(getString(R.string.back), null)
             .create()

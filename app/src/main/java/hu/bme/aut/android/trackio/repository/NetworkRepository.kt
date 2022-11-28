@@ -60,4 +60,8 @@ class NetworkRepository {
     fun putGoals(token: String, userGoals: UserGoals): Call<UserGoals?>? {
         return RetrofitInstance.api.putGoals(token, userGoals)
     }
+
+    fun postUserHeight(token: String, height: Float) : Call<Float?>? {
+        return RetrofitInstance.api.postUserHeight(token, height)
+    }
 }

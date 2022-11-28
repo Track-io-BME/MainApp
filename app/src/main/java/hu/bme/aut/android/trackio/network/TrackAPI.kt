@@ -50,6 +50,9 @@ interface TrackAPI {
     @PUT("userDetails/goals")
     fun putGoals(@Header("Authorization") token: String,@Body userGoals: UserGoals) : Call<UserGoals?>?
 
+    @POST("/userDetails/setHeight")
+    fun postUserHeight(@Header("Authorization") token: String,@Body height: Float) : Call<Float?>?
+
 
 
 
