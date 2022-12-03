@@ -36,7 +36,6 @@ class LocationTrackerService : LifecycleService(), java.io.Serializable {
             get() = this@LocationTrackerService
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
 //        NotificationManagerCompat.from(this).apply {
@@ -66,14 +65,12 @@ class LocationTrackerService : LifecycleService(), java.io.Serializable {
         return binder
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onUnbind(intent: Intent?): Boolean {
         Log.d("service", "UNBIND")
         if (_tracking.value == true) stop()
         return super.onUnbind(intent)
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onDestroy() {
         Log.d("service", tracking.toString())
         if (_tracking.value == true) stop()
@@ -81,7 +78,6 @@ class LocationTrackerService : LifecycleService(), java.io.Serializable {
         super.onDestroy()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun startStop(workoutType: ActiveChallenge.SportType) {
         this.workoutType = workoutType
         _tracking.value = if (_tracking.value == true) {
@@ -95,7 +91,6 @@ class LocationTrackerService : LifecycleService(), java.io.Serializable {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun start() {
         startForeground(
             WorkoutNotificationHelper.WORKOUT_NOTIFICATION_ID,
@@ -116,7 +111,6 @@ class LocationTrackerService : LifecycleService(), java.io.Serializable {
     }
 
     @SuppressLint("WrongConstant")
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun stop() {
         stopForeground(WorkoutNotificationHelper.WORKOUT_NOTIFICATION_ID)
         _locationLiveData.stopLocationMonitoring()
@@ -126,7 +120,6 @@ class LocationTrackerService : LifecycleService(), java.io.Serializable {
         _tracking.value = false
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     fun clear() {
         if (_tracking.value == true) stop()
         _time.value = 0

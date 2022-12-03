@@ -86,8 +86,5 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
 
-        binding.tvLogIn.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_homeMenuFragment)
-        }
-    }
+            }
 }

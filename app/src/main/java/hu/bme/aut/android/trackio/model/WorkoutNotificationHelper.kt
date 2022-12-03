@@ -18,7 +18,6 @@ object WorkoutNotificationHelper {
         this.application = application
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun getWorkoutNotification(workoutType: ActiveChallenge.SportType): Notification {
         createNotificationChannel()
             val notificationIcon = when(workoutType) {

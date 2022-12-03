@@ -29,7 +29,6 @@ class DuringWorkoutFragment : Fragment() {
     private var mBound: Boolean = false
     private lateinit var mService: LocationTrackerService
     private val connection = object : ServiceConnection {
-        @RequiresApi(Build.VERSION_CODES.N)
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
             val binder = service as LocationTrackerService.LocationTrackerBinder
             mService = binder.service
@@ -46,7 +45,6 @@ class DuringWorkoutFragment : Fragment() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -71,7 +69,6 @@ class DuringWorkoutFragment : Fragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnDuringToMap.setOnClickListener {
