@@ -38,16 +38,6 @@ class LocationTrackerService : LifecycleService(), java.io.Serializable {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
-//        NotificationManagerCompat.from(this).apply {
-//            notify(notificationPair.first, /*updated notification*/ notificationPair.second)
-//        }
-
-//        Delete notification
-//        val notificationManager: NotificationManager =
-//            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//        notificationManager.cancel(notificationPair.first)
-
         return super.onStartCommand(intent, flags, startId)
     }
 
