@@ -8,7 +8,6 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface TrackAPI {
-
     @PUT("signup")
     fun signUp(@Body userSignUP: UserSignUP) : Call<UserCreationResponse?>?
 
@@ -36,8 +35,6 @@ interface TrackAPI {
     @GET("/userWorkout/top3")
     fun getTop3Workout(@Header("Authorization") token: String) : Call<List<Workout?>?>?
 
-
-    //USERDETAILS dolgok
     @GET("/userDetails/all")
     fun getUserDetails(@Header("Authorization") token: String) : Call<UserDetails?>?
 
@@ -52,14 +49,4 @@ interface TrackAPI {
 
     @POST("/userDetails/setHeight")
     fun postUserHeight(@Header("Authorization") token: String,@Body height: Float) : Call<Float?>?
-
-
-
-
-
-
-
-
-
-
 }

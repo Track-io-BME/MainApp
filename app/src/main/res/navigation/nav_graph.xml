@@ -129,17 +129,9 @@
         android:label="fragment_workout_history"
         tools:layout="@layout/fragment_workout_history" >
         <action
-            android:id="@+id/action_workoutHistoryFragment_to_pastWorkoutFragment"
-            app:destination="@id/pastWorkoutFragment" />
-        <action
             android:id="@+id/action_workoutHistoryFragment_to_homeMenuFragment"
             app:destination="@id/homeMenuFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/pastWorkoutFragment"
-        android:name="hu.bme.aut.android.trackio.ui.pastworkout.PastWorkoutFragment"
-        android:label="fragment_past_workout"
-        tools:layout="@layout/fragment_past_workout" />
     <fragment
         android:id="@+id/detailedMeasurementsFragment"
         android:name="hu.bme.aut.android.trackio.ui.detatiledmesurements.DetailedMeasurementsFragment"

@@ -15,20 +15,16 @@ import hu.bme.aut.android.trackio.databinding.FragmentSignupBinding
 import hu.bme.aut.android.trackio.network.InternetConnectivityChecker
 import hu.bme.aut.android.trackio.viewmodel.SignupViewModel
 
-
 class SignupFragment : Fragment() {
     private lateinit var binding: FragmentSignupBinding
     private val viewModel: SignupViewModel by viewModels()
-
 
     companion object {
         const val DATE_SELECTED_KEY = "date_selected"
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentSignupBinding.inflate(inflater, container, false)
         return binding.root
@@ -47,47 +43,33 @@ class SignupFragment : Fragment() {
             findNavController().navigate(R.id.action_signupFragment_to_datePickerDialogFragment)
         }
 
-
-
         if (!InternetConnectivityChecker.isOnline()) {
-            Toast.makeText(context, "There is no internet connection", Toast.LENGTH_LONG)
-                .show()
+            Toast.makeText(context, getString(R.string.no_internet), Toast.LENGTH_LONG).show()
         }
-        findNavController()
-            .currentBackStackEntry
-            ?.savedStateHandle
-            ?.getLiveData<DatePickerDialogFragment.DatePickerResult>(DATE_SELECTED_KEY)
-            ?.observe(viewLifecycleOwner) { result ->
-                result.month++
-                var birthDate =
-                    result.year.toString() + "." + result.month.toString() + "." + result.day.toString()
-                binding.etBirthDate.setText(birthDate)
-            }
-
-
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<DatePickerDialogFragment.DatePickerResult>(
+            DATE_SELECTED_KEY
+        )?.observe(viewLifecycleOwner) { result ->
+            result.month++
+            val birthDate =
+                result.year.toString() + "." + result.month.toString() + "." + result.day.toString()
+            binding.etBirthDate.setText(birthDate)
+        }
 
         binding.btnSignupToHome.setOnClickListener {
-            var allset = true
-            if (binding.etFirstName.text.isEmpty())
-                allset = false
-            else if (binding.etLastName.text.isEmpty())
-                allset = false
-            else if (binding.etEmail.text.isEmpty())
-                allset = false
-            else if (binding.etBirthDate.text.isEmpty())
-                allset = false
-            else if (binding.etHeight.text.isEmpty())
-                allset = false
-            else if (binding.etWeight.text.isEmpty())
-                allset = false
-            else if (binding.etPassword.text.isEmpty())
-                allset = false
+            var allSet = true
+            if (binding.etFirstName.text.isEmpty()) allSet = false
+            else if (binding.etLastName.text.isEmpty()) allSet = false
+            else if (binding.etEmail.text.isEmpty()) allSet = false
+            else if (binding.etBirthDate.text.isEmpty()) allSet = false
+            else if (binding.etHeight.text.isEmpty()) allSet = false
+            else if (binding.etWeight.text.isEmpty()) allSet = false
+            else if (binding.etPassword.text.isEmpty()) allSet = false
 
-            if (!allset) {
-                Toast.makeText(context, "Please set all description", Toast.LENGTH_LONG)
+            if (!allSet) {
+                Toast.makeText(context, getString(R.string.set_all_description), Toast.LENGTH_LONG)
                     .show()
             }
-            if (allset) {
+            if (allSet) {
                 viewModel.signUp(
                     UserSignUP(
                         firstname = binding.etFirstName.text.toString(),
@@ -100,23 +82,17 @@ class SignupFragment : Fragment() {
                         password = binding.etPassword.text.toString()
                     )
                 ).observe(viewLifecycleOwner) { messageToUser ->
-                    Toast.makeText(context, messageToUser, Toast.LENGTH_LONG)
-                        .show()
+                    Toast.makeText(context, messageToUser, Toast.LENGTH_LONG).show()
                 }
-
             }
         }
     }
 
     private fun getGenderFromPosition(ordinal: Int): String {
         return if (ordinal == 0) {
-            "male"
+            getString(R.string.male).lowercase()
         } else {
-            "female"
+            getString(R.string.female).lowercase()
         }
     }
-
-
-
-
 }

@@ -99,7 +99,9 @@ class ProfileViewModel(application: Application) :
                             SharedPrefConfig.put(SharedPrefConfig.pref_steps_goal, data.goalSteps)
                             SharedPrefConfig.put(SharedPrefConfig.pref_weight_goal, data.goalWeight)
                             SharedPrefConfig.put(SharedPrefConfig.pref_height, data.height)
-                            if (data.sex == "male") {
+                            if (data.sex == getApplication<Application>().getString(R.string.male)
+                                    .lowercase()
+                            ) {
                                 SharedPrefConfig.put(
                                     SharedPrefConfig.pref_gender,
                                     getApplication<Application>().getString(R.string.male)

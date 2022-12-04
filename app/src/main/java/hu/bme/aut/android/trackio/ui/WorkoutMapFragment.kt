@@ -17,55 +17,17 @@ import hu.bme.aut.android.trackio.databinding.FragmentWorkoutMapBinding
 import hu.bme.aut.android.trackio.model.LocationTrackerService
 
 class WorkoutMapFragment : Fragment() {
-//    companion object {
-//        private const val ACCESS_LOCATION_REQUEST_CODE = 3003
-//    }
-
     private lateinit var binding: FragmentWorkoutMapBinding
     private lateinit var googleMap: GoogleMap
     private var locationTrackerService: LocationTrackerService? = null
 
-    @SuppressLint("MissingPermission")// TODO PERMISSION!!!
+    @SuppressLint("MissingPermission")
     private val callback = OnMapReadyCallback { googleMap ->
         this.googleMap = googleMap
         locationTrackerService?.locationLiveData?.observe(viewLifecycleOwner) {
             moveToUserLocation(it)
         }
-
-//        if (ContextCompat.checkSelfPermission(
-//                requireActivity(),
-//                Manifest.permission.ACCESS_FINE_LOCATION
-//            ) == PackageManager.PERMISSION_GRANTED
-//        ) {
-            this.googleMap.isMyLocationEnabled = true
-//        } else {
-//            if (ActivityCompat.shouldShowRequestPermissionRationale(
-//                    requireActivity(),
-//                    Manifest.permission.ACCESS_FINE_LOCATION
-//                )
-//            ) {
-//                AlertDialog.Builder(requireContext())
-//                    .setTitle("Give us location permission")
-//                    .setMessage("Tracking will not work without it")
-//                    .setPositiveButton(getString(R.string.yes)) { _, _ ->
-//                        ActivityCompat.requestPermissions(
-//                            requireActivity(),
-//                            Array(1) { Manifest.permission.ACCESS_FINE_LOCATION },
-//                            ACCESS_LOCATION_REQUEST_CODE
-//                        )
-//                    }
-//                    .setNegativeButton(getString(R.string.no)) { _, _ ->
-//                        findNavController().navigateUp()
-//                    }
-//                    .show()
-//            } else {
-//                ActivityCompat.requestPermissions(
-//                    requireActivity(),
-//                    Array(1) { Manifest.permission.ACCESS_FINE_LOCATION },
-//                    ACCESS_LOCATION_REQUEST_CODE
-//                )
-//            }
-//        }
+        this.googleMap.isMyLocationEnabled = true
     }
 
     private fun moveToUserLocation(location: Location) {

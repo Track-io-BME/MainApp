@@ -5,15 +5,12 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import hu.bme.aut.android.trackio.R
@@ -83,7 +80,7 @@ class DuringWorkoutFragment : Fragment() {
         }
         binding.btnFinishWorkout.setOnClickListener {
             AlertDialog.Builder(requireContext())
-                .setTitle("Do you want to end the current workout?")
+                .setTitle(getString(R.string.stop_workout_dialog))
                 .setPositiveButton(getString(R.string.yes)) { _, _ ->
                     viewModel.saveCurrentWorkout()
                     mService.clear()
@@ -93,7 +90,7 @@ class DuringWorkoutFragment : Fragment() {
         }
         binding.btnRestartWorkout.setOnClickListener {
             AlertDialog.Builder(requireContext())
-                .setTitle("Do you want to start a new workout and lose the current process?")
+                .setTitle(getString(R.string.restart_workout_dialog))
                 .setPositiveButton(getString(R.string.yes)) { _, _ ->
                     mService.clear()
                 }
@@ -104,7 +101,6 @@ class DuringWorkoutFragment : Fragment() {
 
     private fun observeService() {
         mService.distance.observe(viewLifecycleOwner) {
-            Log.d("fragment", "OBSERVE")
             viewModel.distance = it
             binding.tvWorkoutDistance.text = String.format("%.2f", it)
         }

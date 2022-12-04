@@ -1,13 +1,9 @@
 package hu.bme.aut.android.trackio.model
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.location.Location
 import android.os.Binder
-import android.os.Build
 import android.os.IBinder
-import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,37 +12,33 @@ import java.util.*
 
 class LocationTrackerService : LifecycleService(), java.io.Serializable {
     private val binder = LocationTrackerBinder()
+    private var workoutType = ActiveChallenge.SportType.WALKING
+
     private var lastLocation: Location? = null
     private lateinit var _locationLiveData: LocationLiveData
     val locationLiveData: LiveData<Location>
         get() = _locationLiveData
-    private var _distance = MutableLiveData(0.0F)
+
+    private val _distance = MutableLiveData(0.0F)
     val distance: LiveData<Float>
         get() = _distance
+
     private lateinit var timer: Timer
     private val _time = MutableLiveData(0L)
     val time: LiveData<Long> = _time
-    private var _tracking = MutableLiveData(false)
-    val tracking: LiveData<Boolean> = _tracking
 
-    var workoutType = ActiveChallenge.SportType.WALKING
+    private val _tracking = MutableLiveData(false)
+    val tracking: LiveData<Boolean> = _tracking
 
     inner class LocationTrackerBinder : Binder() {
         val service: LocationTrackerService
             get() = this@LocationTrackerService
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        return super.onStartCommand(intent, flags, startId)
-    }
-
     override fun onBind(intent: Intent): IBinder {
         super.onBind(intent)
-        Log.d("service", "BIND")
-
         _locationLiveData = LocationLiveData(this)
         _locationLiveData.observe(this) {
-            Log.d("service", "OBSERVE")
             if (lastLocation != null && _tracking.value == true) {
                 _distance.value = _distance.value?.plus(it.distanceTo(lastLocation) / 1000)
             }
@@ -56,15 +48,12 @@ class LocationTrackerService : LifecycleService(), java.io.Serializable {
     }
 
     override fun onUnbind(intent: Intent?): Boolean {
-        Log.d("service", "UNBIND")
         if (_tracking.value == true) stop()
         return super.onUnbind(intent)
     }
 
     override fun onDestroy() {
-        Log.d("service", tracking.toString())
         if (_tracking.value == true) stop()
-        Log.d("service", "DESTROY")
         super.onDestroy()
     }
 
@@ -72,11 +61,9 @@ class LocationTrackerService : LifecycleService(), java.io.Serializable {
         this.workoutType = workoutType
         _tracking.value = if (_tracking.value == true) {
             stop()
-            Log.d("service", "STOP")
             false
         } else {
             start()
-            Log.d("service", "START")
             true
         }
     }
@@ -100,9 +87,8 @@ class LocationTrackerService : LifecycleService(), java.io.Serializable {
         _tracking.value = true
     }
 
-    @SuppressLint("WrongConstant")
     private fun stop() {
-        stopForeground(WorkoutNotificationHelper.WORKOUT_NOTIFICATION_ID)
+        stopForeground(STOP_FOREGROUND_REMOVE)
         _locationLiveData.stopLocationMonitoring()
         timer.cancel()
         timer.purge()

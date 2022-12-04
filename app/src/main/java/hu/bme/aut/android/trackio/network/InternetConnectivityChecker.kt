@@ -4,9 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
-import android.util.Log
-
 
 object InternetConnectivityChecker {
 
@@ -31,7 +28,4 @@ object InternetConnectivityChecker {
         }
         return false
     }
-
 }
-
-

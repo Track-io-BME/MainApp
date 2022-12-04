@@ -5,40 +5,39 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
-import hu.bme.aut.android.trackio.data.roomentities.Workout
+import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
 import hu.bme.aut.android.trackio.repository.NetworkRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel(application: Application) : AndroidViewModel(application) {
+class DailyActivitiesViewModel(application: Application) : AndroidViewModel(application) {
     private val networkRepository: NetworkRepository = NetworkRepository()
 
     init {
-        getTop3Workout()
+        getCompletedChallenges()
     }
 
-    fun getTop3Workout(): LiveData<List<Workout?>?> {
-        val top3Workout = MutableLiveData<List<Workout?>?>()
-        networkRepository.getTop3Workout(SharedPrefConfig.getString(SharedPrefConfig.pref_token))
+    fun getCompletedChallenges(): LiveData<List<ActiveChallenge?>?> {
+        val completedChallenge = MutableLiveData<List<ActiveChallenge?>?>()
+        networkRepository.getCompletedChallenges(SharedPrefConfig.getString(SharedPrefConfig.pref_token))
             ?.enqueue(object :
-                Callback<List<Workout?>?> {
+                Callback<List<ActiveChallenge?>?> {
                 override fun onResponse(
-                    call: Call<List<Workout?>?>,
-                    response: Response<List<Workout?>?>
+                    call: Call<List<ActiveChallenge?>?>,
+                    response: Response<List<ActiveChallenge?>?>
                 ) {
                     if (response.isSuccessful) {
                         if (response.body() != null) {
-                            top3Workout.value = response.body()
+                            completedChallenge.value = response.body()
                         }
                     }
-
                 }
 
-                override fun onFailure(call: Call<List<Workout?>?>, t: Throwable) {
+                override fun onFailure(call: Call<List<ActiveChallenge?>?>, t: Throwable) {
                     t.printStackTrace()
                 }
             })
-        return top3Workout
+        return completedChallenge
     }
 }

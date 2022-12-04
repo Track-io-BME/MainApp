@@ -1,7 +1,6 @@
 package hu.bme.aut.android.trackio.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
 import hu.bme.aut.android.trackio.data.database.AppDatabase
@@ -34,30 +33,27 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
             }
         }
 
-    //Challengekmegjelenítése
     private val dbRepository: DbRepository
     private val networkRepository: NetworkRepository
-    var activeWalkingChallengesFromDB : LiveData<List<ActiveChallenge>>
-    var activeRunningChallengesFromDB : LiveData<List<ActiveChallenge>>
-    var activeCyclingChallengesFromDB : LiveData<List<ActiveChallenge>>
+    var activeWalkingChallengesFromDB: LiveData<List<ActiveChallenge>>
+    var activeRunningChallengesFromDB: LiveData<List<ActiveChallenge>>
+    var activeCyclingChallengesFromDB: LiveData<List<ActiveChallenge>>
 
     init {
         val databaseDAO = AppDatabase.getDatabase(application).databaseDAO()
         dbRepository = DbRepository(databaseDAO)
         networkRepository = NetworkRepository()
-        if(InternetConnectivityChecker.isOnline()){
+        if (InternetConnectivityChecker.isOnline()) {
             getActiveChallengesFromNetwork()
         }
 
-
-
-
-        activeWalkingChallengesFromDB = dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.WALKING)
-        activeRunningChallengesFromDB = dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.RUNNING)
-        activeCyclingChallengesFromDB = dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.CYCLING)
+        activeWalkingChallengesFromDB =
+            dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.WALKING)
+        activeRunningChallengesFromDB =
+            dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.RUNNING)
+        activeCyclingChallengesFromDB =
+            dbRepository.getActiveChallengeOfSportType(sportType = ActiveChallenge.SportType.CYCLING)
     }
-
-
 
     fun addActiveChallenge(activeChallenges: ActiveChallenge) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -65,13 +61,7 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun deleteActiveChallenge(activeChallenges: ActiveChallenge) {
-        viewModelScope.launch(Dispatchers.IO) {
-            dbRepository.deleteActiveChallenge(activeChallenges)
-        }
-    }
-
-    fun deleteAllActiveChallenge(){
+    fun deleteAllActiveChallenge() {
         viewModelScope.launch(Dispatchers.IO) {
             dbRepository.deleteAllActiveChallenge()
         }
@@ -79,11 +69,9 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
 
     fun getActiveChallengesFromNetwork() {
         networkRepository.getActiveChallenges(SharedPrefConfig.getString(SharedPrefConfig.pref_token))
-            ?.enqueue(object :
-                Callback<List<ActiveChallenge?>?> {
+            ?.enqueue(object : Callback<List<ActiveChallenge?>?> {
                 override fun onResponse(
-                    call: Call<List<ActiveChallenge?>?>,
-                    response: Response<List<ActiveChallenge?>?>
+                    call: Call<List<ActiveChallenge?>?>, response: Response<List<ActiveChallenge?>?>
                 ) {
                     if (response.isSuccessful) {
                         val data = response.body()
@@ -102,40 +90,42 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
                 override fun onFailure(call: Call<List<ActiveChallenge?>?>, t: Throwable) {
                     t.printStackTrace()
                 }
-
-
             })
     }
 
     fun saveCurrentWorkout() {
-        Log.d("WorkoutViewModel", "SAVE")
-        val calories = when(currentWorkoutType) {
+        val calories = when (currentWorkoutType) {
             ActiveChallenge.SportType.WALKING -> 40.25F * distance
             ActiveChallenge.SportType.RUNNING -> 62.5F * distance
             ActiveChallenge.SportType.CYCLING -> 32F * distance
         }
 
         networkRepository.finishTraining(
-            SharedPrefConfig.getString(SharedPrefConfig.pref_token),
-            Workout(0, Calendar.getInstance().timeInMillis, time, distance,
-                distance/time * 1000.0F, calories, currentWorkoutType)
-            )?.enqueue(object : Callback<Workout?> {
-                override fun onResponse(
-                    call: Call<Workout?>,
-                    response: Response<Workout?>
-                ) {
-                    if (response.isSuccessful) {
-                        val data = response.body()
-                        if (data != null) {
-                            addWorkout(data)
-                        }
+            SharedPrefConfig.getString(SharedPrefConfig.pref_token), Workout(
+                0,
+                Calendar.getInstance().timeInMillis,
+                time,
+                distance,
+                distance / time * 1000.0F,
+                calories,
+                currentWorkoutType
+            )
+        )?.enqueue(object : Callback<Workout?> {
+            override fun onResponse(
+                call: Call<Workout?>, response: Response<Workout?>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    if (data != null) {
+                        addWorkout(data)
                     }
                 }
-                override fun onFailure(call: Call<Workout?>, t: Throwable) {
-                    t.printStackTrace()
-                }
             }
-            )
+
+            override fun onFailure(call: Call<Workout?>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
     }
 
     private fun addWorkout(workout: Workout) {

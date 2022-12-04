@@ -10,7 +10,6 @@ import java.io.Serializable
 import java.util.*
 
 class DatePickerDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
@@ -33,7 +32,5 @@ class DatePickerDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetLis
         var month: Int,
         val day: Int,
     ) : Serializable
-
-
 }
 

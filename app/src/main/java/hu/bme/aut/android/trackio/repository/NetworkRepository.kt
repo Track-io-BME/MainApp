@@ -8,7 +8,6 @@ import hu.bme.aut.android.trackio.network.RetrofitInstance
 import retrofit2.Call
 
 class NetworkRepository {
-
     fun signUp(userSignUP: UserSignUP): Call<UserCreationResponse?>? {
         return RetrofitInstance.api.signUp(userSignUP)
     }
@@ -61,7 +60,7 @@ class NetworkRepository {
         return RetrofitInstance.api.putGoals(token, userGoals)
     }
 
-    fun postUserHeight(token: String, height: Float) : Call<Float?>? {
+    fun postUserHeight(token: String, height: Float): Call<Float?>? {
         return RetrofitInstance.api.postUserHeight(token, height)
     }
 }

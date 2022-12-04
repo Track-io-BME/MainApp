@@ -31,7 +31,7 @@ abstract class AppDatabase: RoomDatabase() {
                     AppDatabase::class.java,
                     "app_database")
                     .build()
-                INSTANCE= instance
+                INSTANCE = instance
                 return instance
             }
         }

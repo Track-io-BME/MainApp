@@ -11,44 +11,44 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/weight"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
         app:layout_constraintRight_toRightOf="@id/rightGuideline"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etHeightValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/height"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal"
-        app:layout_constraintTop_toBottomOf="@id/etWeightValue"
         app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
         app:layout_constraintRight_toRightOf="@id/rightGuideline"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toBottomOf="@id/etWeightValue" />
 
     <EditText
         android:id="@+id/etWeightGoalValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/weight_goal"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal"
-        app:layout_constraintTop_toBottomOf="@id/etHeightValue"
         app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
         app:layout_constraintRight_toRightOf="@id/rightGuideline"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toBottomOf="@id/etHeightValue" />
 
     <EditText
         android:id="@+id/etStepsGoalValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/daily_steps"
+        android:importantForAutofill="no"
         android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@id/etWeightGoalValue"
         app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
         app:layout_constraintRight_toRightOf="@id/rightGuideline"
-        android:importantForAutofill="no"/>
+        app:layout_constraintTop_toBottomOf="@id/etWeightGoalValue" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/leftGuideline"

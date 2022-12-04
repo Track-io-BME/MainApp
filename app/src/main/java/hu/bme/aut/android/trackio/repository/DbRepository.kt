@@ -5,32 +5,32 @@ import hu.bme.aut.android.trackio.data.database.DatabaseDAO
 import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
 import hu.bme.aut.android.trackio.data.roomentities.Workout
 
-class DbRepository(private val databaseDAO : DatabaseDAO) {
+class DbRepository(private val databaseDAO: DatabaseDAO) {
 
-    fun getActiveChallengeOfSportType(sportType: ActiveChallenge.SportType) : LiveData<List<ActiveChallenge>> {
+    fun getActiveChallengeOfSportType(sportType: ActiveChallenge.SportType): LiveData<List<ActiveChallenge>> {
         return databaseDAO.getActiveChallenges(sportType)
     }
 
-    fun getAllActiveChallenge() : LiveData<List<ActiveChallenge>>{
+    fun getAllActiveChallenge(): LiveData<List<ActiveChallenge>> {
         return databaseDAO.readAllData()
     }
 
-    fun deleteAllActiveChallenge(){
+    fun deleteAllActiveChallenge() {
         databaseDAO.deleteAllActiveChallenges()
     }
 
-    fun deleteAllData(){
+    fun deleteAllData() {
         databaseDAO.deleteAllActiveChallenges()
         databaseDAO.deleteAllDailyHistory()
         databaseDAO.deleteWorkout()
         databaseDAO.deleteAllUserWeight()
     }
 
-    suspend fun addActiveChallenge(activeChallenges: ActiveChallenge){
+    suspend fun addActiveChallenge(activeChallenges: ActiveChallenge) {
         databaseDAO.addActiveChallenge(activeChallenges)
     }
 
-    suspend fun deleteActiveChallenge(activeChallenges: ActiveChallenge){
+    suspend fun deleteActiveChallenge(activeChallenges: ActiveChallenge) {
         databaseDAO.deleteActiveChallenge(activeChallenges)
     }
 

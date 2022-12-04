@@ -16,8 +16,8 @@ import hu.bme.aut.android.trackio.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home_menu.*
 
 class HomeFragment : Fragment(), RowItemClick {
-    private lateinit var binding : FragmentHomeMenuBinding
-    private val viewModel : HomeViewModel by activityViewModels()
+    private lateinit var binding: FragmentHomeMenuBinding
+    private val viewModel: HomeViewModel by activityViewModels()
     private lateinit var adapter: WorkoutAdapter
 
     override fun onCreateView(
@@ -27,46 +27,27 @@ class HomeFragment : Fragment(), RowItemClick {
     ): View {
         binding = FragmentHomeMenuBinding.inflate(inflater, container, false)
 
-        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                AlertDialog.Builder(requireContext())
-                    .setTitle(getString(R.string.exit_the_app))
-                    .setPositiveButton(getString(R.string.yes)) { _, _ ->
-                        activity?.finish()
-                    }
-                    .setNegativeButton(getString(R.string.no), null)
-                    .show()
-            }
-        })
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    AlertDialog.Builder(requireContext())
+                        .setTitle(getString(R.string.exit_the_app))
+                        .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                            activity?.finish()
+                        }
+                        .setNegativeButton(getString(R.string.no), null)
+                        .show()
+                }
+            })
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initRecyclerView()
-        viewModel.getTop3Workout().observe(viewLifecycleOwner){
-            workoutlist ->
-           adapter.setData(workoutlist as List<Workout>)
+        viewModel.getTop3Workout().observe(viewLifecycleOwner) { workoutList ->
+            adapter.setData(workoutList as List<Workout>)
         }
-        /*super.onViewCreated(view, savedInstanceState)
-
-        binding.btnHomeToDaily.setOnClickListener {
-            findNavController().navigate(R.id.action_homeMenuFragment_to_dailyActivitiesFragment)
-        }
-        binding.btnHomeToProfile.setOnClickListener {
-            findNavController().navigate(R.id.action_homeMenuFragment_to_profileMenuFragment)
-        }
-        binding.btnHomeToDetailedMeasurements.setOnClickListener {
-            )
-        }
-        binding.btnHomeToWorkoutMenu.setOnClickListener {
-            findNavController().navigate(R.id.action_homeMenuFragment_to_workoutMenuFragment)
-        }
-        binding.btnHomeToWorkoutHistory.setOnClickListener {
-            findNavController().navigate()
-        }*/
-
-
-
         lineChart2.gradientFillColors =
             intArrayOf(
                 Color.parseColor("#81FFFF"),
@@ -84,19 +65,6 @@ class HomeFragment : Fragment(), RowItemClick {
             findNavController().navigate(R.id.action_homeMenuFragment_to_dailyActivitiesFragment)
         }
 
-        /*
-        binding.imageView7.setOnClickListener{
-            findNavController().navigate(R.id.action_homeMenuFragment_to_workoutHistoryFragment)
-        }
-
-        binding.imageView6.setOnClickListener{
-            findNavController().navigate(R.id.action_homeMenuFragment_to_workoutHistoryFragment)
-        }
-
-        binding.imageView5.setOnClickListener{
-            findNavController().navigate(R.id.action_homeMenuFragment_to_workoutHistoryFragment)
-        }
-*/
         binding.tbNavigation.selectedItemId = R.id.home_menu
         binding.tbNavigation.setOnItemSelectedListener {
             when (it.itemId) {
@@ -112,6 +80,7 @@ class HomeFragment : Fragment(), RowItemClick {
             }
         }
     }
+
     private fun initRecyclerView() {
         adapter = WorkoutAdapter(this)
         binding.top3recycleview.layoutManager = LinearLayoutManager(requireContext())
@@ -122,7 +91,7 @@ class HomeFragment : Fragment(), RowItemClick {
         findNavController().navigate(R.id.action_homeMenuFragment_to_workoutHistoryFragment)
     }
 
-    companion object{
+    companion object {
         private val lineSet2 = listOf(
             "05/01" to 68.5f,
             "06/14" to 67.9f,
@@ -131,7 +100,6 @@ class HomeFragment : Fragment(), RowItemClick {
             "10/01" to 68.4f
         )
     }
+
     private val animationDuration = 1000L
-
-
 }

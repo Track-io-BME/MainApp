@@ -66,8 +66,7 @@ class MainActivity : AppCompatActivity() {
                             }
                             .setNegativeButton(getString(R.string.back), null)
                             .show()
-                    }
-                    else{
+                    } else {
                         ActivityCompat.requestPermissions(
                             this, REQUIRED_PERMISSIONS, PERMISSION_REQUEST_CODE
                         )
@@ -82,5 +81,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 }

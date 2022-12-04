@@ -25,7 +25,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     fun login(login: Login): LiveData<Boolean> {
         var serverResponse: ServerResponse
-        var succesfulLogin = MutableLiveData<Boolean>()
+        val successfulLogin = MutableLiveData<Boolean>()
         networkRepository.loginToServer(login)?.enqueue(object : Callback<ServerResponse?> {
             override fun onResponse(
                 call: Call<ServerResponse?>,
@@ -34,7 +34,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                 if (response.isSuccessful) {
                     if (response.body() != null) {
                         serverResponse = response.body()!!
-                        //Log.d("talan", response.body().toString())
                         if (serverResponse.email != SharedPrefConfig.getString(SharedPrefConfig.pref_email)) {
                             deleteAllUserDB()
                             SharedPrefConfig.deleteAll()
@@ -46,24 +45,21 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                         SharedPrefConfig.put(SharedPrefConfig.pref_password, login.password)
                         SharedPrefConfig.put(SharedPrefConfig.pref_email, serverResponse.email)
                         SharedPrefConfig.put(SharedPrefConfig.pref_signed_in, true)
-                        succesfulLogin.value = true
+                        successfulLogin.value = true
                     }
-
                 } else {
-                    succesfulLogin.value = false
+                    successfulLogin.value = false
                 }
             }
 
             override fun onFailure(call: Call<ServerResponse?>, t: Throwable) {
-
                 t.printStackTrace()
             }
-
         })
-        return succesfulLogin
+        return successfulLogin
     }
 
-    fun deleteAllUserDB(){
+    fun deleteAllUserDB() {
         viewModelScope.launch(Dispatchers.IO) {
             dbRepository.deleteAllData()
         }

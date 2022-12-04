@@ -64,4 +64,11 @@
     <string name="exit_the_app">Exit the app?</string>
     <string name="permissions_dialog">The app cannot work without permissions</string>
     <string name="permission_not_granted">Permissions not granted by the user.</string>
+    <string name="wrong_password_or_email">Wrong password or email</string>
+    <string name="no_internet">No internet</string>
+    <string name="set_all_description">Please set all description</string>
+    <string name="restart_workout_dialog">Do you want to start a new workout and lose the current process?</string>
+    <string name="stop_workout_dialog">Do you want to end the current workout?</string>
+    <string name="conditions_and_privacy_policy">I have read and agree to the Terms &amp; Conditions and Privacy Policy</string>
+    <string name="date_example">1996–05–09</string>
 </resources>

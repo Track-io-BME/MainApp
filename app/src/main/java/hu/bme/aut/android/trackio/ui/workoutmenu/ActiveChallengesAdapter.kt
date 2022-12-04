@@ -1,21 +1,17 @@
 package hu.bme.aut.android.trackio.ui.workoutmenu
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.trackio.data.roomentities.ActiveChallenge
-import hu.bme.aut.android.trackio.data.roomentities.Workout
 import hu.bme.aut.android.trackio.databinding.ActivechallengerowitemBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
 class ActiveChallengesAdapter :
     RecyclerView.Adapter<ActiveChallengesAdapter.ActiveChallengeViewHolder>() {
-
-
     private var activeChallengeList = mutableListOf<ActiveChallenge>()
-
-
 
     inner class ActiveChallengeViewHolder(val binding: ActivechallengerowitemBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -26,12 +22,17 @@ class ActiveChallengesAdapter :
 
     override fun onBindViewHolder(holder: ActiveChallengeViewHolder, position: Int) {
         val currentItem = activeChallengeList[position]
-        holder.binding.tvChallengeDuration.text= currentItem.duration.toString()
-        holder.binding.tvDistance.text=getSportType(currentItem.sportType,currentItem.distance.toString())
+        holder.binding.tvChallengeDuration.text = currentItem.duration.toString()
+        holder.binding.tvDistance.text =
+            getSportType(currentItem.sportType, currentItem.distance.toString())
         if (currentItem.duration == ActiveChallenge.SportDuration.DAILY)
-            holder.binding.tvStartDate.text = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(currentItem.startDate)
+            holder.binding.tvStartDate.text =
+                SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(currentItem.startDate)
         else
-            holder.binding.tvStartDate.text = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(currentItem.startDate + 6 * 86_400_000)
+            holder.binding.tvStartDate.text = SimpleDateFormat(
+                "yyyy-MM-dd",
+                Locale.getDefault()
+            ).format(currentItem.startDate + 6 * 86_400_000)
 
     }
 
@@ -47,8 +48,9 @@ class ActiveChallengesAdapter :
         }
     }
 
-    fun setData(activeChallenge: List<ActiveChallenge>){
-        this.activeChallengeList=activeChallenge.toMutableList()
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(activeChallenge: List<ActiveChallenge>) {
+        this.activeChallengeList = activeChallenge.toMutableList()
         notifyDataSetChanged()
     }
 }
