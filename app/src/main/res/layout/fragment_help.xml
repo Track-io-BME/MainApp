@@ -177,7 +177,7 @@
                 android:layout_width="372dp"
                 android:layout_height="35dp"
                 android:fontFamily="@font/trebucbd"
-                android:text="5. How can I see the all my workouts? "
+                android:text="5. How can I see all my workouts? "
                 android:textAlignment="center"
                 android:textColor="@color/primary"
                 android:textSize="16sp"

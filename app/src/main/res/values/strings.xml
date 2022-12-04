@@ -1,25 +1,45 @@
 <resources>
     <string name="app_name">Track.io</string>
 
-<!--    Log in Fragment-->
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="ok">OK</string>
+    <string name="back">Back</string>
+    <string name="go">Go</string>
+    <string name="help">Help</string>
+    <string name="no_value">--</string>
+
     <string name="create_new_account"><u>Create new account</u></string>
     <string name="log_in">Log in</string>
     <string name="password">Password</string>
     <string name="email_address">Email address</string>
 
-<!--    Sign up Fragment-->
     <string name="sign_up">Sign up</string>
+    <string name="sign_out">Sign out</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
-    <string name="weight">Weight (kg)</string>
+    <string name="date_example">1996–05–09</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="measurements">measurements</string>
     <string name="height">Height (cm)</string>
+    <string name="weight">Weight (kg)</string>
+    <string name="weight2">Weight</string>
+    <string name="weight_goal">Weight (kg) - goal</string>
+
+    <string name="set_goals">Set goals</string>
+    <string name="goals_unit">%dsteps|%.1fkg</string>
+    <string name="goals">goals</string>
+    <string name="km">km</string>
+    <string name="cm">%.1fcm</string>
+    <string name="kg">%.1fkg</string>
+
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="workout">Workout</string>
     <string name="walking">Walking</string>
     <string name="running">Running</string>
     <string name="cycling">Cycling</string>
-    <string name="go">Go</string>
+
     <string name="challenges">Challenges</string>
     <string name="daily">Daily</string>
     <string name="weekly">Weekly</string>
@@ -30,9 +50,30 @@
     <string name="current">Current</string>
     <string name="goal">Goal</string>
     <string name="daily_steps">Daily steps</string>
+
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
     <string-array name="genders">
-        <item>Male</item>
-        <item>Female</item>
+        <item>@string/male</item>
+        <item>@string/female</item>
     </string-array>
+
+    <string name="finish_workout">Finish workout</string>
+    <string name="restart_workout">Restart workout</string>
+    <string name="set_your_something">Set your %s</string>
+    <string name="most_recent_workouts">Most recent workouts</string>
+    <string name="completed_challenges">Completed challenges</string>
+
+    <string name="notification_message">Your workout is being tracked</string>
+    <string name="exit_the_app">Exit the app?</string>
+    <string name="permissions_dialog">The app cannot work without permissions</string>
+    <string name="permission_not_granted">Permissions not granted by the user.</string>
+    <string name="wrong_password_or_email">Wrong password or email</string>
+    <string name="no_internet">No internet</string>
+    <string name="set_all_description">Please set all description</string>
+    <string name="restart_workout_dialog">Do you want to start a new workout and lose the current process?</string>
+    <string name="stop_workout_dialog">Do you want to end the current workout?</string>
+    <string name="conditions_and_privacy_policy">I have read and agree to the Terms &amp; Conditions and Privacy Policy</string>
 
 </resources>

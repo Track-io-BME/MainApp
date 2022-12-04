@@ -1,14 +1,15 @@
 package hu.bme.aut.android.trackio.data
 
-import androidx.room.Entity
+import com.squareup.moshi.JsonClass
 
-@Entity
+@JsonClass(generateAdapter = true)
 data class UserDetails(
     val id: Int,
-    val UserId: Int,
-    val height: Int,
-    var gender: String,
+    val firstName: String,
+    val lastName: String,
+    val height: Float,
+    val sex: String,
     val birthDate: Long,
     val goalSteps: Int,
-    val goalWeight: Int
+    val goalWeight: Float
 )

@@ -16,6 +16,7 @@
             android:id="@+id/action_loginFragment_to_homeMenuFragment"
             app:destination="@id/homeMenuFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/signupFragment"
         android:name="hu.bme.aut.android.trackio.ui.singup.SignupFragment"
@@ -27,6 +28,9 @@
         <action
             android:id="@+id/action_signupFragment_to_homeMenuFragment"
             app:destination="@id/homeMenuFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_datePickerDialogFragment"
+            app:destination="@id/datePickerDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/dailyActivitiesFragment"
@@ -35,7 +39,7 @@
         tools:layout="@layout/fragment_daily_activities" />
     <fragment
         android:id="@+id/homeMenuFragment"
-        android:name="hu.bme.aut.android.trackio.ui.HomeFragment"
+        android:name="hu.bme.aut.android.trackio.ui.home.HomeFragment"
         android:label="fragment_home_menu"
         tools:layout="@layout/fragment_home_menu" >
         <action
@@ -84,9 +88,6 @@
             android:id="@+id/action_profileMenuFragment_to_measurementsDialogFragment"
             app:destination="@id/measurementsDialogFragment" />
         <action
-            android:id="@+id/action_profileMenuFragment_to_personalDialogFragment"
-            app:destination="@id/personalDialogFragment" />
-        <action
             android:id="@+id/action_profileMenuFragment_to_workoutMenuFragment"
             app:destination="@id/workoutMenuFragment" />
         <action
@@ -103,30 +104,34 @@
             app:destination="@id/workoutMenuFragment" />
         <action
             android:id="@+id/action_duringWorkoutFragment_to_workoutMapFragment"
-            app:destination="@id/workoutMapFragment" />
+            app:destination="@id/workoutMapFragment">
+            <argument
+                android:name="locationTrackerService"
+                app:argType="hu.bme.aut.android.trackio.model.LocationTrackerService"
+                app:nullable="true"
+                android:defaultValue="@null" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/workoutMapFragment"
         android:name="hu.bme.aut.android.trackio.ui.WorkoutMapFragment"
         android:label="fragment_workout_map"
-        tools:layout="@layout/fragment_workout_map" />
+        tools:layout="@layout/fragment_workout_map" >
+        <argument
+            android:name="locationTrackerService"
+            app:argType="hu.bme.aut.android.trackio.model.LocationTrackerService"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/workoutHistoryFragment"
         android:name="hu.bme.aut.android.trackio.ui.workouthistory.WorkoutHistoryFragment"
         android:label="fragment_workout_history"
         tools:layout="@layout/fragment_workout_history" >
         <action
-            android:id="@+id/action_workoutHistoryFragment_to_pastWorkoutFragment"
-            app:destination="@id/pastWorkoutFragment" />
-        <action
             android:id="@+id/action_workoutHistoryFragment_to_homeMenuFragment"
             app:destination="@id/homeMenuFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/pastWorkoutFragment"
-        android:name="hu.bme.aut.android.trackio.ui.pastworkout.PastWorkoutFragment"
-        android:label="fragment_past_workout"
-        tools:layout="@layout/fragment_past_workout" />
     <fragment
         android:id="@+id/detailedMeasurementsFragment"
         android:name="hu.bme.aut.android.trackio.ui.detatiledmesurements.DetailedMeasurementsFragment"
@@ -146,9 +151,8 @@
         android:name="hu.bme.aut.android.trackio.ui.profilemenu.MeasurementsDialogFragment"
         android:label="fragment_measurements_dialog"
         tools:layout="@layout/fragment_measurements_dialog" />
-    <fragment
-        android:id="@+id/personalDialogFragment"
-        android:name="hu.bme.aut.android.trackio.ui.profilemenu.PersonalDialogFragment"
-        android:label="fragment_personal_dialog"
-        tools:layout="@layout/fragment_personal_dialog" />
+    <dialog
+        android:id="@+id/datePickerDialogFragment"
+        android:name="hu.bme.aut.android.trackio.ui.singup.DatePickerDialogFragment"
+        android:label="DatePickerDialogFragment" />
 </navigation>
