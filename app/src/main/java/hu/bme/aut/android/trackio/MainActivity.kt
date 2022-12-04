@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import hu.bme.aut.android.trackio.data.SharedPrefConfig
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     companion object {
-        private const val REQUEST_CODE_PERMISSIONS = 1001
+        private const val PERMISSION_REQUEST_CODE = 10101
         private val REQUIRED_PERMISSIONS = arrayOf(
             Manifest.permission.FOREGROUND_SERVICE,
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
-                this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
+                this, REQUIRED_PERMISSIONS, PERMISSION_REQUEST_CODE
             )
         }
         InternetConnectivityChecker.init(applicationContext)
@@ -52,14 +53,32 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+        if (requestCode == PERMISSION_REQUEST_CODE) {
             if (!allPermissionsGranted()) {
+                REQUIRED_PERMISSIONS.any {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(this, it)) {
+                        AlertDialog.Builder(this)
+                            .setTitle(getString(R.string.permissions_dialog))
+                            .setPositiveButton(getString(R.string.ok)) { _, _ ->
+                                ActivityCompat.requestPermissions(
+                                    this, REQUIRED_PERMISSIONS, PERMISSION_REQUEST_CODE
+                                )
+                            }
+                            .setNegativeButton(getString(R.string.back), null)
+                            .show()
+                    }
+                    else{
+                        ActivityCompat.requestPermissions(
+                            this, REQUIRED_PERMISSIONS, PERMISSION_REQUEST_CODE
+                        )
+                    }
+                    return
+                }
                 Toast.makeText(
                     this,
-                    "Permissions not granted by the user.",
+                    getString(R.string.permission_not_granted),
                     Toast.LENGTH_SHORT
                 ).show()
-                finish()
             }
         }
     }

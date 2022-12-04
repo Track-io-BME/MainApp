@@ -62,4 +62,6 @@
     <string name="weight2">Weight</string>
     <string name="notification_message">Your workout is being tracked</string>
     <string name="exit_the_app">Exit the app?</string>
+    <string name="permissions_dialog">The app cannot work without permissions</string>
+    <string name="permission_not_granted">Permissions not granted by the user.</string>
 </resources>
